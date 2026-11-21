@@ -1,0 +1,1095 @@
+schema_version: '0.4'
+model:
+  id: escape.atom_convergence
+  name: Finite hydrogen atom with verified shell extension
+  description: Extend explicit statistical shells through N<=20, adopt N=15 from scoped convergence/reference
+    evidence, and retain numerical/physical distinctions.
+  implementation:
+    repository: https://github.com/HajimeKawahara/exojax-escape
+    revision: 246e340658008a8f355c345333571d75dd1e66e9
+    entry_points:
+    - src/escape/hydrogen_atom.py:make_hydrogen_atom
+    - src/escape/hydrogen_atom.py:hydrogenic_radial_dipole
+    - src/escape/hydrogen_atom.py:hydrogenic_einstein_a
+    - src/escape/hydrogen_bound_free.py:hydrogenic_cross_section
+    - src/escape/hydrogen_bound_free.py:_orbital_cross_sections
+    - src/escape/hydrogen_atom.py:atom_collision_rates
+    - src/escape/hydrogen_nlte.py:_solve_equilibrium_with_rates
+    - src/escape/hydrogen_atom.py:solve_atom_populations
+    - tests/test_atom_convergence.py:test_enlarged_atom_shell_sensitivity
+assumptions:
+- statement: Pure hydrogen; n<=3 resolved, n>=4 statistical orbital populations; prescribed radiation
+    and gas temperature for the local comparisons.
+  evidence:
+  - formulation
+- statement: Every retained shell has explicit forward/inverse rates. No top-off population, Case-B replacement
+    or fitted population scale repairs the truncation boundary.
+  evidence:
+  - formulation
+  - implementation
+domains:
+- kind: numerical_evaluation
+  status: documented
+  description: Declared API and retained low-level data limitations, separate from the discrete accuracy
+    checks.
+  conditions:
+  - JAX float64; integer 3<=N<=20; default N=15.
+  - Gas temperature 5802.26--14000 K; finite positive density/radiation inputs and an isolated charge
+    root.
+  evidence:
+  - implementation
+  - formulation
+- kind: scientific_applicability
+  status: unknown
+  description: No full-atmosphere accuracy envelope has been established.
+  conditions: []
+  evidence:
+  - formulation
+claims:
+- id: extended_formulation
+  revision: '1'
+  kind: theoretical
+  statement: The recorded shell, radial, continuum, ionization and charge-root equations correspond to
+    the selected enlarged implementation.
+  scope: Formulation and implementation correspondence only; adopted physical closures remain explicit.
+  equations:
+  - id: statistical_shells
+    revision: '1'
+  - id: radial_dipoles
+    revision: '1'
+  - id: coulomb_bound_free
+    revision: '1'
+  - id: normalized_coulomb_recurrence
+    revision: '1'
+  - id: higher_shell_ionization
+    revision: '1'
+  - id: finite_charge_root
+    revision: '1'
+- id: extended_numerics
+  revision: '1'
+  kind: numerical_verification
+  statement: The enlarged atom passes its recorded atomic, quadrature and forward/reverse implicit-gradient
+    checks and selected coupled regressions.
+  scope: Exactly the retained numerical tests and tolerances; no continuous-domain guarantee or posterior
+    convergence.
+  equations:
+  - id: statistical_shells
+    revision: '1'
+  - id: radial_dipoles
+    revision: '1'
+  - id: coulomb_bound_free
+    revision: '1'
+  - id: normalized_coulomb_recurrence
+    revision: '1'
+  - id: higher_shell_ionization
+    revision: '1'
+  - id: finite_charge_root
+    revision: '1'
+- id: extended_shell_convergence
+  revision: '1'
+  kind: numerical_verification
+  statement: Increasing the atom from N=15 to 20 changes each of n2 and n3 by no more than five percent
+    in all seven registered conditions.
+  scope: The seven points in atom_convergence_cases.json, not their Cartesian product or the infinite-atom
+    limit.
+  equations:
+  - id: shell_change
+    revision: '1'
+- id: matched_reference_agreement
+  revision: '1'
+  kind: numerical_verification
+  statement: Each n2 and n3 value agrees with the matched independent Cloudy finite atom within five percent
+    in all 14 registered cases.
+  scope: N=15 and 20 at the seven registered conditions; matching finite-model populations does not validate
+    the full atmosphere.
+  equations: []
+- id: physical_accuracy
+  revision: '1'
+  kind: physical_validation
+  statement: The adopted finite atomic closure is adequate for the intended escaping planetary atmosphere.
+  scope: No independent full-atmosphere tolerance or validation is established.
+  equations: []
+evidence:
+- id: implementation
+  kind: implementation
+  summary: Frozen extended atomic implementation, tests and declared verification criteria.
+  sources:
+  - src/escape/hydrogen_atom.py
+  - src/escape/hydrogen_bound_free.py
+  - src/escape/hydrogen_rates.py
+  - src/escape/hydrogen_mixing.py
+  - src/escape/hydrogen_nlte.py
+  - src/escape/hydrogen_continuum.py
+  - src/escape/coupled_hydrogen.py
+  - tests/test_atom_convergence.py
+  - tests/test_hydrogen_atom.py
+  - tests/test_hydrogen_bound_free.py
+  - tests/test_coupled_equilibrium.py
+  - tests/data/hydrogen_high_n_bound_free_anchors.json
+  - mceg/investigations/atom_convergence_cases.json
+  - mceg/workflows/coupled.json
+  - tools/diagnose_atom_convergence.py
+  scope: These selected bytes identify the scientific Subject; other documentation changes do not renew
+    scientific evidence.
+  subject: extended_atom
+  provenance:
+    role: implementation
+    location: 246e340658008a8f355c345333571d75dd1e66e9
+    inspection: inspected
+    note: Executed source hashes are compared with this commit, including runs originally made from a
+      dirty tree with the same selected bytes.
+  artifacts:
+  - source: src/escape/hydrogen_atom.py
+    sha256: 1da46f965072933e12a7f37e603b8450a59d53596a95a22375571fec0020c3db
+  - source: src/escape/hydrogen_bound_free.py
+    sha256: 90170626731551946dfeac40f47b87afd369fb9d8f10d378c2f2e5d23de5f5fc
+  - source: src/escape/hydrogen_rates.py
+    sha256: a1e1237725284198f8617a828f292d0d92e42ee6824f95c2efcfd68b535b5535
+  - source: src/escape/hydrogen_mixing.py
+    sha256: 78bf474551b07a6641c471f4403fae44d0de6c07311858e4ecfe0928c99c3b8f
+  - source: src/escape/hydrogen_nlte.py
+    sha256: 697375972fffdc077f9ee2cb131d74a31c1af6e9d8f98fa5e64127fd4b874943
+  - source: src/escape/hydrogen_continuum.py
+    sha256: 61a5669f3a08e6af967d2f1042fa387489224389bddcefd13da576b1cd31e770
+  - source: src/escape/coupled_hydrogen.py
+    sha256: bba13310d54a6eeecd3bfac0eccdb14b1272d15b642c355ccee6f6c8e8adf111
+  - source: tests/test_atom_convergence.py
+    sha256: f5cdaaeb3da0533610a010039d0b2ed9abbdae4179c1aebfa6afe6edfa4c4a18
+  - source: tests/test_hydrogen_atom.py
+    sha256: ec3d65c15095a39d6df96ddbbad755d14098e2ad5cb1fa7f73d75147b399adaa
+  - source: tests/test_hydrogen_bound_free.py
+    sha256: 15338cd1155a647f44050311dc5c8e790d162866d3d6f8e708e648385b3442d0
+  - source: tests/test_coupled_equilibrium.py
+    sha256: 6d05732cece9f1d1374bb957015a5bd6fb94782a88b992ead8b547398f5f6667
+  - source: tests/data/hydrogen_high_n_bound_free_anchors.json
+    sha256: 6c3db85412919f8cee212ab470361fce3ea59e77a03f55422782301c6de9efe6
+  - source: mceg/investigations/atom_convergence_cases.json
+    sha256: 13cfd0631e26f492fc958e101119fa38cf80f7d56525d9f316bf5aa40e4d79ae
+  - source: mceg/workflows/coupled.json
+    sha256: 34f255b8787c6c0896cf7ecd2bbf950139976e586794b250f534ec2851e55aac
+  - source: tools/diagnose_atom_convergence.py
+    sha256: 82677a68dbc01eca8d58f965c60d7b6c2499a617705b8aba9dce5717ef1cba4c
+- id: formulation
+  kind: theory
+  summary: Authored equations and an inspected explanation of the enlarged finite atom.
+  sources:
+  - doc/atom_convergence.tex
+  - doc/atom_convergence_equations.tex
+  - doc/atom_convergence.pdf
+  - mceg/evidence/atom_convergence_20261121/review.json
+  scope: Equation/source correspondence and explicit assumptions; no inferred atmospheric accuracy.
+  subject: extended_atom
+  context: formulation
+  provenance:
+    role: primary
+    location: Authored TeX and generated equation appendix
+    inspection: inspected
+    note: The explanation, generated equations, source correspondences and rendered PDF are reviewed together.
+  artifacts:
+  - source: doc/atom_convergence.tex
+    sha256: 8c1212b518fe15e4905f51870d96877ef94fc6249923cab7cc56cce1b4e2e895
+  - source: doc/atom_convergence_equations.tex
+    sha256: c1ccc1e30f598be10385e201659427f9bb5ae9864ea6e5065b116e12b7673e40
+  - source: doc/atom_convergence.pdf
+    sha256: 51b9f08c954e6ee0c4df22adc3bfe37edd22e389cc990f88a6727b5202406c7a
+  - source: mceg/evidence/atom_convergence_20261121/review.json
+    sha256: 90a91ce01537b1d97cef749b87098f576a593802dd3516bdd060dc3cf969f81f
+- id: radial_source
+  kind: literature
+  summary: Hydrogenic radial matrix elements and radiative rates in Prozesky and Smits (2018).
+  sources:
+  - https://arxiv.org/html/1805.02440v1
+  scope: Appendix A.1 radial-integral formulation; exact rational summation is our evaluation method,
+    not a claimed published algorithm.
+  provenance:
+    role: primary
+    location: Appendix A.1
+    inspection: partial
+    note: Relevant primary-source section inspected; independent normalized Laguerre quadrature verifies
+      the selected high-n integrals.
+  artifacts: []
+- id: vs80_source
+  kind: implementation
+  summary: Inspected Cloudy C23 hydro_vs_ioniz evaluation of VS80 Eq. 8.
+  sources:
+  - https://data.nublado.org/cloudy_releases/c23/c23.01.tar.gz
+  - https://www.pa.uky.edu/~gary/cloudy/c17_branch/doxygen/html/hydro__vs__rates_8cpp_source.html
+  - src/escape/_licenses/Cloudy.txt
+  scope: Only the added n>=6 ionization fit and its source convention; the n<=5 data remain distinct.
+  provenance:
+    role: implementation
+    location: 'C23 hydro_vs_rates.cpp: hydro_vs_ioniz'
+    inspection: inspected
+    note: The C23 function source hash is 453aa53240a622469c204d75eeac1e567f8c21b952aa373dd18eeae89b218a41.
+      The original paper full text was not obtained. Compiled-function anchors use the declared gas-energy
+      constants.
+  artifacts:
+  - source: src/escape/_licenses/Cloudy.txt
+    sha256: 225136d0a6ec8a56ab39dc876bb2c85de47537d783d3fa66fb14322907f986de
+- id: brocklehurst_source
+  kind: implementation
+  summary: Inspected Cloudy Coulomb recurrence and independent high-n cross-section table anchors.
+  sources:
+  - https://doi.org/10.1093/mnras/153.4.471
+  - https://data.nublado.org/cloudy_releases/c23/c23.01.tar.gz
+  - tests/data/hydrogen_high_n_bound_free_anchors.json
+  - src/escape/_licenses/Cloudy.txt
+  scope: Brocklehurst Eqs. 3.13 and 3.17-3.24 as adapted in Cloudy hydro_bauman.cpp; 472 source-table
+    anchors for n=6,8,10,15,20, all orbital states and sampled photon energies.
+  provenance:
+    role: implementation
+    location: Cloudy C23 hydro_bauman.cpp and data/hydro_pcs.dat
+    inspection: inspected
+    note: The source table is independent of the JAX implementation. Tests propagate the table printed-coordinate
+      precision; energy normalization and logarithmic recombination are provider-derived algebraic changes.
+  artifacts:
+  - source: tests/data/hydrogen_high_n_bound_free_anchors.json
+    sha256: 6c3db85412919f8cee212ab470361fce3ea59e77a03f55422782301c6de9efe6
+  - source: src/escape/_licenses/Cloudy.txt
+    sha256: 225136d0a6ec8a56ab39dc876bb2c85de47537d783d3fa66fb14322907f986de
+- id: numerical_execution
+  kind: numerical_test
+  summary: Source-identified atomic, quadrature, shell-scan and implicit-gradient execution.
+  sources:
+  - mceg/evidence/atom_convergence_20261121/verification.json
+  - mceg/evidence/atom_convergence_20261121/verification-execution.json
+  - mceg/evidence/atom_convergence_20261121/atomic_balance.log
+  - mceg/evidence/atom_convergence_20261121/atomic_balance.xml
+  - mceg/evidence/atom_convergence_20261121/enlarged_atom_numerics.log
+  - mceg/evidence/atom_convergence_20261121/enlarged_atom_numerics.xml
+  - mceg/evidence/atom_convergence_20261121/enlarged_atom_convergence.log
+  - mceg/evidence/atom_convergence_20261121/enlarged_atom_convergence.xml
+  - mceg/evidence/atom_convergence_20261121/coupled-regression.log
+  - mceg/evidence/atom_convergence_20261121/coupled-regression.xml
+  - mceg/evidence/atom_convergence_20261121/review.json
+  scope: The three retained numerical gates plus thin-column N=3/N=15 and the retained N=3 joint-equilibrium
+    derivative regressions. Successful execution and measured scientific criteria are distinct.
+  result: passed
+  subject: extended_atom
+  context: numerical_samples
+  provenance:
+    role: primary
+    location: mceg/evidence/atom_convergence_20261121/verification.json
+    inspection: inspected
+    note: Final execution and unchanged input identity are required. Earlier failed source-identity attempts
+      remain in the raw archive and are not promoted to successful verification.
+  artifacts:
+  - source: mceg/evidence/atom_convergence_20261121/verification.json
+    sha256: 4b499f5afd436736ea02a99df6bbc6ffa1726121bc3cbe6b14515aeafc6d49b7
+  - source: mceg/evidence/atom_convergence_20261121/verification-execution.json
+    sha256: e0aec3a94df9f042f9fce99398c6e7ff0e4035a71a82a470648ccb1141f012e2
+  - source: mceg/evidence/atom_convergence_20261121/atomic_balance.log
+    sha256: b9fab1ec653874210fc5b3a83027f24fb32a0a619414b5c8d71d47d52f235899
+  - source: mceg/evidence/atom_convergence_20261121/atomic_balance.xml
+    sha256: d2c796b454d738e19216a203fce241eff1c4d135d8dbcca7f1e8aeec200c9650
+  - source: mceg/evidence/atom_convergence_20261121/enlarged_atom_numerics.log
+    sha256: 27074c575c7d12ba8294c5a8432078e19397ca70ca23fd7ca42cc15da9e2a6f9
+  - source: mceg/evidence/atom_convergence_20261121/enlarged_atom_numerics.xml
+    sha256: e5c9c723d18d4cddba02ef1a7b308a2ee871da0809e3b54e774b2fdcc1cdaa72
+  - source: mceg/evidence/atom_convergence_20261121/enlarged_atom_convergence.log
+    sha256: 3aef681879c6ce39772ea268a12ce116c7b4a2d0afcd4e67e8aae16a9869e580
+  - source: mceg/evidence/atom_convergence_20261121/enlarged_atom_convergence.xml
+    sha256: fb9d6736f69ba3e2231f2b97c3697e5ff57da30403c5bd8c54c1448ace13510b
+  - source: mceg/evidence/atom_convergence_20261121/coupled-regression.log
+    sha256: eeb3b4930adf00811685935eebf0ce650a9459dc0491aa93c1bf50adc7e4c6dd
+  - source: mceg/evidence/atom_convergence_20261121/coupled-regression.xml
+    sha256: 83c3d2969ffc369f99f7db8e310c27f9f4717b55ee61872c15ff05148b7f6e5c
+  - source: mceg/evidence/atom_convergence_20261121/review.json
+    sha256: 90a91ce01537b1d97cef749b87098f576a593802dd3516bdd060dc3cf969f81f
+- id: case_comparison
+  kind: benchmark
+  summary: All 14 matched finite-atom comparisons and all seven 15-to-20 population changes meet the declared
+    five-percent criteria.
+  sources:
+  - mceg/evidence/atom_convergence_20261121/comparison.json
+  - mceg/evidence/atom_convergence_20261121/cloudy-review.json
+  - mceg/evidence/atom_convergence_20261121/review.json
+  - mceg/investigations/atom_convergence_cases.json
+  - mceg/evidence/atom_convergence_20261121/archive.json
+  scope: Seven explicitly registered conditions at both N=15 and 20; separate selected Cloudy 30/40 tail
+    controls are retained in the comparison report.
+  result: passed
+  subject: extended_atom
+  context: registered_cases
+  provenance:
+    role: primary
+    location: Fresh escape and Cloudy executions with retained batch/source identities
+    inspection: inspected
+    note: The case manifest predates this extended escape comparison. Candidate N=15 was selected after
+      retained independent Cloudy exploration; the failure of candidate N=10 is not hidden.
+  artifacts:
+  - source: mceg/evidence/atom_convergence_20261121/comparison.json
+    sha256: e9d9fa0239820f0c6b77f8351e45df04dd4b5baa1f538b6406d0a8704e4c6c57
+  - source: mceg/evidence/atom_convergence_20261121/cloudy-review.json
+    sha256: 067304c182cbae24894a70497af4ca5bdbd36da78568d38aeb5b03afbfadee9e
+  - source: mceg/evidence/atom_convergence_20261121/review.json
+    sha256: 90a91ce01537b1d97cef749b87098f576a593802dd3516bdd060dc3cf969f81f
+  - source: mceg/investigations/atom_convergence_cases.json
+    sha256: 13cfd0631e26f492fc958e101119fa38cf80f7d56525d9f316bf5aa40e4d79ae
+  - source: mceg/evidence/atom_convergence_20261121/archive.json
+    sha256: a36e29f400a2ceb0cf3a6052e86acc88b9ddf3008aa774bcab6478ccc463fcfa
+- id: candidate10_failure
+  kind: benchmark
+  summary: The dilute Cloudy control rejects candidate N=10 at the unchanged five-percent criterion.
+  sources:
+  - mceg/evidence/atom_convergence_20261121/cloudy-review.json
+  - mceg/evidence/atom_convergence_20261121/archive.json
+  scope: At the declared dilute point, the Cloudy n3 change from N=10 to 20 is about 6.96%; this diagnostic
+    reference choice is not an execution of the escape N=10 model.
+  result: failed
+  provenance:
+    role: primary
+    location: Retained independent Cloudy10/20 dilute runs
+    inspection: inspected
+    note: A rejected modeled option remains part of the adoption basis. It is not relabeled as unknown
+      or omitted from the campaign.
+  artifacts:
+  - source: mceg/evidence/atom_convergence_20261121/cloudy-review.json
+    sha256: 067304c182cbae24894a70497af4ca5bdbd36da78568d38aeb5b03afbfadee9e
+  - source: mceg/evidence/atom_convergence_20261121/archive.json
+    sha256: a36e29f400a2ceb0cf3a6052e86acc88b9ddf3008aa774bcab6478ccc463fcfa
+- id: pathway_diagnosis
+  kind: numerical_test
+  summary: Independent fixed-electron-density Schur analysis reproduces the effect of adding excited shells.
+  sources:
+  - mceg/evidence/atom_convergence_20261121/diagnosis.json
+  - mceg/evidence/atom_convergence_20261121/diagnosis-execution.json
+  - tools/diagnose_atom_convergence.py
+  - mceg/evidence/atom_convergence_20261121/archive.json
+  scope: The 4-to-5 and 5-to-20 source/operator/charge decomposition is defined at fixed rates and electron
+    density before restoring charge closure. Individual terms are diagnostic, not unique physical observables.
+  result: passed
+  provenance:
+    role: primary
+    location: Independent SciPy root and NumPy linear solves of saved atomic coefficients
+    inspection: inspected
+    note: Numerical conservation and exact Schur reconstruction distinguish omitted pathways from a failed
+      population solver. No fitted recombination or population scale is introduced.
+  artifacts:
+  - source: mceg/evidence/atom_convergence_20261121/diagnosis.json
+    sha256: 3817ef8dd300c21d165440aecc2d142b91acd562aa7bca899ba531e20a90158d
+  - source: mceg/evidence/atom_convergence_20261121/diagnosis-execution.json
+    sha256: f62588e9d6374feb177ca07c0583012ccd240a660125b5f1538a478d3e644639
+  - source: tools/diagnose_atom_convergence.py
+    sha256: 82677a68dbc01eca8d58f965c60d7b6c2499a617705b8aba9dce5717ef1cba4c
+  - source: mceg/evidence/atom_convergence_20261121/archive.json
+    sha256: a36e29f400a2ceb0cf3a6052e86acc88b9ddf3008aa774bcab6478ccc463fcfa
+limitations:
+- statement: Passing the new 15-to-20 criterion preserves rather than replaces the historical contradicted
+    4-to-5 record.
+  evidence:
+  - formulation
+- statement: Collapsed orbital populations and VS80 collision approximations remain physical choices;
+    finite-reference agreement does not establish an exact or infinite atom.
+  evidence:
+  - case_comparison
+  - formulation
+subjects:
+- id: extended_atom
+  implementation:
+    repository: https://github.com/HajimeKawahara/exojax-escape
+    revision: 246e340658008a8f355c345333571d75dd1e66e9
+    entry_points:
+    - src/escape/hydrogen_atom.py:make_hydrogen_atom
+    - src/escape/hydrogen_atom.py:hydrogenic_radial_dipole
+    - src/escape/hydrogen_atom.py:hydrogenic_einstein_a
+    - src/escape/hydrogen_bound_free.py:hydrogenic_cross_section
+    - src/escape/hydrogen_bound_free.py:_orbital_cross_sections
+    - src/escape/hydrogen_atom.py:atom_collision_rates
+    - src/escape/hydrogen_nlte.py:_solve_equilibrium_with_rates
+    - src/escape/hydrogen_atom.py:solve_atom_populations
+    - tests/test_atom_convergence.py:test_enlarged_atom_shell_sensitivity
+  selected_files:
+    src/escape/hydrogen_atom.py: 1da46f965072933e12a7f37e603b8450a59d53596a95a22375571fec0020c3db
+    src/escape/hydrogen_bound_free.py: 90170626731551946dfeac40f47b87afd369fb9d8f10d378c2f2e5d23de5f5fc
+    src/escape/hydrogen_rates.py: a1e1237725284198f8617a828f292d0d92e42ee6824f95c2efcfd68b535b5535
+    src/escape/hydrogen_mixing.py: 78bf474551b07a6641c471f4403fae44d0de6c07311858e4ecfe0928c99c3b8f
+    src/escape/hydrogen_nlte.py: 697375972fffdc077f9ee2cb131d74a31c1af6e9d8f98fa5e64127fd4b874943
+    src/escape/hydrogen_continuum.py: 61a5669f3a08e6af967d2f1042fa387489224389bddcefd13da576b1cd31e770
+    src/escape/coupled_hydrogen.py: bba13310d54a6eeecd3bfac0eccdb14b1272d15b642c355ccee6f6c8e8adf111
+    tests/test_atom_convergence.py: f5cdaaeb3da0533610a010039d0b2ed9abbdae4179c1aebfa6afe6edfa4c4a18
+    tests/test_hydrogen_atom.py: ec3d65c15095a39d6df96ddbbad755d14098e2ad5cb1fa7f73d75147b399adaa
+    tests/test_hydrogen_bound_free.py: 15338cd1155a647f44050311dc5c8e790d162866d3d6f8e708e648385b3442d0
+    tests/test_coupled_equilibrium.py: 6d05732cece9f1d1374bb957015a5bd6fb94782a88b992ead8b547398f5f6667
+    tests/data/hydrogen_high_n_bound_free_anchors.json: 6c3db85412919f8cee212ab470361fce3ea59e77a03f55422782301c6de9efe6
+    mceg/investigations/atom_convergence_cases.json: 13cfd0631e26f492fc958e101119fa38cf80f7d56525d9f316bf5aa40e4d79ae
+    mceg/workflows/coupled.json: 34f255b8787c6c0896cf7ecd2bbf950139976e586794b250f534ec2851e55aac
+    tools/diagnose_atom_convergence.py: 82677a68dbc01eca8d58f965c60d7b6c2499a617705b8aba9dce5717ef1cba4c
+contexts:
+- id: formulation
+  scope: Declared finite-atom extension and corresponding implementation; no physical accuracy envelope.
+- id: numerical_samples
+  scope: Exactly the source-identified atomic and enlarged-atom tests retained in the verification receipt.
+  settings:
+    baseline_temperature_k: 9000.0
+    baseline_n_h_cm3: 1000000000000.0
+    baseline_radiation_temperature_k: 10000.0
+    baseline_dilution: 0.025
+    nmax_limit: 20
+- id: registered_cases
+  scope: Seven joint physical conditions, each evaluated at N=15 and 20. No Cartesian product or unsampled
+    interval is implied.
+  settings:
+    manifest: mceg/investigations/atom_convergence_cases.json
+    manifest_sha256: 13cfd0631e26f492fc958e101119fa38cf80f7d56525d9f316bf5aa40e4d79ae
+    candidate_nmax: 15
+    control_nmax: 20
+    relative_population_tolerance: 0.05
+- id: intended_atmosphere
+  scope: Intended full planetary escape application; no matched atmospheric validation in this campaign.
+assessments:
+- id: formulation_review
+  kind: evidence_support
+  claim: extended_formulation
+  claim_revision: '1'
+  status: supported
+  origin: reviewed
+  subject: extended_atom
+  context: formulation
+  method:
+    id: retained_scoped_review
+    revision: '1'
+    description: Inspect execution validity, source identity, unchanged criteria and the declared physical
+      scope before recording support.
+  evidence:
+  - formulation
+  - implementation
+  - radial_source
+  - vs80_source
+  - brocklehurst_source
+  reasons:
+  - The source correspondence and unit conventions are reviewed at the frozen Subject. Exact rational
+    bound-bound integration and rescaled bound-free evaluation preserve the declared hydrogenic equations;
+    the high-shell ionization closure is explicit.
+  equation_pins:
+  - id: statistical_shells
+    revision: '1'
+    sha256: 6c7b52cbfdac3da24c7a52e989f9a6db100292facd652dd3069fabb14dc40a0b
+  - id: radial_dipoles
+    revision: '1'
+    sha256: b09bb84c99419c1f81e335017fff23cf849deba6cf8ad11ce2a04811249e6373
+  - id: coulomb_bound_free
+    revision: '1'
+    sha256: bbd1bf2e3471abef0371c60714091712293206dbf51bcfc97ccd160674c8de88
+  - id: normalized_coulomb_recurrence
+    revision: '1'
+    sha256: 13b01dd08fb23dad58e64a975e989a47d811317651cc18de0cf86be28e16c893
+  - id: higher_shell_ionization
+    revision: '1'
+    sha256: 022388d9dab1fa55ffdb5170110c0b8d9f123eb7c621395ac556c8f2b87132aa
+  - id: finite_charge_root
+    revision: '1'
+    sha256: f10a6b3985bb3bf8ef6c50f33864e5d9629a0ac6a6027b056489d7e746796620
+  binding_pins:
+  - id: shell_groups
+    sha256: c4bab6edb2c9e1c9e529954a143bfb1486958c8f9b01717ddf8cec7a46b53abc
+  - id: radial_integral
+    sha256: 7d1b38500116c0604557bca4ee172a1ec4ebe6d1384df670e947a85356da1c85
+  - id: radiative_rate
+    sha256: 0484f0dc9828a106d08ef34c527671bb912feed21eb1ba08ef9ec0229e6a0384
+  - id: orbital_cross_section
+    sha256: b2985d9b2c5fc0df12d92e15aefa5d22aaffd23b88b85d7a0e4f8ffac3e9fb44
+  - id: normalized_recurrence
+    sha256: 25b420b52bc3e1f5a2020838d013f8f5dd8fad8925d06dbcc8f1c631782842e6
+  - id: higher_shell_ionization
+    sha256: ce4689a2520884ae5cda90a9db17c3ab0b66e63c14789e0456be2e52a659549d
+  - id: density_root
+    sha256: fe28880b153b06fbf3e9f728a96c0e6b906daf4611f33f78ff826b0cd7e55347
+  - id: atom_population_root
+    sha256: c547770f2ec4d6dc0402a7f3e6a906b77146b1e4c07c7f4ffc02a3d3501fac09
+- id: numerical_review
+  kind: evidence_support
+  claim: extended_numerics
+  claim_revision: '1'
+  status: supported
+  origin: reviewed
+  subject: extended_atom
+  context: numerical_samples
+  method:
+    id: retained_scoped_review
+    revision: '1'
+    description: Inspect execution validity, source identity, unchanged criteria and the declared physical
+      scope before recording support.
+  evidence:
+  - numerical_execution
+  - implementation
+  reasons:
+  - The final source-identified gates pass, including independent data/quadrature anchors, thermodynamic
+    identities and forward/reverse implicit derivatives. Only the retained numerical samples and tolerances
+    are supported.
+  equation_pins:
+  - id: statistical_shells
+    revision: '1'
+    sha256: 6c7b52cbfdac3da24c7a52e989f9a6db100292facd652dd3069fabb14dc40a0b
+  - id: radial_dipoles
+    revision: '1'
+    sha256: b09bb84c99419c1f81e335017fff23cf849deba6cf8ad11ce2a04811249e6373
+  - id: coulomb_bound_free
+    revision: '1'
+    sha256: bbd1bf2e3471abef0371c60714091712293206dbf51bcfc97ccd160674c8de88
+  - id: normalized_coulomb_recurrence
+    revision: '1'
+    sha256: 13b01dd08fb23dad58e64a975e989a47d811317651cc18de0cf86be28e16c893
+  - id: higher_shell_ionization
+    revision: '1'
+    sha256: 022388d9dab1fa55ffdb5170110c0b8d9f123eb7c621395ac556c8f2b87132aa
+  - id: finite_charge_root
+    revision: '1'
+    sha256: f10a6b3985bb3bf8ef6c50f33864e5d9629a0ac6a6027b056489d7e746796620
+  binding_pins:
+  - id: shell_groups
+    sha256: c4bab6edb2c9e1c9e529954a143bfb1486958c8f9b01717ddf8cec7a46b53abc
+  - id: radial_integral
+    sha256: 7d1b38500116c0604557bca4ee172a1ec4ebe6d1384df670e947a85356da1c85
+  - id: radiative_rate
+    sha256: 0484f0dc9828a106d08ef34c527671bb912feed21eb1ba08ef9ec0229e6a0384
+  - id: orbital_cross_section
+    sha256: b2985d9b2c5fc0df12d92e15aefa5d22aaffd23b88b85d7a0e4f8ffac3e9fb44
+  - id: normalized_recurrence
+    sha256: 25b420b52bc3e1f5a2020838d013f8f5dd8fad8925d06dbcc8f1c631782842e6
+  - id: higher_shell_ionization
+    sha256: ce4689a2520884ae5cda90a9db17c3ab0b66e63c14789e0456be2e52a659549d
+  - id: density_root
+    sha256: fe28880b153b06fbf3e9f728a96c0e6b906daf4611f33f78ff826b0cd7e55347
+  - id: atom_population_root
+    sha256: c547770f2ec4d6dc0402a7f3e6a906b77146b1e4c07c7f4ffc02a3d3501fac09
+- id: convergence_review
+  kind: evidence_support
+  claim: extended_shell_convergence
+  claim_revision: '1'
+  status: supported
+  origin: reviewed
+  subject: extended_atom
+  context: registered_cases
+  method:
+    id: retained_scoped_review
+    revision: '1'
+    description: Inspect execution validity, source identity, unchanged criteria and the declared physical
+      scope before recording support.
+  evidence:
+  - case_comparison
+  - implementation
+  reasons:
+  - The largest n2/n3 change from N=15 to 20 across the seven registered conditions is 1.471335%, below
+    the unchanged 5% criterion. The baseline n3 change is 0.233488%. Neither result changes the original
+    4-to-5 contradiction or establishes infinite-atom convergence.
+  equation_pins:
+  - id: shell_change
+    revision: '1'
+    sha256: f5c9364243ceecec01d7958d52e8a4f2a56c0157e55df252ff2915c7c2691925
+  binding_pins:
+  - id: shell_change_measurement
+    sha256: 416b14abd57298264a2fec050c06ae1bf58114d7b7b18f59e49f73a3b9fe9ec0
+- id: reference_review
+  kind: evidence_support
+  claim: matched_reference_agreement
+  claim_revision: '1'
+  status: supported
+  origin: reviewed
+  subject: extended_atom
+  context: registered_cases
+  method:
+    id: retained_scoped_review
+    revision: '1'
+    description: Inspect execution validity, source identity, unchanged criteria and the declared physical
+      scope before recording support.
+  evidence:
+  - case_comparison
+  - implementation
+  reasons:
+  - All 14 matched N=15/N=20 comparisons meet 5%; the maximum n2/n3 discrepancy is 2.031485%. Separate
+    escape N=15 versus Cloudy N=30/40 tail checks differ by at most 2.065684%; these are selected controls,
+    not an infinite reference.
+  equation_pins: []
+  binding_pins: []
+- id: physical_accuracy_review
+  kind: evidence_support
+  claim: physical_accuracy
+  claim_revision: '1'
+  status: unknown
+  origin: reviewed
+  subject: extended_atom
+  context: intended_atmosphere
+  method:
+    id: retained_scoped_review
+    revision: '1'
+    description: Inspect execution validity, source identity, unchanged criteria and the declared physical
+      scope before recording support.
+  evidence: []
+  reasons:
+  - The local prescribed radiation, statistical high shells and finite cutoff have no matched full-atmosphere
+    validation. Numerical differentiation and finite-model agreement do not validate an observed spectrum
+    or a NUTS posterior.
+equations:
+- id: statistical_shells
+  revision: '1'
+  latex: g_n=2n^2,\quad p_{n\ell}=\frac{2\ell+1}{n^2},\\\overline{A}_{nj}=\sum_{\ell=0}^{n-1}p_{n\ell}\sum_{k\in
+    j}A_{n\ell,k},\qquad\overline{\sigma}_n(\nu)=\sum_{\ell=0}^{n-1}p_{n\ell}\sigma_{n\ell}(\nu)
+  description: The added shells distribute population statistically over orbital states and sum each physical
+    transition into its destination group.
+  scope: Resolved 1s,2s,2p,3s,3p,3d; collapsed shells 4 through N, with 3<=N<=20.
+  symbols:
+    principal:
+      latex: n
+      description: Principal quantum number
+      unit: '1'
+    orbital:
+      latex: \ell
+      description: Orbital quantum number
+      unit: '1'
+    weight:
+      latex: g_n,p_{n\ell}
+      description: State degeneracy and orbital population fraction
+      unit: '1'
+    einstein_a:
+      latex: A,\overline A
+      description: Spontaneous electric-dipole rate
+      unit: s^-1
+    cross_section:
+      latex: \sigma,\overline\sigma
+      description: Photoionization cross section
+      unit: cm^2
+    frequency:
+      latex: \nu
+      description: Ordinary photon frequency
+      unit: Hz
+    maximum_shell:
+      latex: N
+      description: Largest included principal shell
+      unit: '1'
+  assumptions:
+  - Statistical orbital populations in the collapsed shells are an approximation, not a new resolved high-l
+    kinetic model.
+  - Low-level energies and transition rates retain the selected original data.
+  - Every retained shell has explicit recombination, ionization and cascade paths; omitted shells have
+    no artificial top-off source.
+  evidence:
+  - formulation
+- id: radial_dipoles
+  revision: '1'
+  latex: \widetilde R_{n\ell}(u)=\frac{2}{n^2}\sqrt{\frac{(n-\ell-1)!}{(n+\ell)!}}e^{-u/n}\left(\frac{2u}{n}\right)^\ell
+    L_{n-\ell-1}^{2\ell+1}\!\left(\frac{2u}{n}\right),\\ d_{n\ell,n^\prime\ell^\prime}=a_{\rm H}\int_0^\infty
+    u^3\widetilde R_{n\ell}(u)\widetilde R_{n^\prime\ell^\prime}(u)\,du,\\ A_{n\ell,n^\prime\ell^\prime}=\frac{64\pi^4
+    e^2\nu^3}{3hc^3}\frac{\max(\ell,\ell^\prime)}{2\ell+1}d^2_{n\ell,n^\prime\ell^\prime}
+  description: Hydrogenic electric-dipole radial integrals; exact rational polynomial integration prevents
+    cancellation in the static construction.
+  scope: 1<=n,nprime<=20; n>nprime and |l-lprime|=1 for a downward radiative transition.
+  symbols:
+    radius:
+      latex: u=r/a_{\rm H}
+      description: Dimensionless radius
+      unit: '1'
+    radial:
+      latex: d
+      description: Radial dipole integral
+      unit: cm
+    einstein_a:
+      latex: A
+      description: Spontaneous rate averaged over upper magnetic states
+      unit: s^-1
+    frequency:
+      latex: \nu
+      description: Finite-state transition frequency
+      unit: Hz
+    n_upper:
+      latex: n
+      description: Upper principal quantum number
+      unit: '1'
+    l_upper:
+      latex: \ell
+      description: Upper orbital quantum number
+      unit: '1'
+    n_lower:
+      latex: n^\prime
+      description: Lower principal quantum number
+      unit: '1'
+    l_lower:
+      latex: \ell^\prime
+      description: Lower orbital quantum number
+      unit: '1'
+    bohr_radius:
+      latex: a_{\rm H}
+      description: Protium reduced-mass Bohr radius used by the bound-bound construction
+      unit: cm
+  assumptions:
+  - The Bohr radius uses the declared protium reduced-mass correction.
+  - Polynomial summation is exact rational arithmetic; the final normalization and returned rates use
+    float64.
+  - This static atomic construction is independent of differentiable gas parameters.
+  evidence:
+  - radial_source
+  - formulation
+- id: coulomb_bound_free
+  revision: '1'
+  latex: "E=\\frac{h\\nu}{\\chi_{n\\ell}},\\quad t^2=\\max(E-1,0),\\quad \\mathcal E=1+t^2,\\quad k=t/n,\\\
+    \\\n\\log G_* =\\tfrac12\\log(\\pi/2)+\\log(8n)+n\\log(4n)-\\log\\Gamma(2n)\\\\\n\\hspace{7mm}-2n\\\
+    frac{\\arctan t}{t}-\\tfrac12\\log(1-\\exp[-2\\pi/k])-(n+2)\\log\\mathcal E,\\\\\n\\log D_{n\\ell,\\\
+    ell'}^2=\\log\\frac{(n+\\ell)!}{(n-\\ell-1)!}\n +\\sum_{s=1}^{\\ell'}\\log(1+s^2k^2)+2(\\ell-n)\\\
+    log(2n)\\\\\n\\hspace{7mm}+2[\\log G_*+p_\\ell^\\pm\\log\\mathcal E+\\log|H_\\ell^\\pm|],\\\\\np_\\\
+    ell^+=n-1-\\ell,\\quad p_\\ell^-=n-\\ell,\\\\\n\\sigma_{n\\ell}(\\nu)=\\frac{4\\pi\\alpha a_0^2n^2}{3}\n\
+    \ \\sum_{\\ell'=\\ell\\pm1\\ge0}\\frac{\\max(\\ell,\\ell')}{2\\ell+1}\\,\\mathcal E\\,\\exp(\\log\
+    \ D_{n\\ell,\\ell'}^2)"
+  description: Coulomb-wave cross sections recombine the normalized radial recurrence in logarithmic form.
+  scope: 1<=n<=20; cross section zero for E<1. Plus/minus denotes continuum lprime=l+1/l-1. Each finite
+    state uses its actual threshold.
+  symbols:
+    principal:
+      latex: n
+      description: Principal quantum number
+      unit: '1'
+    orbital:
+      latex: \ell
+      description: Bound-state orbital quantum number
+      unit: '1'
+    energy:
+      latex: E
+      description: Photon energy divided by the actual threshold
+      unit: '1'
+    radial:
+      latex: G_*,H^\pm,D
+      description: Coulomb radial normalization, normalized recurrence and dipoles
+      unit: '1'
+    cross_section:
+      latex: \sigma_{n\ell}
+      description: Orbital photoionization cross section
+      unit: cm^2
+    bohr_radius:
+      latex: a_0
+      description: Bohr radius 5.29177210903e-9 cm used in the bound-free normalization
+      unit: cm
+  assumptions:
+  - At threshold arctan(t)/t tends to one; a small-t series preserves the derivative.
+  - Computing the logarithm of the product avoids squaring tiny dipoles before compensating factors are
+    applied.
+  - Both photoionization and the inverse Milne process use this same cross section.
+  - The support limit n<=20 is explicit; successful tests at sampled energies do not prove an unlimited
+    high-n domain.
+  evidence:
+  - brocklehurst_source
+  - formulation
+- id: normalized_coulomb_recurrence
+  revision: '1'
+  latex: 'G_q^+=G_*\mathcal E^{n-1-q}H_q^+,\quad G_q^-=G_*\mathcal E^{n-q}H_q^-,\\
+
+    H^+_{n-1}=1,\quad H^+_{n-2}=n(2n-1),\\
+
+    H^-_{n-1}=\frac1{2n},\quad H^-_{n-2}=(2n-1)\left(\frac4{\mathcal E}+n-1\right)H^-_{n-1},\\
+
+    A_q^+=\frac{4n^2-4(q+2)^2}{\mathcal E}+(q+2)(2q+3),\\
+
+    B_q^+=\frac{4n^2[n^2-(q+2)^2][1+(q+3)^2k^2]}{\mathcal E^2},\\
+
+    A_q^-=\frac{4n^2-4(q+1)^2}{\mathcal E}+(q+1)(2q+3),\\
+
+    B_q^-=\frac{4n^2[n^2-(q+2)^2][1+(q+1)^2k^2]}{\mathcal E^2},\\
+
+    H_q^\pm=A_q^\pm H_{q+1}^\pm-B_q^\pm H_{q+2}^\pm'
+  description: Energy-normalized Brocklehurst recurrence, algebraically equivalent to the earlier unscaled
+    radial recurrence.
+  scope: Plus runs q=n-3,...,0; minus runs q=n-3,...,1. Initial values are used only when their indices
+    exist. The noncontributing n=1 minus seed is never evaluated as a dipole.
+  symbols:
+    principal:
+      latex: n
+      description: Principal quantum number
+      unit: '1'
+    energy:
+      latex: E
+      description: Photon energy divided by threshold; the clipped energy is max(E,1)
+      unit: '1'
+    continuum:
+      latex: k
+      description: Dimensionless continuum momentum
+      unit: '1'
+    radial:
+      latex: H_q^\pm
+      description: Energy-normalized radial factors
+      unit: '1'
+  assumptions:
+  - Each downward step removes one power of the clipped photon energy before forming the recurrence.
+  - The algorithm is a provider-derived rescaling of the inspected Cloudy/Brocklehurst recurrence, not
+    an empirical population adjustment.
+  evidence:
+  - brocklehurst_source
+  - formulation
+- id: higher_shell_ionization
+  revision: '1'
+  latex: u=\frac{k_{\rm B}T}{1\,\mathrm{eV}},\quad\epsilon_n=\frac{\chi_n}{k_{\rm B}T},\\q_n^{\rm ion}=\frac{9.56\times10^{-6}e^{-\epsilon_n}}{u^{3/2}[\epsilon_n^{2.33}+4.38\epsilon_n^{1.72}+1.32\epsilon_n]},\\q_n^{\rm
+    3b}=q_n^{\rm ion}\frac{g_n}{2}\left(\frac{h^2}{2\pi m_e k_{\rm B}T}\right)^{3/2}e^{\chi_n/(k_{\rm
+    B}T)}
+  description: VS80 Eq. 8 supplies the added-shell electron ionization rate; its three-body inverse uses
+    the same state energy and statistical weight.
+  scope: Only collapsed n=6,...,20 use this extension. The retained n<=5 collision/ionization prescriptions
+    remain distinct.
+  symbols:
+    temperature:
+      latex: T
+      description: Gas temperature
+      unit: K
+    binding:
+      latex: \chi_n
+      description: Actual finite-state ionization threshold
+      unit: erg
+    rate:
+      latex: q_n^{\rm ion}
+      description: Electron-impact ionization coefficient
+      unit: cm^3 s^-1
+    inverse:
+      latex: q_n^{\rm 3b}
+      description: Three-body recombination coefficient
+      unit: cm^6 s^-1
+  assumptions:
+  - Maxwellian electrons; the VS80 fit is an adopted approximation.
+  - The retained low-level data restrict the shared gas-temperature domain.
+  evidence:
+  - vs80_source
+  - formulation
+- id: finite_charge_root
+  revision: '1'
+  latex: "P_{ij}=R_{ij}+n_e q_{ij},\\quad\n M=\\operatorname{diag}\\!\\left(\\sum_jP_{ij}+\\Gamma_i+n_e\
+    \ q_i^{\\rm ion}\\right)-P^{\\mathsf T},\\\\\ns_i=n_e\\alpha_i+n_e^2q_i^{\\rm 3b},\\quad b=M^{-1}s,\\\
+    \\\nn_e=n_p=n_{\\rm H}e^z,\\quad n_i=n_e b_i,\\quad F(z;\\theta)=z+\\log(1+\\mathbf1^{\\mathsf T}b)=0,\\\
+    \\\n\\frac{dz}{d\\theta}=-\\frac{\\partial_\\theta F}{\\partial_z F}"
+  description: The retained charge-conserving statistical-equilibrium root is solved for the enlarged
+    rate matrix and differentiated implicitly.
+  scope: Pure H, nonnegative finite rates with a positive photoionization rate, nonsingular bound-state
+    matrix, isolated scalar charge root. Gas and radiation inputs are prescribed in this local comparison.
+  symbols:
+    density:
+      latex: n_{\rm H}
+      description: Hydrogen nucleus number density
+      unit: cm^-3
+    temperature:
+      latex: T
+      description: Prescribed gas temperature
+      unit: K
+    electron:
+      latex: n_e=n_p
+      description: Electron and proton density
+      unit: cm^-3
+    population:
+      latex: n_i
+      description: Bound-state populations
+      unit: cm^-3
+    ratio:
+      latex: b_i
+      description: Bound-to-proton population ratio
+      unit: '1'
+    rate:
+      latex: P,R,\Gamma,M,s
+      description: Transition rates, loss matrix and source per proton
+      unit: s^-1
+    coefficient:
+      latex: q_{ij},q_i^{\rm ion},\alpha_i
+      description: Two-body rate coefficients
+      unit: cm^3 s^-1
+    three_body:
+      latex: q_i^{\rm 3b}
+      description: Three-body coefficient
+      unit: cm^6 s^-1
+    root:
+      latex: z,F
+      description: Log ionized fraction and conservation residual
+      unit: '1'
+  assumptions:
+  - Orbital mixing coefficients remain inside the density-dependent rate callback.
+  - The implicit derivative follows the converged equations, including rate feedback, rather than differentiating
+    the bisection iterations.
+  - The gas-temperature limits of the retained low-level atomic data remain applicable.
+  evidence:
+  - formulation
+- id: shell_change
+  revision: '1'
+  latex: \Delta_s(N,N_{\rm ref})=\left|\frac{n_s(N_{\rm ref})}{n_s(N)}-1\right|,\qquad\max_{s\in\{2,3\}}\Delta_s(15,20)\le0.05
+  description: A sampled relative shell-size criterion with the smaller atom in the denominator.
+  scope: The seven registered temperature/density/radiation cases; N=15 and Nref=20. The separate baseline
+    measurement retains 48 points per threshold interval.
+  symbols:
+    population:
+      latex: n_s
+      description: Population summed over resolved sublevels of shell s
+      unit: cm^-3
+    change:
+      latex: \Delta_s
+      description: Absolute relative change on increasing the largest included shell
+      unit: '1'
+  assumptions:
+  - Each population solve must meet its numerical convergence criteria.
+  - Numerical quadrature and derivative tests are separate prerequisites.
+  - This finite comparison cannot establish infinite-atom convergence or physical atmospheric accuracy.
+  evidence:
+  - formulation
+bindings:
+- id: shell_groups
+  equation:
+    id: statistical_shells
+    revision: '1'
+  subject: extended_atom
+  source: src/escape/hydrogen_atom.py
+  symbol: make_hydrogen_atom
+  arguments:
+    nmax:
+      symbol: maximum_shell
+  note: Constructs six resolved states and every statistical shell through N; default N=15. The low-level
+    data are retained.
+- id: radial_integral
+  equation:
+    id: radial_dipoles
+    revision: '1'
+  subject: extended_atom
+  source: src/escape/hydrogen_atom.py
+  symbol: hydrogenic_radial_dipole
+  arguments:
+    n_upper:
+      symbol: n_upper
+    l_upper:
+      symbol: l_upper
+    n_lower:
+      symbol: n_lower
+    l_lower:
+      symbol: l_lower
+  note: Static exact-rational polynomial integration; final normalization is float64. This is not a JAX
+    runtime parameter solve.
+  result: radial
+- id: radiative_rate
+  equation:
+    id: radial_dipoles
+    revision: '1'
+  subject: extended_atom
+  source: src/escape/hydrogen_atom.py
+  symbol: hydrogenic_einstein_a
+  arguments:
+    n_upper:
+      symbol: n_upper
+    l_upper:
+      symbol: l_upper
+    n_lower:
+      symbol: n_lower
+    l_lower:
+      symbol: l_lower
+    frequency_hz:
+      symbol: frequency
+  note: Declared correspondence; source and numerical evidence are inspected separately.
+  result: einstein_a
+- id: orbital_cross_section
+  equation:
+    id: coulomb_bound_free
+    revision: '1'
+  subject: extended_atom
+  source: src/escape/hydrogen_bound_free.py
+  symbol: hydrogenic_cross_section
+  arguments:
+    n:
+      symbol: principal
+    ell:
+      symbol: orbital
+    relative_energy:
+      symbol: energy
+  note: Declared correspondence; source and numerical evidence are inspected separately.
+  result: cross_section
+- id: normalized_recurrence
+  equation:
+    id: normalized_coulomb_recurrence
+    revision: '1'
+  subject: extended_atom
+  source: src/escape/hydrogen_bound_free.py
+  symbol: _orbital_cross_sections
+  arguments:
+    n:
+      symbol: principal
+    relative_energy:
+      symbol: energy
+  note: Evaluates both normalized recurrences once per shell; reconstructs the channel products in log
+    space before the statistical shell average.
+- id: higher_shell_ionization
+  equation:
+    id: higher_shell_ionization
+    revision: '1'
+  subject: extended_atom
+  source: src/escape/hydrogen_atom.py
+  symbol: atom_collision_rates
+  arguments:
+    temperature_k:
+      symbol: temperature
+  note: Only n>=6 uses the new VS80 ionization expression; the returned tuple also includes the retained
+    bound-bound and lower-level data.
+- id: density_root
+  equation:
+    id: finite_charge_root
+    revision: '1'
+  subject: extended_atom
+  source: src/escape/hydrogen_nlte.py
+  symbol: _solve_equilibrium_with_rates
+  arguments:
+    n_h_cm3:
+      symbol: density
+  note: The supplied rates_at_density callback enters every charge-root evaluation and its implicit derivative.
+- id: atom_population_root
+  equation:
+    id: finite_charge_root
+    revision: '1'
+  subject: extended_atom
+  source: src/escape/hydrogen_atom.py
+  symbol: solve_atom_populations
+  arguments:
+    n_h_cm3:
+      symbol: density
+    temperature_k:
+      symbol: temperature
+  note: The callback includes the existing ne-dependent low-orbital mixing; the root returns converged
+    populations and diagnostics.
+- id: shell_change_measurement
+  equation:
+    id: shell_change
+    revision: '1'
+  subject: extended_atom
+  source: tests/test_atom_convergence.py
+  symbol: test_enlarged_atom_shell_sensitivity
+  arguments: {}
+  note: JUnit properties retain the full 5,10,15,20 baseline sequence; the provider gate applies the unchanged
+    five-percent criterion.
+decisions:
+- id: default_shell_count
+  revision: '1'
+  question: Which explicit shell cutoff should the extended finite atom use by default?
+  scope: The seven registered local conditions and retained selected tail controls; not a universal atmospheric
+    cutoff.
+  options:
+  - id: retain_five
+    description: Retain the smaller atom despite the saved 4-to-5 failure and omitted high-shell pathways.
+  - id: use_ten
+    description: Use ten shells; rejected by the dilute-gas reference convergence control.
+  - id: use_fifteen
+    description: Use fifteen shells, checked against twenty and the selected larger Cloudy controls.
+  - id: use_twenty
+    description: Use the largest supported atom routinely, increasing cost despite the scoped 15-to-20
+      criterion passing.
+  selected: use_fifteen
+  reasons:
+  - The unchanged 5% population criterion is met for both n2 and n3 in all seven registered conditions
+    at N=15 versus 20.
+  - The N=10 dilute-gas failure is retained. The original N=4-to-5 failure remains contradicted.
+  - Explicit high-shell rates address the missing pathways without fitting a recombination coefficient
+    or rescaling the lower populations.
+  basis:
+  - kind: assessment
+    id: convergence_review
+    sha256: 39608b5eb1a8063e178169550aa142b20430069a7b6756f417f78b89e7623f62
+  - kind: assessment
+    id: reference_review
+    sha256: 4452ba958597a65d313223cbbceb1deeef822d4e7a9e659231428188976febc1
+  - kind: evidence
+    id: candidate10_failure
+    sha256: 086dd1adc569f22583bd98c9d233195b34aa167d0ddf3bb57ba5636f37d455e8
+  - kind: evidence
+    id: pathway_diagnosis
+    sha256: 42a2b59e72ce0a96917568c3cb656450adc5dd27904d13e64db71025d316780e
+  limitations:
+  - This choice is verified only at the declared samples; statistical orbital populations, finite cutoff
+    and collision approximations remain.
+  reconsider_when:
+  - New gas/radiation conditions change n2 or n3 by more than 5% on increasing the atom.
+  - Higher-shell data, orbital-resolved calculations, or intended-use atmospheric tests expose a significant
+    discrepancy.
+  subject: extended_atom
+  context: registered_cases

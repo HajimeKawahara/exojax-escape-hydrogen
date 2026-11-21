@@ -846,6 +846,32 @@ evidence:
       note: The same failed metric and artifact hashes are retained; only the new record narrows Context
         to the actual baseline.
   result: failed
+- id: extended_atom_convergence_resolution
+  kind: benchmark
+  summary: The enlarged nmax=15 atom passes the unchanged five-percent population criteria in the
+    declared convergence and external-reference checks.
+  sources:
+  - mceg/contracts/escape.atom_convergence.yaml
+  - mceg/evidence/atom_convergence_20261121/comparison.json
+  - mceg/evidence/atom_convergence_20261121/review.json
+  scope: New implementation at source revision 246e340, with seven factorized fixed-temperature,
+    prescribed-radiation conditions. The maximum nmax=15-to-20 change is 1.47134%; matched-atom
+    Cloudy errors across fourteen cases are at most 2.03149%. Separate comparisons of nmax=15
+    against Cloudy nmax=30 at the baseline and nmax=40 at low density differ by at most 2.06569%.
+    These measurements do not establish infinite-atom convergence or atmospheric accuracy and
+    are not evidence about the historical optimized_atom Subject.
+  artifacts:
+  - source: mceg/evidence/atom_convergence_20261121/comparison.json
+    sha256: e9d9fa0239820f0c6b77f8351e45df04dd4b5baa1f538b6406d0a8704e4c6c57
+  provenance:
+    role: secondary
+    location: The enlarged-atom comparison review and its separately scoped escape.atom_convergence contract.
+    inspection: inspected
+    note: All fourteen retained comparison receipts and their artifact hashes were independently
+      checked. Their sixteen selected source hashes match both the current tree and source commit
+      246e340. New model definitions, numerical verification and adoption rationale remain in the
+      dedicated convergence contract; this bridge only records completion of the follow-up action.
+  result: passed
 limitations:
 - statement: MCEG records and navigates evidence, Decisions and FollowUps; it does not execute repairs or prove
     physical equivalence.
@@ -1514,6 +1540,15 @@ follow_up_resolutions:
   - current_truncation_failure
   note: Reviewed the fulfilled finite-comparison criteria and causal repair, while retaining the distinct failed
     shell-truncation requirement and atmospheric limitations. This closes only the declared comparison investigation.
+- follow_up: establish_atom_size_convergence
+  evidence:
+  - extended_atom_convergence_resolution
+  note: Completed the action by extending the atom and recording new finite-scope convergence and
+    reference evidence in escape.atom_convergence. The nmax=15-to-20 changes and larger-reference
+    tail checks satisfy the original five-percent criterion in their declared samples. This does
+    not change current_atom_truncation@1 or its contradicted nmax=4-to-5 Assessment; that historical
+    failure remains valid. Atmospheric adequacy and convergence outside the sampled conditions
+    remain unresolved. The new contract records the separate model definition and adoption decision.
 decisions:
 - id: continue_after_disagreement
   revision: '1'

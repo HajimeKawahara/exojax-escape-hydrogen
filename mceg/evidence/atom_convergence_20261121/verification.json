@@ -1,0 +1,1247 @@
+{
+  "receipt_version": "1",
+  "started_utc": "2026-11-21T13:06:00.885870+00:00",
+  "workflow": "mceg/workflows/coupled.json",
+  "workflow_sha256": "34f255b8787c6c0896cf7ecd2bbf950139976e586794b250f534ec2851e55aac",
+  "repository": {
+    "root": "/tmp/exojax-escape-atom-convergence",
+    "revision": "246e340658008a8f355c345333571d75dd1e66e9",
+    "dirty": false
+  },
+  "python": "3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:50:58) [GCC 12.3.0]",
+  "executable": "/home/kawahara/miniconda3/bin/python",
+  "package_metadata_versions": {
+    "jax": "0.10.0",
+    "jaxlib": "0.10.0",
+    "numpy": "2.1.0",
+    "scipy": "1.17.1",
+    "pytest": "8.3.3",
+    "exojax": "2.4.1.dev127+gcde2bda1f"
+  },
+  "dependency_probe": {
+    "command": [
+      "/home/kawahara/miniconda3/bin/python",
+      "-c",
+      "import importlib,json,sys\nout={}\nfor name in json.loads(sys.argv[1]):\n module=importlib.import_module(name)\n out[name]={'file':getattr(module,'__file__',None),'version':getattr(module,'__version__',None)}\nprint(json.dumps(out))\n",
+      "[\"escape\", \"exojax\", \"jax\", \"numpy\", \"scipy\"]"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"escape\": {\"file\": \"/tmp/exojax-escape-atom-convergence/src/escape/__init__.py\", \"version\": null}, \"exojax\": {\"file\": \"/home/kawahara/exojax/src/exojax/__init__.py\", \"version\": \"2.4.1.dev127+gcde2bda1f\"}, \"jax\": {\"file\": \"/home/kawahara/miniconda3/lib/python3.12/site-packages/jax/__init__.py\", \"version\": \"0.10.0\"}, \"numpy\": {\"file\": \"/home/kawahara/miniconda3/lib/python3.12/site-packages/numpy/__init__.py\", \"version\": \"2.1.0\"}, \"scipy\": {\"file\": \"/home/kawahara/miniconda3/lib/python3.12/site-packages/scipy/__init__.py\", \"version\": \"1.17.1\"}}\n",
+    "stderr": ""
+  },
+  "external_source_roots": [
+    {
+      "root": "/home/kawahara/exojax/src",
+      "revision": "38cb2e44f153ad6d729e3253e235702de52920cf",
+      "dirty": true
+    }
+  ],
+  "environment": {
+    "JAX_PLATFORMS": "cpu",
+    "JAX_ENABLE_X64": "1",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "PYTHONPATH": "/tmp/exojax-escape-atom-convergence/src:/home/kawahara/exojax/src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "selected_inputs_before": {
+    "MANIFEST.in": "1d8a78b7f7a38e87a071929b8063e2df897b5ae54d8673635a4c499d388469b6",
+    "examples/coupled_hydrogen.py": "2d301a947e6ae117f28bf82f825e99456e8050e939ed39267a2e919400e4651d",
+    "mceg/evidence/cloudy_reference_20261121/provenance.json": "d4492894cf6b85f27c798f71b875c84990089ab359e2045db28e0113dcf9ea57",
+    "mceg/investigations/atom_convergence_cases.json": "13cfd0631e26f492fc958e101119fa38cf80f7d56525d9f316bf5aa40e4d79ae",
+    "mceg/investigations/cloudy_discrepancy.json": "9d5028335b7c79cc75c0af7408c522b868c182dc9f3400e77ff42f89b64a037a",
+    "mceg/investigations/cloudy_n2_followup.json": "67c8bf28c4090de99f80b0b4ace5146d31d582d3f17ab911340e1937bbbc1762",
+    "mceg/investigations/cloudy_validation_cases.json": "28a87451b57345f3841d24a47c6a32edbb85642ae010084c48e127de086fa580",
+    "mceg/workflows/coupled.json": "34f255b8787c6c0896cf7ecd2bbf950139976e586794b250f534ec2851e55aac",
+    "pyproject.toml": "ec795cda2da582ab94525b45712e79900395eeb24b7040219592a01e0f1dafac",
+    "src/escape/__init__.py": "68bfd52442b9d98b7c167846961560a5a2f2e9d8d2a74a297a218c8d0efbf631",
+    "src/escape/_licenses/Cloudy.txt": "225136d0a6ec8a56ab39dc876bb2c85de47537d783d3fa66fb14322907f986de",
+    "src/escape/coupled_hydrogen.py": "bba13310d54a6eeecd3bfac0eccdb14b1272d15b642c355ccee6f6c8e8adf111",
+    "src/escape/hydrogen_atom.py": "1da46f965072933e12a7f37e603b8450a59d53596a95a22375571fec0020c3db",
+    "src/escape/hydrogen_bound_free.py": "90170626731551946dfeac40f47b87afd369fb9d8f10d378c2f2e5d23de5f5fc",
+    "src/escape/hydrogen_continuum.py": "61a5669f3a08e6af967d2f1042fa387489224389bddcefd13da576b1cd31e770",
+    "src/escape/hydrogen_forward.py": "586ee08f484a01d9a0b150c8cce4cf7a32e62105a29a677434d9d353b3f41ebc",
+    "src/escape/hydrogen_mixing.py": "78bf474551b07a6641c471f4403fae44d0de6c07311858e4ecfe0928c99c3b8f",
+    "src/escape/hydrogen_nlte.py": "697375972fffdc077f9ee2cb131d74a31c1af6e9d8f98fa5e64127fd4b874943",
+    "src/escape/hydrogen_populations.py": "c4b913236c6e5384903920d0378fe285563bb46170528f0fe7d2b02e76733289",
+    "src/escape/hydrogen_rates.py": "a1e1237725284198f8617a828f292d0d92e42ee6824f95c2efcfd68b535b5535",
+    "src/escape/nlte_forward.py": "32197712b8167e19760b265df3480ca1c8b67b008e2a6765a914ebbf9078416c",
+    "src/escape/nonisothermal.py": "35ab60f683ca96ceda895b186406f481aad3563c6c27e7b8af1a8c4715e1c529",
+    "src/escape/parker.py": "0d6b340dd3c47895117b6aa0fbf156ca9eb3f04588170ea99ef7858766004a1e",
+    "src/escape/radiation.py": "1c56019cb4821f3df7020b0403e1308a83c5d24328de07640d473cb0274df2f3",
+    "src/escape/reactive_flow.py": "af160d5ae62c5ebd7b77a4158ecf07768a7638bcdaf659d6caf9fe1b535883df",
+    "tests/data/cloudy_hydrogen_thin_reference.json": "9e37085abe3afeea7ce91ab3cd8268154ec90db28fb95f9f7d16d3e8977e0b84",
+    "tests/data/hydrogen_bound_free_anchors.json": "00e58e36be08f265d35c7442aa67903eb147b1d4ef1f4b3a4862527ea4864eab",
+    "tests/data/hydrogen_high_n_bound_free_anchors.json": "6c3db85412919f8cee212ab470361fce3ea59e77a03f55422782301c6de9efe6",
+    "tests/test_atom_convergence.py": "f5cdaaeb3da0533610a010039d0b2ed9abbdae4179c1aebfa6afe6edfa4c4a18",
+    "tests/test_cloudy_case_workflow.py": "196688ca91338565afb12ede6c654f6b8e13aae022798dc709029f4c1b6ccc3f",
+    "tests/test_cloudy_reference_tool.py": "75bd53900f5cf851a53e9d4a54c31dd05ca7cdfbd0d45f9b5ab9e0ff67770f99",
+    "tests/test_coupled_equilibrium.py": "6d05732cece9f1d1374bb957015a5bd6fb94782a88b992ead8b547398f5f6667",
+    "tests/test_coupled_flow.py": "aa28dc592559abcb689f4edab84269e4f3c1448226ecaa19bbdb131c8949a118",
+    "tests/test_hydrogen_atom.py": "ec3d65c15095a39d6df96ddbbad755d14098e2ad5cb1fa7f73d75147b399adaa",
+    "tests/test_hydrogen_bound_free.py": "15338cd1155a647f44050311dc5c8e790d162866d3d6f8e708e648385b3442d0",
+    "tests/test_hydrogen_cloudy_reference.py": "a1b299c2b182627e59f1dc26852434560deb94e306dc8079c2677be23265277c",
+    "tests/test_hydrogen_continuum.py": "52cff42fbba08ec33ab8fb092999b9997d1386a00917897404ad391fee97cf23",
+    "tests/test_hydrogen_forward.py": "cd4dd60af08ff3a032f0f1926b750ccce061789f950064888f0611c8d3a81971",
+    "tests/test_hydrogen_mixing.py": "fce2ecf49ff4c31ca31529f1c6a34af5beef03fab403f7923a7d3349f513e707",
+    "tests/test_hydrogen_nlte.py": "b151cf29e40195380ba027b96a578f230ac7055333bc7ab16ccfdf6002a6472e",
+    "tests/test_hydrogen_rates.py": "763c80270cb821ceb4a2ec2e20dbc451d07109f7ea07f7cfb94b59b5e565d65c",
+    "tests/test_model_evidence.py": "b5a1bf3152f81f1fa7b7c448b945ff064c8441edd5b8fa7961741544e0d8e4cb",
+    "tests/test_nlte_forward.py": "85a25bb6ab5e1196c1d9f608079be6a39e80a7b506389af2769733c4394d4bfe",
+    "tests/test_nonisothermal_parker.py": "d7a0cc937f02ae8af623690fc776ad88521964ade7887b60483859c9a8365c27",
+    "tests/test_parker.py": "6117aba4be4b72fa2c96f105c3648a0945e8be0f755ddef0997795739f85c2af",
+    "tests/test_populations.py": "142a72b6694651a9283236e9a3b28d5f1812e0ec04bb618fce6c091e0c4ae65c",
+    "tests/test_radiation.py": "fe05b803e3235aed9485e2d86b074c8c13f5e4235a068b3e15861be8669c1be5",
+    "tests/test_reactive_flow.py": "8f2365e83410df42da8b60b6b2ce99a1030c25c35531dadf64f0a3ffc2991780",
+    "tests/test_verification_workflow.py": "4051a2edea2286313f7034def9b23767fc5ca6be1dfb743b12bae472e3aca6f0",
+    "tools/cloudy/rate_readout.patch": "b321b6eafe56bf9482d5f41eb002f98e8855685f36511df3b13aeb9a61a57853",
+    "tools/cloudy_archive.py": "5547637bda6eaae5850ec79d7fad82bb8c999544252a3ff8b9dddff0e074eaa1",
+    "tools/cloudy_mixing_check.py": "942cf2bc915e446e512f095b25f71ab497578d1aee693beae34a752c96c3a30c",
+    "tools/cloudy_mixing_convention.py": "cba7bd391581ff8efc757c4e137037b9e3dd6c748a09259d6ebab948992db6b6",
+    "tools/cloudy_rates_diagnosis.py": "ee6b710465a2401beab39548c18d3359b4679b6954fcdba84b6ac401ab55506b",
+    "tools/cloudy_reference.py": "16a65adf87d609b807dfefafe4d33ef88eceed7e3583f9c4ee56593d6fa4e1dc",
+    "tools/diagnose_atom_convergence.py": "82677a68dbc01eca8d58f965c60d7b6c2499a617705b8aba9dce5717ef1cba4c",
+    "tools/verify_cloudy_cases.py": "7c1a7508a8544681d1bf34f9077824b7be77b59f6ba01d353638509153c1d188",
+    "tools/verify_coupled.py": "1791502dbb5994374d21c1e95e747827a7599b3507b878b0720b01f1fce2c07f"
+  },
+  "gates": [
+    {
+      "id": "atomic_balance",
+      "scope": "Included atomic/continuum identities, hydrogenic cross-section anchors, independent mixing quadrature, finite differentiable rates and implicit charge feedback.",
+      "what_not_proved": [
+        "Atomic-data accuracy, complete hydrogen atom, or H-minus chemical equilibrium."
+      ],
+      "command": [
+        "/home/kawahara/miniconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "junit_family=legacy",
+        "tests/test_hydrogen_atom.py",
+        "tests/test_hydrogen_continuum.py",
+        "tests/test_hydrogen_bound_free.py",
+        "tests/test_hydrogen_mixing.py",
+        "--junitxml=/tmp/exojax-escape-atom-convergence/results/atom-convergence/verification-02/atomic_balance.xml"
+      ],
+      "cwd": "/tmp/exojax-escape-atom-convergence",
+      "status": "passed",
+      "exit_code": 0,
+      "junit": {
+        "cases": [
+          {
+            "id": "tests.test_hydrogen_atom::test_radial_integral_and_published_transition_anchors",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_truncation_keeps_low_data_and_adds_explicit_cascade_edges[3-6-5]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_truncation_keeps_low_data_and_adds_explicit_cascade_edges[4-7-11]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_truncation_keeps_low_data_and_adds_explicit_cascade_edges[5-8-18]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_truncation_keeps_low_data_and_adds_explicit_cascade_edges[10-13-68]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_truncation_keeps_low_data_and_adds_explicit_cascade_edges[20-23-243]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_high_shell_dipoles_match_independent_radial_quadrature[upper0-lower0]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_high_shell_dipoles_match_independent_radial_quadrature[upper1-lower1]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_high_shell_dipoles_match_independent_radial_quadrature[upper2-lower2]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_high_shell_dipoles_match_independent_radial_quadrature[upper3-lower3]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_extended_collisions_preserve_all_pairwise_equilibria[6000.0-5]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_extended_collisions_preserve_all_pairwise_equilibria[6000.0-10]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_extended_collisions_preserve_all_pairwise_equilibria[6000.0-20]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_extended_collisions_preserve_all_pairwise_equilibria[10000.0-5]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_extended_collisions_preserve_all_pairwise_equilibria[10000.0-10]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_extended_collisions_preserve_all_pairwise_equilibria[10000.0-20]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_extended_collisions_preserve_all_pairwise_equilibria[14000.0-5]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_extended_collisions_preserve_all_pairwise_equilibria[14000.0-10]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_extended_collisions_preserve_all_pairwise_equilibria[14000.0-20]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_extra_shells_preserve_previous_low_level_rate_data",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_high_shell_ionization_matches_cloudy_vs80_source[6-6000.0-3.0976659751338506e-06]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_high_shell_ionization_matches_cloudy_vs80_source[10-9000.0-2.5098090298669288e-05]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_high_shell_ionization_matches_cloudy_vs80_source[20-14000.0-0.0001495874742673897]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_shared_grid_reproduces_old_atom_rates_without_edge_bias",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_extended_milne_identity_and_differentiable_population_solve",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+            "status": "passed",
+            "properties": [
+              {
+                "name": "temperature_k",
+                "value": "9000.0"
+              },
+              {
+                "name": "n_h_cm3",
+                "value": "1000000000000.0"
+              },
+              {
+                "name": "radiation_temperature_k",
+                "value": "10000.0"
+              },
+              {
+                "name": "radiation_dilution",
+                "value": "0.025"
+              },
+              {
+                "name": "continuum_points_per_interval",
+                "value": "48"
+              },
+              {
+                "name": "n2_cm3_nmax_3",
+                "value": "115135.93471636112"
+              },
+              {
+                "name": "n3_cm3_nmax_3",
+                "value": "16432.61948636622"
+              },
+              {
+                "name": "ionized_fraction_nmax_3",
+                "value": "0.8434919759563345"
+              },
+              {
+                "name": "n2_cm3_nmax_4",
+                "value": "124757.56200430446"
+              },
+              {
+                "name": "n3_cm3_nmax_4",
+                "value": "18752.28680885588"
+              },
+              {
+                "name": "ionized_fraction_nmax_4",
+                "value": "0.8308408700442594"
+              },
+              {
+                "name": "n2_cm3_nmax_5",
+                "value": "132340.65091636137"
+              },
+              {
+                "name": "n3_cm3_nmax_5",
+                "value": "20202.77670932158"
+              },
+              {
+                "name": "ionized_fraction_nmax_5",
+                "value": "0.8207177829420637"
+              },
+              {
+                "name": "n2_relative_change_4_to_5",
+                "value": "0.06078259938900743"
+              },
+              {
+                "name": "n3_relative_change_4_to_5",
+                "value": "0.07735002750601594"
+              }
+            ]
+          },
+          {
+            "id": "tests.test_hydrogen_atom::test_invalid_atomic_choices_and_temperature_are_not_extrapolated",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_continuum::test_ion_free_free_bolometric_emission_matches_analytic_integral",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_continuum::test_bound_free_and_free_free_kirchhoff_at_saha_populations",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_continuum::test_full_photon_energy_matches_independent_event_accounting",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_continuum::test_hminus_optional_trace_domain_and_kirchhoff",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_continuum::test_total_radiative_energy_jit_gradient",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_coulomb_recurrence_matches_independently_tabulated_anchors",
+            "status": "passed",
+            "properties": [
+              {
+                "name": "hydrogenic_cross_section_anchor_error",
+                "value": "2.5748993850438495e-06"
+              }
+            ]
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_ground_state_stobbe_expression_and_threshold",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_high_shells_match_independent_cloudy_cross_section_table",
+            "status": "passed",
+            "properties": [
+              {
+                "name": "high_n_cross_section_anchor_error",
+                "value": "5.945659705275386e-05"
+              }
+            ]
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_frequency_derivative_matches_finite_difference[1.000001-1e-07-3-1]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_frequency_derivative_matches_finite_difference[1.000001-1e-07-10-0]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_frequency_derivative_matches_finite_difference[1.000001-1e-07-20-19]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_frequency_derivative_matches_finite_difference[1.01-1e-05-3-1]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_frequency_derivative_matches_finite_difference[1.01-1e-05-10-0]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_frequency_derivative_matches_finite_difference[1.01-1e-05-20-19]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_frequency_derivative_matches_finite_difference[10.0-0.001-3-1]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_frequency_derivative_matches_finite_difference[10.0-0.001-10-0]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_frequency_derivative_matches_finite_difference[10.0-0.001-20-19]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_collapsed_shells_are_statistical_orbital_averages",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_bound_free::test_invalid_quantum_numbers_and_model",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_nested_batched_exponential_integral_preserves_values_and_first_second_ad",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_combined_cutoffs_match_independent_maxwell_cross_section[6000.0-100000000.0]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_combined_cutoffs_match_independent_maxwell_cross_section[9000.0-10000000000.0]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_combined_cutoffs_match_independent_maxwell_cross_section[14000.0-1000000000000.0]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_combined_cutoffs_match_independent_maxwell_cross_section[9000.0-1000000000000000.0]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_cloudy_readout_anchor_with_declared_cutoff_and_mass_difference",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_mixing_matrix_preserves_pairwise_detailed_balance_and_ground_state",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_n2_rate_matches_cloudy_dilute_readout_with_declared_mass_difference",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_density_and_temperature_derivatives_across_the_cloudy_cutoff_boundary",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_weak_density_limit_is_finite_through_the_charge_root_bracket",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_invalid_mixing_inputs_are_visible[0.0-1000000000000.0-1e-08]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_invalid_mixing_inputs_are_visible[9000.0--1.0-1e-08]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_invalid_mixing_inputs_are_visible[9000.0-1000000000000.0-0.0]",
+            "status": "passed",
+            "properties": []
+          },
+          {
+            "id": "tests.test_hydrogen_mixing::test_canonical_population_gradients_include_screening_and_charge_feedback",
+            "status": "passed",
+            "properties": []
+          }
+        ],
+        "metrics": {
+          "temperature_k": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "9000.0"
+            }
+          ],
+          "n_h_cm3": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "1000000000000.0"
+            }
+          ],
+          "radiation_temperature_k": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "10000.0"
+            }
+          ],
+          "radiation_dilution": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "0.025"
+            }
+          ],
+          "continuum_points_per_interval": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "48"
+            }
+          ],
+          "n2_cm3_nmax_3": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "115135.93471636112"
+            }
+          ],
+          "n3_cm3_nmax_3": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "16432.61948636622"
+            }
+          ],
+          "ionized_fraction_nmax_3": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "0.8434919759563345"
+            }
+          ],
+          "n2_cm3_nmax_4": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "124757.56200430446"
+            }
+          ],
+          "n3_cm3_nmax_4": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "18752.28680885588"
+            }
+          ],
+          "ionized_fraction_nmax_4": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "0.8308408700442594"
+            }
+          ],
+          "n2_cm3_nmax_5": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "132340.65091636137"
+            }
+          ],
+          "n3_cm3_nmax_5": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "20202.77670932158"
+            }
+          ],
+          "ionized_fraction_nmax_5": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "0.8207177829420637"
+            }
+          ],
+          "n2_relative_change_4_to_5": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "0.06078259938900743"
+            }
+          ],
+          "n3_relative_change_4_to_5": [
+            {
+              "case": "tests.test_hydrogen_atom::test_atom_truncation_sensitivity",
+              "value": "0.07735002750601594"
+            }
+          ],
+          "hydrogenic_cross_section_anchor_error": [
+            {
+              "case": "tests.test_hydrogen_bound_free::test_coulomb_recurrence_matches_independently_tabulated_anchors",
+              "value": "2.5748993850438495e-06"
+            }
+          ],
+          "high_n_cross_section_anchor_error": [
+            {
+              "case": "tests.test_hydrogen_bound_free::test_high_shells_match_independent_cloudy_cross_section_table",
+              "value": "5.945659705275386e-05"
+            }
+          ]
+        },
+        "counts": {
+          "passed": 60,
+          "failed": 0,
+          "error": 0,
+          "skipped": 0
+        }
+      },
+      "metric_checks": [],
+      "artifacts": {
+        "atomic_balance.log": "b9fab1ec653874210fc5b3a83027f24fb32a0a619414b5c8d71d47d52f235899",
+        "atomic_balance.xml": "d2c796b454d738e19216a203fce241eff1c4d135d8dbcca7f1e8aeec200c9650"
+      }
+    },
+    {
+      "id": "enlarged_atom_numerics",
+      "scope": "For the extended nmax=20 atom at T=9000 K, nH=1e12 cm^-3, Trad=10000 K and W=0.025, continuum refinement and forward/reverse implicit population derivatives meet numerical tolerances.",
+      "what_not_proved": [
+        "Numerical accuracy does not establish shell-size convergence or atomic-data accuracy.",
+        "The derivative checks use log(T) and log(nH) at one declared baseline, not a global NUTS parameter domain."
+      ],
+      "command": [
+        "/home/kawahara/miniconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "junit_family=legacy",
+        "tests/test_atom_convergence.py::test_enlarged_atom_quadrature_refinement",
+        "tests/test_atom_convergence.py::test_enlarged_atom_implicit_derivatives",
+        "--junitxml=/tmp/exojax-escape-atom-convergence/results/atom-convergence/verification-02/enlarged_atom_numerics.xml"
+      ],
+      "cwd": "/tmp/exojax-escape-atom-convergence",
+      "status": "passed",
+      "exit_code": 0,
+      "junit": {
+        "cases": [
+          {
+            "id": "tests.test_atom_convergence::test_enlarged_atom_quadrature_refinement",
+            "status": "passed",
+            "properties": [
+              {
+                "name": "n2_quadrature_change_nmax20",
+                "value": "4.440892098500626e-16"
+              },
+              {
+                "name": "n3_quadrature_change_nmax20",
+                "value": "3.4416913763379853e-15"
+              }
+            ]
+          },
+          {
+            "id": "tests.test_atom_convergence::test_enlarged_atom_implicit_derivatives",
+            "status": "passed",
+            "properties": [
+              {
+                "name": "population_gradient_normalized_error_nmax20",
+                "value": "6.876812452816239e-10"
+              }
+            ]
+          }
+        ],
+        "metrics": {
+          "n2_quadrature_change_nmax20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_quadrature_refinement",
+              "value": "4.440892098500626e-16"
+            }
+          ],
+          "n3_quadrature_change_nmax20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_quadrature_refinement",
+              "value": "3.4416913763379853e-15"
+            }
+          ],
+          "population_gradient_normalized_error_nmax20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_implicit_derivatives",
+              "value": "6.876812452816239e-10"
+            }
+          ]
+        },
+        "counts": {
+          "passed": 2,
+          "failed": 0,
+          "error": 0,
+          "skipped": 0
+        }
+      },
+      "metric_checks": [
+        {
+          "criterion": {
+            "name": "n2_quadrature_change_nmax20",
+            "minimum": 0.0,
+            "maximum": 0.001
+          },
+          "values": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_quadrature_refinement",
+              "value": "4.440892098500626e-16"
+            }
+          ],
+          "status": "passed"
+        },
+        {
+          "criterion": {
+            "name": "n3_quadrature_change_nmax20",
+            "minimum": 0.0,
+            "maximum": 0.001
+          },
+          "values": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_quadrature_refinement",
+              "value": "3.4416913763379853e-15"
+            }
+          ],
+          "status": "passed"
+        },
+        {
+          "criterion": {
+            "name": "population_gradient_normalized_error_nmax20",
+            "minimum": 0.0,
+            "maximum": 2e-05
+          },
+          "values": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_implicit_derivatives",
+              "value": "6.876812452816239e-10"
+            }
+          ],
+          "status": "passed"
+        }
+      ],
+      "artifacts": {
+        "enlarged_atom_numerics.log": "27074c575c7d12ba8294c5a8432078e19397ca70ca23fd7ca42cc15da9e2a6f9",
+        "enlarged_atom_numerics.xml": "e5c9c723d18d4cddba02ef1a7b308a2ee871da0809e3b54e774b2fdcc1cdaa72"
+      }
+    },
+    {
+      "id": "enlarged_atom_convergence",
+      "scope": "At T=9000 K, nH=1e12 cm^-3, Trad=10000 K and W=0.025, both n2 and n3 change by at most 5 percent from nmax=15 to 20. The explicit 5,10,15,20 sequence is also retained.",
+      "what_not_proved": [
+        "The original nmax=4-to-5 criterion remains separate and is not redefined by this gate.",
+        "This sampled larger-atom criterion does not prove infinite-atom convergence, agreement with an external reference, or atmospheric validity."
+      ],
+      "command": [
+        "/home/kawahara/miniconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "junit_family=legacy",
+        "tests/test_atom_convergence.py::test_enlarged_atom_shell_sensitivity",
+        "--junitxml=/tmp/exojax-escape-atom-convergence/results/atom-convergence/verification-02/enlarged_atom_convergence.xml"
+      ],
+      "cwd": "/tmp/exojax-escape-atom-convergence",
+      "status": "passed",
+      "exit_code": 0,
+      "junit": {
+        "cases": [
+          {
+            "id": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+            "status": "passed",
+            "properties": [
+              {
+                "name": "temperature_k",
+                "value": "9000.0"
+              },
+              {
+                "name": "n_h_cm3",
+                "value": "1000000000000.0"
+              },
+              {
+                "name": "radiation_temperature_k",
+                "value": "10000.0"
+              },
+              {
+                "name": "radiation_dilution",
+                "value": "0.025"
+              },
+              {
+                "name": "continuum_points_per_interval",
+                "value": "48"
+              },
+              {
+                "name": "n2_cm3_nmax_5",
+                "value": "132340.65091636137"
+              },
+              {
+                "name": "n3_cm3_nmax_5",
+                "value": "20202.77670932158"
+              },
+              {
+                "name": "ionized_fraction_nmax_5",
+                "value": "0.8207177829420637"
+              },
+              {
+                "name": "rate_residual_norm_nmax_5",
+                "value": "1.2130676719980602e-16"
+              },
+              {
+                "name": "conservation_error_nmax_5",
+                "value": "2.4424906541753444e-15"
+              },
+              {
+                "name": "n2_cm3_nmax_10",
+                "value": "146657.2280957081"
+              },
+              {
+                "name": "n3_cm3_nmax_10",
+                "value": "22726.97294895412"
+              },
+              {
+                "name": "ionized_fraction_nmax_10",
+                "value": "0.8015140761988838"
+              },
+              {
+                "name": "rate_residual_norm_nmax_10",
+                "value": "1.8793319033958162e-16"
+              },
+              {
+                "name": "conservation_error_nmax_10",
+                "value": "4.440892098500626e-16"
+              },
+              {
+                "name": "n2_cm3_nmax_15",
+                "value": "147731.36046048385"
+              },
+              {
+                "name": "n3_cm3_nmax_15",
+                "value": "22943.083093238056"
+              },
+              {
+                "name": "ionized_fraction_nmax_15",
+                "value": "0.800089994892538"
+              },
+              {
+                "name": "rate_residual_norm_nmax_15",
+                "value": "1.8720624695504088e-16"
+              },
+              {
+                "name": "conservation_error_nmax_15",
+                "value": "7.327471962526033e-15"
+              },
+              {
+                "name": "n2_cm3_nmax_20",
+                "value": "147968.2519591785"
+              },
+              {
+                "name": "n3_cm3_nmax_20",
+                "value": "22996.652514727233"
+              },
+              {
+                "name": "ionized_fraction_nmax_20",
+                "value": "0.7997791092809242"
+              },
+              {
+                "name": "rate_residual_norm_nmax_20",
+                "value": "4.948668490229859e-16"
+              },
+              {
+                "name": "conservation_error_nmax_20",
+                "value": "7.327471962526033e-15"
+              },
+              {
+                "name": "n2_relative_change_5_to_10",
+                "value": "0.10817973978679252"
+              },
+              {
+                "name": "n3_relative_change_5_to_10",
+                "value": "0.12494303510605409"
+              },
+              {
+                "name": "n2_relative_change_10_to_15",
+                "value": "0.007324101094252189"
+              },
+              {
+                "name": "n3_relative_change_10_to_15",
+                "value": "0.009508971774170316"
+              },
+              {
+                "name": "n2_relative_change_15_to_20",
+                "value": "0.0016035288509919088"
+              },
+              {
+                "name": "n3_relative_change_15_to_20",
+                "value": "0.002334883296698953"
+              },
+              {
+                "name": "n2_relative_change_10_to_20",
+                "value": "0.008939374352656237"
+              },
+              {
+                "name": "n3_relative_change_10_to_20",
+                "value": "0.011866057410233388"
+              },
+              {
+                "name": "n2_relative_change_5_to_20",
+                "value": "0.11808617333077587"
+              },
+              {
+                "name": "n3_relative_change_5_to_20",
+                "value": "0.13829167374386486"
+              }
+            ]
+          }
+        ],
+        "metrics": {
+          "temperature_k": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "9000.0"
+            }
+          ],
+          "n_h_cm3": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "1000000000000.0"
+            }
+          ],
+          "radiation_temperature_k": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "10000.0"
+            }
+          ],
+          "radiation_dilution": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.025"
+            }
+          ],
+          "continuum_points_per_interval": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "48"
+            }
+          ],
+          "n2_cm3_nmax_5": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "132340.65091636137"
+            }
+          ],
+          "n3_cm3_nmax_5": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "20202.77670932158"
+            }
+          ],
+          "ionized_fraction_nmax_5": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.8207177829420637"
+            }
+          ],
+          "rate_residual_norm_nmax_5": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "1.2130676719980602e-16"
+            }
+          ],
+          "conservation_error_nmax_5": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "2.4424906541753444e-15"
+            }
+          ],
+          "n2_cm3_nmax_10": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "146657.2280957081"
+            }
+          ],
+          "n3_cm3_nmax_10": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "22726.97294895412"
+            }
+          ],
+          "ionized_fraction_nmax_10": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.8015140761988838"
+            }
+          ],
+          "rate_residual_norm_nmax_10": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "1.8793319033958162e-16"
+            }
+          ],
+          "conservation_error_nmax_10": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "4.440892098500626e-16"
+            }
+          ],
+          "n2_cm3_nmax_15": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "147731.36046048385"
+            }
+          ],
+          "n3_cm3_nmax_15": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "22943.083093238056"
+            }
+          ],
+          "ionized_fraction_nmax_15": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.800089994892538"
+            }
+          ],
+          "rate_residual_norm_nmax_15": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "1.8720624695504088e-16"
+            }
+          ],
+          "conservation_error_nmax_15": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "7.327471962526033e-15"
+            }
+          ],
+          "n2_cm3_nmax_20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "147968.2519591785"
+            }
+          ],
+          "n3_cm3_nmax_20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "22996.652514727233"
+            }
+          ],
+          "ionized_fraction_nmax_20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.7997791092809242"
+            }
+          ],
+          "rate_residual_norm_nmax_20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "4.948668490229859e-16"
+            }
+          ],
+          "conservation_error_nmax_20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "7.327471962526033e-15"
+            }
+          ],
+          "n2_relative_change_5_to_10": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.10817973978679252"
+            }
+          ],
+          "n3_relative_change_5_to_10": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.12494303510605409"
+            }
+          ],
+          "n2_relative_change_10_to_15": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.007324101094252189"
+            }
+          ],
+          "n3_relative_change_10_to_15": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.009508971774170316"
+            }
+          ],
+          "n2_relative_change_15_to_20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.0016035288509919088"
+            }
+          ],
+          "n3_relative_change_15_to_20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.002334883296698953"
+            }
+          ],
+          "n2_relative_change_10_to_20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.008939374352656237"
+            }
+          ],
+          "n3_relative_change_10_to_20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.011866057410233388"
+            }
+          ],
+          "n2_relative_change_5_to_20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.11808617333077587"
+            }
+          ],
+          "n3_relative_change_5_to_20": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.13829167374386486"
+            }
+          ]
+        },
+        "counts": {
+          "passed": 1,
+          "failed": 0,
+          "error": 0,
+          "skipped": 0
+        }
+      },
+      "metric_checks": [
+        {
+          "criterion": {
+            "name": "n2_relative_change_15_to_20",
+            "minimum": 0.0,
+            "maximum": 0.05
+          },
+          "values": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.0016035288509919088"
+            }
+          ],
+          "status": "passed"
+        },
+        {
+          "criterion": {
+            "name": "n3_relative_change_15_to_20",
+            "minimum": 0.0,
+            "maximum": 0.05
+          },
+          "values": [
+            {
+              "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+              "value": "0.002334883296698953"
+            }
+          ],
+          "status": "passed"
+        }
+      ],
+      "artifacts": {
+        "enlarged_atom_convergence.log": "3aef681879c6ce39772ea268a12ce116c7b4a2d0afcd4e67e8aae16a9869e580",
+        "enlarged_atom_convergence.xml": "fb9d6736f69ba3e2231f2b97c3697e5ff57da30403c5bd8c54c1448ace13510b"
+      }
+    }
+  ],
+  "status": "passed",
+  "limitations": [
+    "Gate outcomes do not update or establish scientific Assessments.",
+    "Package metadata plus source roots are not a complete environment lock.",
+    "Only declared repository inputs are snapshotted; external dependencies are not vendored."
+  ],
+  "selected_inputs_after": {
+    "MANIFEST.in": "1d8a78b7f7a38e87a071929b8063e2df897b5ae54d8673635a4c499d388469b6",
+    "examples/coupled_hydrogen.py": "2d301a947e6ae117f28bf82f825e99456e8050e939ed39267a2e919400e4651d",
+    "mceg/evidence/cloudy_reference_20261121/provenance.json": "d4492894cf6b85f27c798f71b875c84990089ab359e2045db28e0113dcf9ea57",
+    "mceg/investigations/atom_convergence_cases.json": "13cfd0631e26f492fc958e101119fa38cf80f7d56525d9f316bf5aa40e4d79ae",
+    "mceg/investigations/cloudy_discrepancy.json": "9d5028335b7c79cc75c0af7408c522b868c182dc9f3400e77ff42f89b64a037a",
+    "mceg/investigations/cloudy_n2_followup.json": "67c8bf28c4090de99f80b0b4ace5146d31d582d3f17ab911340e1937bbbc1762",
+    "mceg/investigations/cloudy_validation_cases.json": "28a87451b57345f3841d24a47c6a32edbb85642ae010084c48e127de086fa580",
+    "mceg/workflows/coupled.json": "34f255b8787c6c0896cf7ecd2bbf950139976e586794b250f534ec2851e55aac",
+    "pyproject.toml": "ec795cda2da582ab94525b45712e79900395eeb24b7040219592a01e0f1dafac",
+    "src/escape/__init__.py": "68bfd52442b9d98b7c167846961560a5a2f2e9d8d2a74a297a218c8d0efbf631",
+    "src/escape/_licenses/Cloudy.txt": "225136d0a6ec8a56ab39dc876bb2c85de47537d783d3fa66fb14322907f986de",
+    "src/escape/coupled_hydrogen.py": "bba13310d54a6eeecd3bfac0eccdb14b1272d15b642c355ccee6f6c8e8adf111",
+    "src/escape/hydrogen_atom.py": "1da46f965072933e12a7f37e603b8450a59d53596a95a22375571fec0020c3db",
+    "src/escape/hydrogen_bound_free.py": "90170626731551946dfeac40f47b87afd369fb9d8f10d378c2f2e5d23de5f5fc",
+    "src/escape/hydrogen_continuum.py": "61a5669f3a08e6af967d2f1042fa387489224389bddcefd13da576b1cd31e770",
+    "src/escape/hydrogen_forward.py": "586ee08f484a01d9a0b150c8cce4cf7a32e62105a29a677434d9d353b3f41ebc",
+    "src/escape/hydrogen_mixing.py": "78bf474551b07a6641c471f4403fae44d0de6c07311858e4ecfe0928c99c3b8f",
+    "src/escape/hydrogen_nlte.py": "697375972fffdc077f9ee2cb131d74a31c1af6e9d8f98fa5e64127fd4b874943",
+    "src/escape/hydrogen_populations.py": "c4b913236c6e5384903920d0378fe285563bb46170528f0fe7d2b02e76733289",
+    "src/escape/hydrogen_rates.py": "a1e1237725284198f8617a828f292d0d92e42ee6824f95c2efcfd68b535b5535",
+    "src/escape/nlte_forward.py": "32197712b8167e19760b265df3480ca1c8b67b008e2a6765a914ebbf9078416c",
+    "src/escape/nonisothermal.py": "35ab60f683ca96ceda895b186406f481aad3563c6c27e7b8af1a8c4715e1c529",
+    "src/escape/parker.py": "0d6b340dd3c47895117b6aa0fbf156ca9eb3f04588170ea99ef7858766004a1e",
+    "src/escape/radiation.py": "1c56019cb4821f3df7020b0403e1308a83c5d24328de07640d473cb0274df2f3",
+    "src/escape/reactive_flow.py": "af160d5ae62c5ebd7b77a4158ecf07768a7638bcdaf659d6caf9fe1b535883df",
+    "tests/data/cloudy_hydrogen_thin_reference.json": "9e37085abe3afeea7ce91ab3cd8268154ec90db28fb95f9f7d16d3e8977e0b84",
+    "tests/data/hydrogen_bound_free_anchors.json": "00e58e36be08f265d35c7442aa67903eb147b1d4ef1f4b3a4862527ea4864eab",
+    "tests/data/hydrogen_high_n_bound_free_anchors.json": "6c3db85412919f8cee212ab470361fce3ea59e77a03f55422782301c6de9efe6",
+    "tests/test_atom_convergence.py": "f5cdaaeb3da0533610a010039d0b2ed9abbdae4179c1aebfa6afe6edfa4c4a18",
+    "tests/test_cloudy_case_workflow.py": "196688ca91338565afb12ede6c654f6b8e13aae022798dc709029f4c1b6ccc3f",
+    "tests/test_cloudy_reference_tool.py": "75bd53900f5cf851a53e9d4a54c31dd05ca7cdfbd0d45f9b5ab9e0ff67770f99",
+    "tests/test_coupled_equilibrium.py": "6d05732cece9f1d1374bb957015a5bd6fb94782a88b992ead8b547398f5f6667",
+    "tests/test_coupled_flow.py": "aa28dc592559abcb689f4edab84269e4f3c1448226ecaa19bbdb131c8949a118",
+    "tests/test_hydrogen_atom.py": "ec3d65c15095a39d6df96ddbbad755d14098e2ad5cb1fa7f73d75147b399adaa",
+    "tests/test_hydrogen_bound_free.py": "15338cd1155a647f44050311dc5c8e790d162866d3d6f8e708e648385b3442d0",
+    "tests/test_hydrogen_cloudy_reference.py": "a1b299c2b182627e59f1dc26852434560deb94e306dc8079c2677be23265277c",
+    "tests/test_hydrogen_continuum.py": "52cff42fbba08ec33ab8fb092999b9997d1386a00917897404ad391fee97cf23",
+    "tests/test_hydrogen_forward.py": "cd4dd60af08ff3a032f0f1926b750ccce061789f950064888f0611c8d3a81971",
+    "tests/test_hydrogen_mixing.py": "fce2ecf49ff4c31ca31529f1c6a34af5beef03fab403f7923a7d3349f513e707",
+    "tests/test_hydrogen_nlte.py": "b151cf29e40195380ba027b96a578f230ac7055333bc7ab16ccfdf6002a6472e",
+    "tests/test_hydrogen_rates.py": "763c80270cb821ceb4a2ec2e20dbc451d07109f7ea07f7cfb94b59b5e565d65c",
+    "tests/test_model_evidence.py": "b5a1bf3152f81f1fa7b7c448b945ff064c8441edd5b8fa7961741544e0d8e4cb",
+    "tests/test_nlte_forward.py": "85a25bb6ab5e1196c1d9f608079be6a39e80a7b506389af2769733c4394d4bfe",
+    "tests/test_nonisothermal_parker.py": "d7a0cc937f02ae8af623690fc776ad88521964ade7887b60483859c9a8365c27",
+    "tests/test_parker.py": "6117aba4be4b72fa2c96f105c3648a0945e8be0f755ddef0997795739f85c2af",
+    "tests/test_populations.py": "142a72b6694651a9283236e9a3b28d5f1812e0ec04bb618fce6c091e0c4ae65c",
+    "tests/test_radiation.py": "fe05b803e3235aed9485e2d86b074c8c13f5e4235a068b3e15861be8669c1be5",
+    "tests/test_reactive_flow.py": "8f2365e83410df42da8b60b6b2ce99a1030c25c35531dadf64f0a3ffc2991780",
+    "tests/test_verification_workflow.py": "4051a2edea2286313f7034def9b23767fc5ca6be1dfb743b12bae472e3aca6f0",
+    "tools/cloudy/rate_readout.patch": "b321b6eafe56bf9482d5f41eb002f98e8855685f36511df3b13aeb9a61a57853",
+    "tools/cloudy_archive.py": "5547637bda6eaae5850ec79d7fad82bb8c999544252a3ff8b9dddff0e074eaa1",
+    "tools/cloudy_mixing_check.py": "942cf2bc915e446e512f095b25f71ab497578d1aee693beae34a752c96c3a30c",
+    "tools/cloudy_mixing_convention.py": "cba7bd391581ff8efc757c4e137037b9e3dd6c748a09259d6ebab948992db6b6",
+    "tools/cloudy_rates_diagnosis.py": "ee6b710465a2401beab39548c18d3359b4679b6954fcdba84b6ac401ab55506b",
+    "tools/cloudy_reference.py": "16a65adf87d609b807dfefafe4d33ef88eceed7e3583f9c4ee56593d6fa4e1dc",
+    "tools/diagnose_atom_convergence.py": "82677a68dbc01eca8d58f965c60d7b6c2499a617705b8aba9dce5717ef1cba4c",
+    "tools/verify_cloudy_cases.py": "7c1a7508a8544681d1bf34f9077824b7be77b59f6ba01d353638509153c1d188",
+    "tools/verify_coupled.py": "1791502dbb5994374d21c1e95e747827a7599b3507b878b0720b01f1fce2c07f"
+  },
+  "changed_inputs": [],
+  "finished_utc": "2026-11-21T13:10:06.264692+00:00",
+  "review_ready": true
+}

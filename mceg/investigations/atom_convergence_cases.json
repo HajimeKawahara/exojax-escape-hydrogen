@@ -1,0 +1,161 @@
+{
+  "validation_version": "1",
+  "registered_utc": "2026-11-21T13:02:14.265940+00:00",
+  "protocol": "mceg/investigations/cloudy_discrepancy.json",
+  "protocol_sha256": "9d5028335b7c79cc75c0af7408c522b868c182dc9f3400e77ff42f89b64a037a",
+  "registration_scope": "Registered before evaluating the extended escape implementation in this campaign. The original five-percent reference criterion is unchanged. Seven unique conditions from the earlier campaign are evaluated at both nmax15 and nmax20. Candidate15 was selected after independent Cloudy convergence exploration, including a retained nmax10 failure at low density.",
+  "relative_population_tolerance": 0.05,
+  "observables": [
+    "n2",
+    "n3"
+  ],
+  "cases": [
+    {
+      "temperature_k": 9000.0,
+      "hydrogen_nuclei_cm3": 1000000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.025,
+      "id": "nmax15",
+      "condition_id": "baseline",
+      "role": "candidate",
+      "nmax": 15
+    },
+    {
+      "temperature_k": 9000.0,
+      "hydrogen_nuclei_cm3": 1000000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.025,
+      "id": "nmax20",
+      "condition_id": "baseline",
+      "role": "larger_atom_control",
+      "nmax": 20
+    },
+    {
+      "temperature_k": 6000.0,
+      "hydrogen_nuclei_cm3": 1000000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.025,
+      "id": "cold_nmax15",
+      "condition_id": "cold",
+      "role": "candidate",
+      "nmax": 15
+    },
+    {
+      "temperature_k": 6000.0,
+      "hydrogen_nuclei_cm3": 1000000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.025,
+      "id": "cold_nmax20",
+      "condition_id": "cold",
+      "role": "larger_atom_control",
+      "nmax": 20
+    },
+    {
+      "temperature_k": 12000.0,
+      "hydrogen_nuclei_cm3": 1000000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.025,
+      "id": "hot_nmax15",
+      "condition_id": "hot",
+      "role": "candidate",
+      "nmax": 15
+    },
+    {
+      "temperature_k": 12000.0,
+      "hydrogen_nuclei_cm3": 1000000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.025,
+      "id": "hot_nmax20",
+      "condition_id": "hot",
+      "role": "larger_atom_control",
+      "nmax": 20
+    },
+    {
+      "temperature_k": 9000.0,
+      "hydrogen_nuclei_cm3": 10000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.025,
+      "id": "dilute_gas_nmax15",
+      "condition_id": "dilute_gas",
+      "role": "candidate",
+      "nmax": 15
+    },
+    {
+      "temperature_k": 9000.0,
+      "hydrogen_nuclei_cm3": 10000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.025,
+      "id": "dilute_gas_nmax20",
+      "condition_id": "dilute_gas",
+      "role": "larger_atom_control",
+      "nmax": 20
+    },
+    {
+      "temperature_k": 9000.0,
+      "hydrogen_nuclei_cm3": 100000000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.025,
+      "id": "dense_gas_nmax15",
+      "condition_id": "dense_gas",
+      "role": "candidate",
+      "nmax": 15
+    },
+    {
+      "temperature_k": 9000.0,
+      "hydrogen_nuclei_cm3": 100000000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.025,
+      "id": "dense_gas_nmax20",
+      "condition_id": "dense_gas",
+      "role": "larger_atom_control",
+      "nmax": 20
+    },
+    {
+      "temperature_k": 9000.0,
+      "hydrogen_nuclei_cm3": 1000000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.01,
+      "id": "weak_field_nmax15",
+      "condition_id": "weak_field",
+      "role": "candidate",
+      "nmax": 15
+    },
+    {
+      "temperature_k": 9000.0,
+      "hydrogen_nuclei_cm3": 1000000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.01,
+      "id": "weak_field_nmax20",
+      "condition_id": "weak_field",
+      "role": "larger_atom_control",
+      "nmax": 20
+    },
+    {
+      "temperature_k": 9000.0,
+      "hydrogen_nuclei_cm3": 1000000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.05,
+      "id": "strong_field_nmax15",
+      "condition_id": "strong_field",
+      "role": "candidate",
+      "nmax": 15
+    },
+    {
+      "temperature_k": 9000.0,
+      "hydrogen_nuclei_cm3": 1000000000000.0,
+      "radiation_temperature_k": 10000.0,
+      "radiation_dilution": 0.05,
+      "id": "strong_field_nmax20",
+      "condition_id": "strong_field",
+      "role": "larger_atom_control",
+      "nmax": 20
+    }
+  ],
+  "scope": "Factorized pure-H fixed-temperature, prescribed-blackbody comparisons. The supplied reference batch must contain case-ID directories with independently executed Cloudy output at the matching configuration; larger-tail Cloudy controls and three candidate15 continuum refinements are separate evidence. No atmospheric accuracy claim.",
+  "failed_case_policy": "Retain every failed case and continue diagnosis. A scientifically justified domain restriction is a new explicit Decision and does not convert an excluded failed case into agreement.",
+  "comparison_metrics": {
+    "matched_atom_reference": "abs(escape / Cloudy - 1) <= 0.05 for n2 and n3 in all14 cases",
+    "internal_atom_convergence": "abs(escape_nmax20 / escape_nmax15 - 1) <= 0.05 in all7 conditions",
+    "external_tail_controls": "Compare escape_nmax15 against Cloudy_nmax30 at baseline and Cloudy_nmax40 at the dilute condition; keep separate from matched finite-atom agreement."
+  }
+}

@@ -6,10 +6,12 @@ recursive-include mceg *.gz *.populations *.ionization
 recursive-include doc *.md *.tex
 include doc/Makefile doc/model.pdf
 include doc/parker_wind.pdf
+include doc/atom_convergence.pdf
 include doc/hydrogen_nlte.pdf
 include doc/coupled_model.pdf
 include doc/cloudy_investigation.pdf
 include tools/verify_coupled.py
+include tools/diagnose_atom_convergence.py
 include tools/cloudy_reference.py tools/cloudy_rates_diagnosis.py tools/cloudy_archive.py tools/verify_cloudy_cases.py
 include tools/cloudy_mixing_check.py tools/cloudy_mixing_convention.py
 recursive-include tools/cloudy *.py *.patch *.md

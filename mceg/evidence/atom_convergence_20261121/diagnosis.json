@@ -1,0 +1,510 @@
+{
+  "kind": "fixed_electron_density_schur_diagnosis",
+  "conditions": {
+    "temperature_k": 9000.0,
+    "n_h_cm3": 1000000000000.0,
+    "radiation_temperature_k": 10000.0,
+    "radiation_dilution": 0.025,
+    "points_per_threshold_interval": 48
+  },
+  "argv": [
+    "tools/diagnose_atom_convergence.py",
+    "--output",
+    "/tmp/exojax-escape-atom-convergence/results/atom-convergence/diagnosis/final01/report.json"
+  ],
+  "python": "3.12.2",
+  "jax": "0.10.0",
+  "elapsed_seconds": 25.695277268067002,
+  "selected_files_before": {
+    "src/escape/hydrogen_atom.py": "1da46f965072933e12a7f37e603b8450a59d53596a95a22375571fec0020c3db",
+    "src/escape/hydrogen_bound_free.py": "90170626731551946dfeac40f47b87afd369fb9d8f10d378c2f2e5d23de5f5fc",
+    "src/escape/hydrogen_mixing.py": "78bf474551b07a6641c471f4403fae44d0de6c07311858e4ecfe0928c99c3b8f",
+    "src/escape/hydrogen_nlte.py": "697375972fffdc077f9ee2cb131d74a31c1af6e9d8f98fa5e64127fd4b874943",
+    "src/escape/hydrogen_rates.py": "a1e1237725284198f8617a828f292d0d92e42ee6824f95c2efcfd68b535b5535",
+    "src/escape/parker.py": "0d6b340dd3c47895117b6aa0fbf156ca9eb3f04588170ea99ef7858766004a1e",
+    "tools/diagnose_atom_convergence.py": "82677a68dbc01eca8d58f965c60d7b6c2499a617705b8aba9dce5717ef1cba4c"
+  },
+  "selected_files_after": {
+    "src/escape/hydrogen_atom.py": "1da46f965072933e12a7f37e603b8450a59d53596a95a22375571fec0020c3db",
+    "src/escape/hydrogen_bound_free.py": "90170626731551946dfeac40f47b87afd369fb9d8f10d378c2f2e5d23de5f5fc",
+    "src/escape/hydrogen_mixing.py": "78bf474551b07a6641c471f4403fae44d0de6c07311858e4ecfe0928c99c3b8f",
+    "src/escape/hydrogen_nlte.py": "697375972fffdc077f9ee2cb131d74a31c1af6e9d8f98fa5e64127fd4b874943",
+    "src/escape/hydrogen_rates.py": "a1e1237725284198f8617a828f292d0d92e42ee6824f95c2efcfd68b535b5535",
+    "src/escape/parker.py": "0d6b340dd3c47895117b6aa0fbf156ca9eb3f04588170ea99ef7858766004a1e",
+    "tools/diagnose_atom_convergence.py": "82677a68dbc01eca8d58f965c60d7b6c2499a617705b8aba9dce5717ef1cba4c"
+  },
+  "selected_files_unchanged_during_run": true,
+  "method": [
+    "Evaluate nmax20 coefficients on a shared threshold-split grid; exact subsets define smaller atoms without changing low-level rates.",
+    "Solve charge conservation with scipy.brentq and scaled NumPy linear solves; evaluate PSM20 mixing at every trial density.",
+    "At the smaller-atom ne, eliminate added levels: M_eff=M_LL-M_LH inv(M_HH) M_HL; s_eff=s_L-M_LH inv(M_HH) s_H.",
+    "The exact fixed-ne difference is ne inv(M_eff)[delta_s-delta_M b_small]. Split delta_s into radiative and three-body sources.",
+    "Charge feedback is the full-atom change when ne is allowed to satisfy its own conservation equation."
+  ],
+  "models": {
+    "4": {
+      "electron_cm3": 830840870044.2656,
+      "n2": 124757.56200430432,
+      "n3": 18752.28680885588,
+      "total_bound": 169159129955.7334,
+      "charge_residual": -8.881784197001252e-16,
+      "conservation_error": 9.992007221626409e-16,
+      "max_relative_rate_residual": 1.2877529093075381e-16,
+      "n3_flux_budget_cm3_s": {
+        "n1": {
+          "radiative": {
+            "in": 1717468874910.3076,
+            "out": 1073881125394.8347
+          },
+          "collisional": {
+            "in": 275454988.9509522,
+            "out": 20212421.598587204
+          },
+          "net": 643842992082.8252
+        },
+        "n2": {
+          "radiative": {
+            "in": 38905061748.97146,
+            "out": 819102567101.7856
+          },
+          "collisional": {
+            "in": 3372697778.207614,
+            "out": 2571630689.874973
+          },
+          "net": -779396438264.4816
+        },
+        "n4_5": {
+          "radiative": {
+            "in": 109172505566.17862,
+            "out": 6453595138.000214
+          },
+          "collisional": {
+            "in": 1189724898.238347,
+            "out": 1413712667.825685
+          },
+          "net": 102494922658.59106
+        },
+        "n6plus": {
+          "radiative": {
+            "in": 0.0,
+            "out": 0.0
+          },
+          "collisional": {
+            "in": 0.0,
+            "out": 0.0
+          },
+          "net": 0.0
+        },
+        "continuum": {
+          "radiative_recombination": 33974900352.93039,
+          "three_body_recombination": 1727150815.4831364,
+          "photoionization": 1111565262.609619,
+          "collisional_ionization": 1531962382.741415,
+          "net": 33058523523.062492
+        }
+      },
+      "n6plus_continuum_budget_cm3_s": {
+        "radiative_recombination": 0.0,
+        "three_body_recombination": 0.0,
+        "photoionization": 0.0,
+        "collisional_ionization": 0.0,
+        "net": 0.0
+      }
+    },
+    "5": {
+      "electron_cm3": 820717782942.0577,
+      "n2": 132340.65091636757,
+      "n3": 20202.776709322497,
+      "total_bound": 179282217057.9423,
+      "charge_residual": 1.1102230246251565e-16,
+      "conservation_error": 0.0,
+      "max_relative_rate_residual": 9.912435019423341e-17,
+      "n3_flux_budget_cm3_s": {
+        "n1": {
+          "radiative": {
+            "in": 1820248208560.0066,
+            "out": 1156288353920.9885
+          },
+          "collisional": {
+            "in": 288382147.39955586,
+            "out": 21504946.539094847
+          },
+          "net": 664226731839.8787
+        },
+        "n2": {
+          "radiative": {
+            "in": 41268371130.3487,
+            "out": 882671459941.8008
+          },
+          "collisional": {
+            "in": 3534048729.610236,
+            "out": 2736827346.2280216
+          },
+          "net": -840605867428.0698
+        },
+        "n4_5": {
+          "radiative": {
+            "in": 153038989515.22723,
+            "out": 8441935455.405003
+          },
+          "collisional": {
+            "in": 1508314461.1547804,
+            "out": 1715343839.2925003
+          },
+          "net": 144390024681.6845
+        },
+        "n6plus": {
+          "radiative": {
+            "in": 0.0,
+            "out": 0.0
+          },
+          "collisional": {
+            "in": 0.0,
+            "out": 0.0
+          },
+          "net": 0.0
+        },
+        "continuum": {
+          "radiative_recombination": 33152033698.789417,
+          "three_body_recombination": 1664785318.7674277,
+          "photoionization": 1197357839.2694445,
+          "collisional_ionization": 1630350271.7787766,
+          "net": 31989110906.508625
+        }
+      },
+      "n6plus_continuum_budget_cm3_s": {
+        "radiative_recombination": 0.0,
+        "three_body_recombination": 0.0,
+        "photoionization": 0.0,
+        "collisional_ionization": 0.0,
+        "net": 0.0
+      }
+    },
+    "10": {
+      "electron_cm3": 801514076198.8933,
+      "n2": 146657.22809569945,
+      "n3": 22726.972948952836,
+      "total_bound": 198485923801.10504,
+      "charge_residual": -1.6930901125533637e-15,
+      "conservation_error": 1.6653345369377348e-15,
+      "max_relative_rate_residual": 1.4751858684170508e-16,
+      "n3_flux_budget_cm3_s": {
+        "n1": {
+          "radiative": {
+            "in": 2015221609261.151,
+            "out": 1300434454836.374
+          },
+          "collisional": {
+            "in": 311801270.7311313,
+            "out": 23624006.90681154
+          },
+          "net": 715075331688.6012
+        },
+        "n2": {
+          "radiative": {
+            "in": 45730700770.465614,
+            "out": 993032617446.8254
+          },
+          "collisional": {
+            "in": 3824640473.768924,
+            "out": 3006751303.1117425
+          },
+          "net": -946484027505.7026
+        },
+        "n4_5": {
+          "radiative": {
+            "in": 181826375455.29846,
+            "out": 9496990451.811586
+          },
+          "collisional": {
+            "in": 1741533907.550886,
+            "out": 1884573905.5143282
+          },
+          "net": 172186345005.5234
+        },
+        "n6plus": {
+          "radiative": {
+            "in": 30584745850.353203,
+            "out": 1371350817.4761446
+          },
+          "collisional": {
+            "in": 135231318.61667037,
+            "out": 157643455.73590252
+          },
+          "net": 29190982895.757828
+        },
+        "continuum": {
+          "radiative_recombination": 31618757198.4535,
+          "three_body_recombination": 1550637090.838503,
+          "photoionization": 1346889553.7050138,
+          "collisional_ionization": 1791136819.761141,
+          "net": 30031367915.825844
+        }
+      },
+      "n6plus_continuum_budget_cm3_s": {
+        "radiative_recombination": 34486831216.73571,
+        "three_body_recombination": 1641011178937.9749,
+        "photoionization": 2148325803.1495633,
+        "collisional_ionization": 1627817496694.444,
+        "net": 45532187657.1167
+      }
+    },
+    "15": {
+      "electron_cm3": 800089994892.5431,
+      "n2": 147731.36046046828,
+      "n3": 22943.083093235513,
+      "total_bound": 199910005107.4482,
+      "charge_residual": -8.715250743307479e-15,
+      "conservation_error": 8.659739592076221e-15,
+      "max_relative_rate_residual": 3.2083781624305975e-16,
+      "n3_flux_budget_cm3_s": {
+        "n1": {
+          "radiative": {
+            "in": 2029677275229.9995,
+            "out": 1312717211743.0605
+          },
+          "collisional": {
+            "in": 313479932.35229474,
+            "out": 23805707.706825987
+          },
+          "net": 717249737711.5845
+        },
+        "n2": {
+          "radiative": {
+            "in": 46065337562.989334,
+            "out": 1002498473347.0416
+          },
+          "collisional": {
+            "in": 3845795383.329076,
+            "out": 3029953719.40244
+          },
+          "net": -955617294120.1257
+        },
+        "n4_5": {
+          "radiative": {
+            "in": 184594159957.33203,
+            "out": 9587385945.820059
+          },
+          "collisional": {
+            "in": 1764376544.9412644,
+            "out": 1899132513.6480596
+          },
+          "net": 174872018042.80515
+        },
+        "n6plus": {
+          "radiative": {
+            "in": 35208017758.55074,
+            "out": 1571054660.593662
+          },
+          "collisional": {
+            "in": 155164749.31198916,
+            "out": 180843978.44962996
+          },
+          "net": 33611283868.81944
+        },
+        "continuum": {
+          "radiative_recombination": 31506500455.43653,
+          "three_body_recombination": 1542386535.1879282,
+          "photoionization": 1359676448.2810545,
+          "collisional_ionization": 1804956045.4219096,
+          "net": 29884254496.921494
+        }
+      },
+      "n6plus_continuum_budget_cm3_s": {
+        "radiative_recombination": 47017623938.38676,
+        "three_body_recombination": 15570543542918.363,
+        "photoionization": 3544764680.0985265,
+        "collisional_ionization": 15565013781712.39,
+        "net": 49002620464.26172
+      }
+    },
+    "20": {
+      "electron_cm3": 799779109280.9243,
+      "n2": 147968.25195919262,
+      "n3": 22996.652514729536,
+      "total_bound": 200220890719.0875,
+      "charge_residual": 1.1796119636642288e-14,
+      "conservation_error": 1.176836406102666e-14,
+      "max_relative_rate_residual": 7.482117620913006e-16,
+      "n3_flux_budget_cm3_s": {
+        "n1": {
+          "radiative": {
+            "in": 2032828269942.3806,
+            "out": 1315749012733.72
+          },
+          "collisional": {
+            "in": 313844601.80767465,
+            "out": 23851779.763051815
+          },
+          "net": 717369250030.7052
+        },
+        "n2": {
+          "radiative": {
+            "in": 46139106563.612206,
+            "out": 1004848838815.9083
+          },
+          "collisional": {
+            "in": 3850461571.47088,
+            "out": 3035849991.934396
+          },
+          "net": -957895120672.7596
+        },
+        "n4_5": {
+          "radiative": {
+            "in": 185361947983.2576,
+            "out": 9609808552.27499
+          },
+          "collisional": {
+            "in": 1770865643.8374784,
+            "out": 1902834834.9924963
+          },
+          "net": 175620170239.82758
+        },
+        "n6plus": {
+          "radiative": {
+            "in": 36718251564.81104,
+            "out": 1636864884.0063078
+          },
+          "collisional": {
+            "in": 162368221.09803373,
+            "out": 189354484.77301177
+          },
+          "net": 35054400417.12975
+        },
+        "continuum": {
+          "radiative_recombination": 31482020672.527637,
+          "three_body_recombination": 1540589289.2898948,
+          "photoionization": 1362842546.8279662,
+          "collisional_ionization": 1808467429.913788,
+          "net": 29851299985.07578
+        }
+      },
+      "n6plus_continuum_budget_cm3_s": {
+        "radiative_recombination": 53338699306.63216,
+        "three_body_recombination": 73478556343384.55,
+        "photoionization": 4568192363.280481,
+        "collisional_ionization": 73477529705524.11,
+        "net": 49797144803.78125
+      }
+    }
+  },
+  "comparisons": {
+    "4_to_5": {
+      "n2": {
+        "baseline_cm3": 124757.56200430432,
+        "full_at_baseline_ne_cm3": 135661.11457996315,
+        "full_with_charge_closure_cm3": 132340.65091636757,
+        "delta_from_added_recombination_cm3": 18443.35283124859,
+        "delta_from_added_radiative_recombination_cm3": 6785.601023580781,
+        "delta_from_added_three_body_recombination_cm3": 11657.751807667823,
+        "delta_from_effective_operator_cm3": -7539.80025559389,
+        "delta_from_charge_feedback_cm3": -3320.463663595583,
+        "relative_fixed_ne_increase": 0.0873979292356053,
+        "relative_total_increase": 0.0607825993890585
+      },
+      "n3": {
+        "baseline_cm3": 18752.28680885588,
+        "full_at_baseline_ne_cm3": 20712.149895916067,
+        "full_with_charge_closure_cm3": 20202.776709322497,
+        "delta_from_added_recombination_cm3": 2840.7129390966647,
+        "delta_from_added_radiative_recombination_cm3": 1045.143190807164,
+        "delta_from_added_three_body_recombination_cm3": 1795.569748289502,
+        "delta_from_effective_operator_cm3": -880.8498520370695,
+        "delta_from_charge_feedback_cm3": -509.3731865935697,
+        "relative_fixed_ne_increase": 0.10451328454162878,
+        "relative_total_increase": 0.07735002750606479
+      },
+      "schur_full_max_relative_difference": 2.2093438190040615e-14,
+      "low_source_max_relative_difference": 0.0
+    },
+    "5_to_10": {
+      "n2": {
+        "baseline_cm3": 132340.65091636757,
+        "full_at_baseline_ne_cm3": 153760.72820879048,
+        "full_with_charge_closure_cm3": 146657.22809569945,
+        "delta_from_added_recombination_cm3": 60605.372906026314,
+        "delta_from_added_radiative_recombination_cm3": 2914.210693071593,
+        "delta_from_added_three_body_recombination_cm3": 57691.16221295474,
+        "delta_from_effective_operator_cm3": -39185.29561360229,
+        "delta_from_charge_feedback_cm3": -7103.500113091024,
+        "relative_fixed_ne_increase": 0.16185561385790126,
+        "relative_total_increase": 0.10817973978667528
+      },
+      "n3": {
+        "baseline_cm3": 20202.776709322497,
+        "full_at_baseline_ne_cm3": 23833.08070498657,
+        "full_with_charge_closure_cm3": 22726.972948952836,
+        "delta_from_added_recombination_cm3": 9440.395319893767,
+        "delta_from_added_radiative_recombination_cm3": 454.35101982272386,
+        "delta_from_added_three_body_recombination_cm3": 8986.044300071046,
+        "delta_from_effective_operator_cm3": -5810.091324229537,
+        "delta_from_charge_feedback_cm3": -1106.1077560337326,
+        "relative_fixed_ne_increase": 0.17969331878963346,
+        "relative_total_increase": 0.12494303510593952
+      },
+      "schur_full_max_relative_difference": 3.4861002973229915e-14,
+      "low_source_max_relative_difference": 0.0
+    },
+    "5_to_15": {
+      "n2": {
+        "baseline_cm3": 132340.65091636757,
+        "full_at_baseline_ne_cm3": 155413.89958391245,
+        "full_with_charge_closure_cm3": 147731.36046046828,
+        "delta_from_added_recombination_cm3": 68411.15967652698,
+        "delta_from_added_radiative_recombination_cm3": 2449.921264627252,
+        "delta_from_added_three_body_recombination_cm3": 65961.23841189974,
+        "delta_from_effective_operator_cm3": -45337.9110089819,
+        "delta_from_charge_feedback_cm3": -7682.539123444178,
+        "relative_fixed_ne_increase": 0.1743474020097271,
+        "relative_total_increase": 0.1162961602314232
+      },
+      "n3": {
+        "baseline_cm3": 20202.776709322497,
+        "full_at_baseline_ne_cm3": 24141.938055798524,
+        "full_with_charge_closure_cm3": 22943.083093235513,
+        "delta_from_added_recombination_cm3": 10675.965545499766,
+        "delta_from_added_radiative_recombination_cm3": 382.91987663982735,
+        "delta_from_added_three_body_recombination_cm3": 10293.045668859942,
+        "delta_from_effective_operator_cm3": -6736.804199023727,
+        "delta_from_charge_feedback_cm3": -1198.8549625630112,
+        "relative_fixed_ne_increase": 0.19498118516838892,
+        "relative_total_increase": 0.13564008667424954
+      },
+      "schur_full_max_relative_difference": 2.5979218776228663e-14,
+      "low_source_max_relative_difference": 0.0
+    },
+    "5_to_20": {
+      "n2": {
+        "baseline_cm3": 132340.65091636757,
+        "full_at_baseline_ne_cm3": 155778.16394530277,
+        "full_with_charge_closure_cm3": 147968.25195919262,
+        "delta_from_added_recombination_cm3": 70559.96886808104,
+        "delta_from_added_radiative_recombination_cm3": 2352.0467080271537,
+        "delta_from_added_three_body_recombination_cm3": 68207.92216005392,
+        "delta_from_effective_operator_cm3": -47122.4558391442,
+        "delta_from_charge_feedback_cm3": -7809.91198611015,
+        "relative_fixed_ne_increase": 0.17709987722326148,
+        "relative_total_increase": 0.11808617333083005
+      },
+      "n3": {
+        "baseline_cm3": 20202.776709322497,
+        "full_at_baseline_ne_cm3": 24216.26892791145,
+        "full_with_charge_closure_cm3": 22996.652514729536,
+        "delta_from_added_recombination_cm3": 11018.219860237481,
+        "delta_from_added_radiative_recombination_cm3": 367.93641551766143,
+        "delta_from_added_three_body_recombination_cm3": 10650.283444719822,
+        "delta_from_effective_operator_cm3": -7004.727641648327,
+        "delta_from_charge_feedback_cm3": -1219.6164131819132,
+        "relative_fixed_ne_increase": 0.1986604255610538,
+        "relative_total_increase": 0.13829167374392726
+      },
+      "schur_full_max_relative_difference": 4.773959005888173e-14,
+      "low_source_max_relative_difference": 0.0
+    }
+  },
+  "limitations": [
+    "Source/operator attribution is a defined diagnostic about the smaller atom at fixed ne; the terms are not separate self-consistent atmospheres.",
+    "Large three-body and collisional-ionization contributions nearly cancel. Assess net continuum and bound-bound flows before interpreting gross source terms.",
+    "No fitted correction, topoff, orbital-collapse validation or infinite-atom convergence claim is introduced."
+  ]
+}

@@ -1,5 +1,26 @@
 # Evidence retention
 
+The subsequent enlarged-atom investigation has its own immutable tag,
+`evidence/atom-convergence-20261121`. Its
+[archive record](atom_convergence_20261121/archive.json) pins the commit and
+archive hash. The 1.31 MB archive retains 35 fresh Cloudy executions, 14 matched
+escape comparisons, numerical workflow attempts and causal diagnostics. Compact
+reviews and test results remain in this tree. Restore it explicitly:
+
+```bash
+git show evidence/atom-convergence-20261121:mceg/evidence/atom_convergence_20261121/raw.tar.gz > /tmp/atom-convergence-raw.tar.gz
+mkdir -p results/atom-evidence
+tar -xzf /tmp/atom-convergence-raw.tar.gz -C results/atom-evidence
+python tools/verify_cloudy_cases.py run \
+  --cases mceg/investigations/atom_convergence_cases.json \
+  --reference-batch results/atom-evidence/cloudy \
+  --record results/atom-replay-001
+```
+
+The archived `archive-manifest.json` lists every original file hash. A replay
+evaluates the current escape code against the retained reference; it does not
+silently reuse earlier escape populations or renew scientific Assessments.
+
 This directory contains review records and selected artifacts. The complete
 2026-11-21 investigation is preserved at Git tag `evidence/cloudy-20261121`,
 commit `c75bc5b819febcf1b3bed232ccebd4a889b6d829`.

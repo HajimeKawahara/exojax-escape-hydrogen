@@ -1,5 +1,14 @@
 # Mathematical model definitions
 
+The enlarged hydrogen atom is described in [atom_convergence.pdf](atom_convergence.pdf),
+with [editable explanation](atom_convergence.tex), a generated
+[equation appendix](atom_convergence_equations.tex) and its
+[MCEG contract](../mceg/contracts/escape.atom_convergence.yaml). It explains the
+missing high-shell recombination/cascade paths, stable atomic kernels and the
+choice of nmax=15 compared with nmax=20 and larger independent Cloudy atoms.
+The original nmax=4-to-5 contradiction remains in the historical contract.
+Use `make -C doc atom-equations` and `make -C doc atom-pdf` to regenerate it.
+
 The prescribed-temperature wind is defined in [parker_wind.pdf](parker_wind.pdf),
 with [editable explanation](parker_wind.tex) and a
 [generated equation appendix](parker_wind_equations.tex). Its

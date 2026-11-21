@@ -54,11 +54,12 @@ files:
     note: Prescribed-field NLTE populations and actual-branch H-alpha weights on the existing fixed-mu
       wind/observer-ray model.
   src/escape/hydrogen_atom.py:
-    sha256: 5cbb7390ec3477d8b67dbfb7c64c350920d25c52428281f186453da0593391e9
+    sha256: 1da46f965072933e12a7f37e603b8450a59d53596a95a22375571fec0020c3db
     role: model
     note: >-
-      Finite nmax3/4/5 atom with shared Coulomb bound-free kernels, selected PSM20 n2/n3 mixing
-      inside the implicit charge root, and explicit legacy comparison options.
+      Finite nmax3..20 atom (default15), exact-rational static dipoles and high-shell VS80 ionization;
+      shared Coulomb bound-free kernels and PSM20 n2/n3 mixing inside the implicit charge root.
+      Original n<=5 rates remain available for controlled comparisons.
   src/escape/hydrogen_continuum.py:
     sha256: 61a5669f3a08e6af967d2f1042fa387489224389bddcefd13da576b1cd31e770
     role: model
@@ -74,18 +75,19 @@ files:
     role: model
     note: Finite spherical inflow branch with variable composition, chemical energy and advected populations.
   src/escape/coupled_hydrogen.py:
-    sha256: cf1e56f5dd1ba737a4a42041ba02861992a862ca5d069004803895918c0e1603
+    sha256: bba13310d54a6eeecd3bfac0eccdb14b1272d15b642c355ccee6f6c8e8adf111
     role: model
-    note: Joint radiation/SE/thermal and finite-flow residuals with implicit derivatives and separate energy diagnostics.
+    note: Joint radiation/SE/thermal and finite-flow residuals with implicit derivatives and separate energy
+      diagnostics; default nmax15, with prior small-atom numerical scopes retained explicitly.
   src/escape/_licenses/Cloudy.txt:
     sha256: 225136d0a6ec8a56ab39dc876bb2c85de47537d783d3fa66fb14322907f986de
     role: support
     note: Retained zlib notice for the explicitly altered Cloudy collision-rate adaptation.
   src/escape/hydrogen_bound_free.py:
-    sha256: b2a73649d161f74c2159b9207002b8a8ff80d210b32a69a2649828596b7643e0
+    sha256: 90170626731551946dfeac40f47b87afd369fb9d8f10d378c2f2e5d23de5f5fc
     role: model
-    note: Small-n Brocklehurst Coulomb cross sections for resolved sublevels and statistically collapsed
-      shells; n<=5 only.
+    note: Energy-scaled Brocklehurst Coulomb recurrences with logarithmic assembly for resolved sublevels
+      and statistically collapsed shells through n<=20; anchored to independent source tables.
   src/escape/hydrogen_mixing.py:
     sha256: 78bf474551b07a6641c471f4403fae44d0de6c07311858e4ecfe0928c99c3b8f
     role: model
@@ -275,10 +277,13 @@ models:
   contracts:
   - path: mceg/contracts/escape.coupled_hydrogen.yaml
     model_id: escape.coupled_hydrogen
+  - path: mceg/contracts/escape.atom_convergence.yaml
+    model_id: escape.atom_convergence
 - id: escape.cloudy_investigation
-  description: Current finite-atom Coulomb bound-free and density-dependent PSM20 n2/n3 mixing closures,
-    source-pinned equations, causal rate-block experiments and eight-case controlled Cloudy comparison.
-    Agreement does not validate every rate or a planetary atmosphere.
+  description: Finite-atom Coulomb bound-free and density-dependent PSM20 n2/n3 mixing closures.
+    Historical eight-case small-atom repair plus enlarged-atom convergence and fourteen matched
+    Cloudy comparisons have distinct contracts and source scopes. Agreement does not validate
+    every rate or a planetary atmosphere.
   review_pending: true
   bindings:
   - path: src/escape/hydrogen_bound_free.py
@@ -294,3 +299,5 @@ models:
   contracts:
   - path: mceg/contracts/escape.cloudy_investigation.yaml
     model_id: escape.cloudy_investigation
+  - path: mceg/contracts/escape.atom_convergence.yaml
+    model_id: escape.atom_convergence

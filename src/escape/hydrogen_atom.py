@@ -1,4 +1,4 @@
-"""Hydrogen atom with resolved low levels and optional collapsed n=4,5 shells.
+"""Hydrogen atom with resolved low levels and optional collapsed n=4..20 shells.
 
 Higher-shell populations are statistical over l; the first six populations
 remain resolved. This coupled atom adds resolved Coulomb bound-free dipoles
@@ -13,14 +13,17 @@ The VS80 evaluation is an altered Python adaptation of Cloudy C23, not the
 original Cloudy routine; its retained notice is in escape/_licenses/Cloudy.txt.
 
 All included recombination/cascade paths are explicit. No Case-B coefficient
-or unmodelled high-n recombination is added at the truncation boundary. The
-nmax=3,4,5 comparison measures sensitivity, not convergence to an infinite atom.
+or unmodelled high-n recombination is added at the truncation boundary.
+An explicit finite-shell sequence measures sensitivity, not convergence to an
+infinite atom. The n=4,5 ionization fits are retained; n>=6 uses VS80 Eq. 8
+with three-body recombination obtained from the same Saha factors.
 The retained low-level data restrict gas temperatures to 5802.26--14000 K.
 """
 
 from __future__ import annotations
 
-from functools import partial
+from fractions import Fraction
+from functools import lru_cache, partial
 from math import comb, factorial, sqrt
 from typing import NamedTuple
 
@@ -28,7 +31,7 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
-from .hydrogen_bound_free import resolved_atom_cross_sections
+from .hydrogen_bound_free import MAX_PRINCIPAL_N, resolved_atom_cross_sections
 from .hydrogen_mixing import mixing_bound_bound_cm3_s
 from .hydrogen_nlte import RateCoefficients, _solve_equilibrium_with_rates
 from .hydrogen_rates import (
@@ -44,6 +47,7 @@ PROTON_MASS_CGS = 1.67262192369e-24
 HYDROGEN_BOHR_RADIUS_CM = 5.29177210544e-9 * (1 + ELECTRON_MASS_CGS / PROTON_MASS_CGS)
 _IONIZATION_LIMIT_ERG = 13.5984345 * EV_CGS
 _THERMAL_VOLUME = (PLANCK_CGS**2 / (2 * np.pi * ELECTRON_MASS_CGS * BOLTZMANN_CGS))**1.5
+DEFAULT_PRINCIPAL_N = 15
 
 
 class HydrogenAtom(NamedTuple):
@@ -59,31 +63,38 @@ class HydrogenAtom(NamedTuple):
     line_frequency_hz: jnp.ndarray
 
 
+@lru_cache(maxsize=None, typed=True)
 def hydrogenic_radial_dipole(n_upper, l_upper, n_lower, l_lower):
     """Return the radial integral of r between normalized orbitals, in cm.
 
-    Finite Laguerre polynomials are integrated analytically term by term;
-    no numerical radial grid or fitted A coefficient enters this calculation.
-    Only n <= 5 is supported here to avoid large-n cancellation.
+    Finite Laguerre polynomials are integrated term by term in exact rational
+    arithmetic. Only the final normalization is evaluated in float64, avoiding
+    cancellation between large alternating terms at higher n. This static
+    construction has no differentiable parameters or numerical radial grid.
     """
     for n, ell in ((n_upper, l_upper), (n_lower, l_lower)):
-        if not (isinstance(n, int) and isinstance(ell, int) and 1 <= n <= 5 and 0 <= ell < n):
-            raise ValueError("Use integer 1 <= n <= 5 and 0 <= l < n.")
+        if not (isinstance(n, int) and not isinstance(n, bool)
+                and isinstance(ell, int) and not isinstance(ell, bool)
+                and 1 <= n <= MAX_PRINCIPAL_N and 0 <= ell < n):
+            raise ValueError(f"Use integer 1 <= n <= {MAX_PRINCIPAL_N} and 0 <= l < n.")
 
     def polynomial(n, ell):
         order = n - ell - 1
-        norm = 2 / n**2 * sqrt(factorial(order) / factorial(n + ell))
-        return [norm * (-1)**k * comb(n + ell, order - k) / factorial(k)
-                * (2 / n)**(ell + k) for k in range(order + 1)]
+        return [Fraction((-1)**k * comb(n + ell, order - k), factorial(k))
+                * Fraction(2, n)**(ell + k) for k in range(order + 1)]
 
     upper, lower = polynomial(n_upper, l_upper), polynomial(n_lower, l_lower)
-    inverse_scale = 1 / n_upper + 1 / n_lower
-    integral = 0.0
+    inverse_scale = Fraction(1, n_upper) + Fraction(1, n_lower)
+    integral = Fraction(0)
     for i, a in enumerate(upper):
         for j, b in enumerate(lower):
             power = l_upper + l_lower + i + j + 3
             integral += a * b * factorial(power) / inverse_scale**(power + 1)
-    return integral * HYDROGEN_BOHR_RADIUS_CM
+    normalization = (4 / (n_upper * n_lower)**2 * sqrt(
+        factorial(n_upper - l_upper - 1) / factorial(n_upper + l_upper)
+        * factorial(n_lower - l_lower - 1) / factorial(n_lower + l_lower)
+    ))
+    return float(integral) * normalization * HYDROGEN_BOHR_RADIUS_CM
 
 
 def hydrogenic_einstein_a(n_upper, l_upper, n_lower, l_lower, frequency_hz=None):
@@ -100,15 +111,17 @@ def hydrogenic_einstein_a(n_upper, l_upper, n_lower, l_lower, frequency_hz=None)
             * frequency_hz**3 * ELECTRON_CHARGE_ESU**2 * radial**2 * angular)
 
 
-def make_hydrogen_atom(nmax=5):
-    """Construct six resolved states plus zero, one or two statistical shells.
+def make_hydrogen_atom(nmax=DEFAULT_PRINCIPAL_N):
+    """Construct six resolved states plus statistical shells through nmax.
 
     The resolved states retain the NIST-derived energies and A values of the
-    previous model. Added n=4,5 energies use the hydrogenic ionization limit;
+    previous model. Added shell energies use the hydrogenic ionization limit;
     their A values are summed with g_nl/g_n over their upper l sublevels.
+    The default uses nmax=15; nmax=20 provides a larger comparison atom.
+    This is a tested finite-shell choice, not universal truncation accuracy.
     """
-    if not isinstance(nmax, int) or isinstance(nmax, bool) or nmax not in (3, 4, 5):
-        raise ValueError("nmax must be 3, 4 or 5.")
+    if not isinstance(nmax, int) or isinstance(nmax, bool) or not 3 <= nmax <= MAX_PRINCIPAL_N:
+        raise ValueError(f"nmax must be an integer from 3 to {MAX_PRINCIPAL_N}.")
     principal = list(PRINCIPAL_QUANTUM_NUMBERS)
     weights = list(STATISTICAL_WEIGHTS)
     energy = list(EXCITATION_ENERGY_ERG)
@@ -253,7 +266,16 @@ def atom_collision_rates(atom, temperature_k):
     a = jnp.array([1.27e-6, 5.39e-6])[:size - 6]
     b = jnp.array([.053, -.023])[:size - 6]
     c = jnp.array([-1.09e4, -7.38e3])[:size - 6]
-    ionization = jnp.concatenate((low_ion, a * temperature_k**b * jnp.exp(c / temperature_k)))
+    fitted_ionization = a * temperature_k**b * jnp.exp(c / temperature_k)
+    # VS80 Eq. 8, as evaluated by Cloudy C23 hydro_vs_ioniz. Only shells
+    # above the retained n=4,5 fits use this approximation. The actual group
+    # binding energy is used, and the inverse below preserves detailed balance.
+    kt_ev = BOLTZMANN_CGS * temperature_k / EV_CGS
+    binding_over_kt = atom.ionization_energy_erg[8:] / (EV_CGS * kt_ev)
+    high_ionization = (9.56e-6 / kt_ev**1.5 * jnp.exp(-binding_over_kt)
+                       / (binding_over_kt**2.33 + 4.38 * binding_over_kt**1.72
+                          + 1.32 * binding_over_kt))
+    ionization = jnp.concatenate((low_ion, fitted_ionization, high_ionization))
     three_body = ionization * atom_saha_factors(atom, temperature_k)
     valid = ((temperature_k >= MIN_TEMPERATURE_K) & (temperature_k <= MAX_TEMPERATURE_K)
              & jnp.all(jnp.isfinite(bound_bound) & (bound_bound >= 0)))

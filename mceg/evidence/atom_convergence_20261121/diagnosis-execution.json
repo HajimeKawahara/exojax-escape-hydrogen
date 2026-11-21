@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/home/kawahara/miniconda3/bin/python",
+    "tools/diagnose_atom_convergence.py",
+    "--output",
+    "/tmp/exojax-escape-atom-convergence/results/atom-convergence/diagnosis/final01/report.json"
+  ],
+  "cwd": "/tmp/exojax-escape-atom-convergence",
+  "environment": {
+    "PYTHONPATH": "src:/home/kawahara/exojax/src",
+    "JAX_PLATFORMS": "cpu",
+    "JAX_ENABLE_X64": "1"
+  },
+  "exit_code": 0,
+  "exit_code_note": "Captured directly from subprocess.run.",
+  "artifacts": {
+    "run.log": "05c7309f25308240e02d159eaa3d3a4f2a23273b8589fe8fe7276c3e5b9da8a3",
+    "report.json": "3817ef8dd300c21d165440aecc2d142b91acd562aa7bca899ba531e20a90158d"
+  }
+}

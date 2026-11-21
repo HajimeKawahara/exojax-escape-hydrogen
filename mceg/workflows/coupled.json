@@ -249,6 +249,64 @@
       ]
     },
     {
+      "id": "enlarged_atom_numerics",
+      "requires": [
+        "atomic_balance"
+      ],
+      "scope": "For the extended nmax=20 atom at T=9000 K, nH=1e12 cm^-3, Trad=10000 K and W=0.025, continuum refinement and forward/reverse implicit population derivatives meet numerical tolerances.",
+      "tests": [
+        "tests/test_atom_convergence.py::test_enlarged_atom_quadrature_refinement",
+        "tests/test_atom_convergence.py::test_enlarged_atom_implicit_derivatives"
+      ],
+      "metrics": [
+        {
+          "name": "n2_quadrature_change_nmax20",
+          "minimum": 0.0,
+          "maximum": 0.001
+        },
+        {
+          "name": "n3_quadrature_change_nmax20",
+          "minimum": 0.0,
+          "maximum": 0.001
+        },
+        {
+          "name": "population_gradient_normalized_error_nmax20",
+          "minimum": 0.0,
+          "maximum": 0.00002
+        }
+      ],
+      "what_not_proved": [
+        "Numerical accuracy does not establish shell-size convergence or atomic-data accuracy.",
+        "The derivative checks use log(T) and log(nH) at one declared baseline, not a global NUTS parameter domain."
+      ]
+    },
+    {
+      "id": "enlarged_atom_convergence",
+      "requires": [
+        "enlarged_atom_numerics"
+      ],
+      "scope": "At T=9000 K, nH=1e12 cm^-3, Trad=10000 K and W=0.025, both n2 and n3 change by at most 5 percent from nmax=15 to 20. The explicit 5,10,15,20 sequence is also retained.",
+      "tests": [
+        "tests/test_atom_convergence.py::test_enlarged_atom_shell_sensitivity"
+      ],
+      "metrics": [
+        {
+          "name": "n2_relative_change_15_to_20",
+          "minimum": 0.0,
+          "maximum": 0.05
+        },
+        {
+          "name": "n3_relative_change_15_to_20",
+          "minimum": 0.0,
+          "maximum": 0.05
+        }
+      ],
+      "what_not_proved": [
+        "The original nmax=4-to-5 criterion remains separate and is not redefined by this gate.",
+        "This sampled larger-atom criterion does not prove infinite-atom convergence, agreement with an external reference, or atmospheric validity."
+      ]
+    },
+    {
       "id": "reference_agreement",
       "requires": [
         "atomic_balance"

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/home/kawahara/miniconda3/bin/python",
+    "tools/verify_coupled.py",
+    "--gate",
+    "enlarged_atom_convergence",
+    "--pythonpath",
+    "/home/kawahara/exojax/src",
+    "--record",
+    "results/atom-convergence/verification-02"
+  ],
+  "exit_code": 0
+}

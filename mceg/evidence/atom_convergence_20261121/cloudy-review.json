@@ -1,0 +1,901 @@
+{
+  "scope": "Independent Cloudy shell convergence at seven factorized pure-H fixed-temperature conditions. These are finite-atom/reference checks, not atmospheric validation.",
+  "created_by": "cloudy_convergence subagent",
+  "source_revision": "719ba25",
+  "executable_provenance": "mceg/evidence/cloudy_reference_20261121/provenance.json",
+  "baseline_sweep": [
+    {
+      "nmax": 4,
+      "n2_cm3": 124415.3,
+      "n3_cm3": 18675.05,
+      "electron_cm3": 831422000000.0
+    },
+    {
+      "nmax": 5,
+      "n2_cm3": 131816.7,
+      "n3_cm3": 20091.05,
+      "electron_cm3": 821551000000.0
+    },
+    {
+      "nmax": 6,
+      "n2_cm3": 137913.8,
+      "n3_cm3": 21167.55,
+      "electron_cm3": 813376000000.0
+    },
+    {
+      "nmax": 8,
+      "n2_cm3": 144302.1,
+      "n3_cm3": 22279.24,
+      "electron_cm3": 804805000000.0
+    },
+    {
+      "nmax": 10,
+      "n2_cm3": 146201.1,
+      "n3_cm3": 22626.46,
+      "electron_cm3": 802267000000.0
+    },
+    {
+      "nmax": 15,
+      "n2_cm3": 147205.9,
+      "n3_cm3": 22831.59,
+      "electron_cm3": 800938000000.0
+    },
+    {
+      "nmax": 20,
+      "n2_cm3": 147408.4,
+      "n3_cm3": 22879.71,
+      "electron_cm3": 800674000000.0
+    },
+    {
+      "nmax": 30,
+      "n2_cm3": 147519.9,
+      "n3_cm3": 22908.82,
+      "electron_cm3": 800529000000.0
+    }
+  ],
+  "candidate_checks": {
+    "baseline": {
+      "n10_to_n20": {
+        "n2_cm3": 0.008257803805853614,
+        "n3_cm3": 0.011192647899848307
+      },
+      "n15_to_n20": {
+        "n2_cm3": 0.0013756242107143546,
+        "n3_cm3": 0.0021076061719749184
+      },
+      "n15": {
+        "nmax": 15,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          199061000000.0,
+          37017.9,
+          110188.0,
+          2604.73,
+          7810.46,
+          12416.4,
+          16089.2,
+          16300.8,
+          18415.6,
+          21842.3,
+          26174.9,
+          31258.6,
+          37031.6,
+          43465.2,
+          50545.0,
+          58262.5,
+          66612.8,
+          75592.7
+        ],
+        "n2_cm3": 147205.9,
+        "n3_cm3": 22831.59,
+        "temperature_k": 9000.0,
+        "density_cm3": 1000000000000.0,
+        "electron_cm3": 800938000000.0,
+        "proton_cm3": 800938000000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 800938368371.31
+      },
+      "n20": {
+        "nmax": 20,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          199325000000.0,
+          37069.4,
+          110339.0,
+          2610.2,
+          7826.71,
+          12442.8,
+          16147.9,
+          16371.3,
+          18474.0,
+          21878.8,
+          26194.6,
+          31266.6,
+          37031.1,
+          43458.3,
+          50532.8,
+          58245.9,
+          66592.3,
+          75568.7,
+          85172.7,
+          95403.0,
+          106258.0,
+          117738.0,
+          129841.0
+        ],
+        "n2_cm3": 147408.4,
+        "n3_cm3": 22879.71,
+        "temperature_k": 9000.0,
+        "density_cm3": 1000000000000.0,
+        "electron_cm3": 800674000000.0,
+        "proton_cm3": 800674000000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 800673833536.89
+      }
+    },
+    "cold": {
+      "n10_to_n20": {
+        "n2_cm3": 0.021164472262605427,
+        "n3_cm3": 0.024145232946776618
+      },
+      "n15_to_n20": {
+        "n2_cm3": 0.0036296128637680614,
+        "n3_cm3": 0.004367113515868271
+      },
+      "n15": {
+        "nmax": 15,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          280844000000.0,
+          52206.0,
+          155447.0,
+          3685.42,
+          11051.3,
+          17584.4,
+          23270.2,
+          24192.5,
+          30179.7,
+          36528.0,
+          43368.1,
+          50977.9,
+          59490.8,
+          68946.9,
+          79353.2,
+          90706.1,
+          103000.0,
+          116229.0
+        ],
+        "n2_cm3": 207653.0,
+        "n3_cm3": 32321.120000000003,
+        "temperature_k": 6000.0,
+        "density_cm3": 1000000000000.0,
+        "electron_cm3": 719155000000.0,
+        "proton_cm3": 719155000000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 719155033783.48
+      },
+      "n20": {
+        "nmax": 20,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          281848000000.0,
+          52396.7,
+          156010.0,
+          3701.57,
+          11099.5,
+          17661.2,
+          23411.2,
+          24366.1,
+          30339.5,
+          36617.9,
+          43394.3,
+          50956.0,
+          59432.1,
+          68858.6,
+          79239.9,
+          90571.6,
+          102848.0,
+          116063.0,
+          130213.0,
+          145293.0,
+          161303.0,
+          178238.0,
+          196098.0
+        ],
+        "n2_cm3": 208406.7,
+        "n3_cm3": 32462.27,
+        "temperature_k": 6000.0,
+        "density_cm3": 1000000000000.0,
+        "electron_cm3": 718150000000.0,
+        "proton_cm3": 718150000000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 718150221887.8301
+      }
+    },
+    "hot": {
+      "n10_to_n20": {
+        "n2_cm3": 0.0021136325350253893,
+        "n3_cm3": 0.0006927490563350958
+      },
+      "n15_to_n20": {
+        "n2_cm3": 0.0006379271409879816,
+        "n3_cm3": 6.860798925845124e-05
+      },
+      "n15": {
+        "nmax": 15,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          153134000000.0,
+          28698.7,
+          85107.4,
+          2014.39,
+          6037.83,
+          9584.21,
+          12216.1,
+          12100.3,
+          12802.5,
+          14982.8,
+          18011.3,
+          21662.6,
+          25845.8,
+          30521.6,
+          35672.2,
+          41288.8,
+          47366.3,
+          53902.3
+        ],
+        "n2_cm3": 113806.09999999999,
+        "n3_cm3": 17636.43,
+        "temperature_k": 12000.0,
+        "density_cm3": 1000000000000.0,
+        "electron_cm3": 846866000000.0,
+        "proton_cm3": 846866000000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 846865542184.87
+      },
+      "n20": {
+        "nmax": 20,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          153028000000.0,
+          28680.9,
+          85052.6,
+          2014.49,
+          6038.03,
+          9585.12,
+          12233.4,
+          12121.9,
+          12819.3,
+          14993.2,
+          18017.0,
+          21665.3,
+          25845.8,
+          30519.3,
+          35667.3,
+          41280.8,
+          47354.7,
+          53886.2,
+          60873.5,
+          68315.5,
+          76211.4,
+          84560.9,
+          93363.4
+        ],
+        "n2_cm3": 113733.5,
+        "n3_cm3": 17637.64,
+        "temperature_k": 12000.0,
+        "density_cm3": 1000000000000.0,
+        "electron_cm3": 846971000000.0,
+        "proton_cm3": 846971000000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 846971158899.96
+      }
+    },
+    "dilute_gas": {
+      "n10_to_n20": {
+        "n2_cm3": 0.06581853327443898,
+        "n3_cm3": 0.06956618640598178
+      },
+      "n15_to_n20": {
+        "n2_cm3": 0.01386347631859386,
+        "n3_cm3": 0.014735734803172695
+      },
+      "n15": {
+        "nmax": 15,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          30992200.0,
+          9.37932,
+          17.0621,
+          0.519199,
+          1.55733,
+          0.940762,
+          2.50683,
+          2.53991,
+          2.88119,
+          3.37528,
+          3.99256,
+          4.72521,
+          5.57752,
+          6.54327,
+          7.61502,
+          8.78578,
+          10.0513,
+          11.4092
+        ],
+        "n2_cm3": 26.44142,
+        "n3_cm3": 3.017291,
+        "temperature_k": 9000.0,
+        "density_cm3": 10000000000.0,
+        "electron_cm3": 9969010000.0,
+        "proton_cm3": 9969010000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 9969007700.53822
+      },
+      "n20": {
+        "nmax": 20,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          31410300.0,
+          9.51489,
+          17.2931,
+          0.526822,
+          1.57914,
+          0.955791,
+          2.54787,
+          2.58874,
+          2.94625,
+          3.46283,
+          4.10526,
+          4.85955,
+          5.72798,
+          6.70751,
+          7.79445,
+          8.98424,
+          10.2739,
+          11.6618,
+          13.1468,
+          14.7283,
+          16.406,
+          18.1796,
+          20.049
+        ],
+        "n2_cm3": 26.807989999999997,
+        "n3_cm3": 3.061753,
+        "temperature_k": 9000.0,
+        "density_cm3": 10000000000.0,
+        "electron_cm3": 9968590000.0,
+        "proton_cm3": 9968590000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 9968589515.960176
+      }
+    },
+    "dense_gas": {
+      "n10_to_n20": {
+        "n2_cm3": 0.00013158728379480955,
+        "n3_cm3": 0.002730627690417764
+      },
+      "n15_to_n20": {
+        "n2_cm3": 1.4619099365953403e-05,
+        "n3_cm3": 0.0006742443839806711
+      },
+      "n15": {
+        "nmax": 15,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          83096900000000.0,
+          15398700.0,
+          46164600.0,
+          1071670.0,
+          3214850.0,
+          5339070.0,
+          6797730.0,
+          7062220.0,
+          8126920.0,
+          9707510.0,
+          11655800.0,
+          13926500.0,
+          16500000.0,
+          19366500.0,
+          22520400.0,
+          25958400.0,
+          29678400.0,
+          33679000.0
+        ],
+        "n2_cm3": 61563300.0,
+        "n3_cm3": 9625590.0,
+        "temperature_k": 9000.0,
+        "density_cm3": 100000000000000.0,
+        "electron_cm3": 16902800000000.0,
+        "proton_cm3": 16902800000000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 16902823831730.0
+      },
+      "n20": {
+        "nmax": 20,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          83094400000000.0,
+          15398900.0,
+          46165300.0,
+          1072390.0,
+          3217010.0,
+          5342680.0,
+          6804850.0,
+          7067900.0,
+          8131060.0,
+          9711260.0,
+          11659600.0,
+          13930700.0,
+          16504800.0,
+          19372000.0,
+          22526700.0,
+          25965600.0,
+          29686600.0,
+          33688300.0,
+          37969800.0,
+          42530400.0,
+          47369700.0,
+          52487300.0,
+          57882900.0
+        ],
+        "n2_cm3": 61564200.0,
+        "n3_cm3": 9632080.0,
+        "temperature_k": 9000.0,
+        "density_cm3": 100000000000000.0,
+        "electron_cm3": 16905000000000.0,
+        "proton_cm3": 16905000000000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 16905085514250.0
+      }
+    },
+    "weak_field": {
+      "n10_to_n20": {
+        "n2_cm3": 0.007047796222094949,
+        "n3_cm3": 0.010034996268756258
+      },
+      "n15_to_n20": {
+        "n2_cm3": 0.0011885460909872858,
+        "n3_cm3": 0.0019355305057420225
+      },
+      "n15": {
+        "nmax": 15,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          341882000000.0,
+          25488.1,
+          75728.0,
+          1777.66,
+          5329.94,
+          8386.86,
+          10914.2,
+          11037.6,
+          12450.4,
+          14751.5,
+          17671.8,
+          21102.3,
+          24999.4,
+          29342.8,
+          34122.5,
+          39332.9,
+          44970.3,
+          51032.7
+        ],
+        "n2_cm3": 101216.1,
+        "n3_cm3": 15494.460000000001,
+        "temperature_k": 9000.0,
+        "density_cm3": 1000000000000.0,
+        "electron_cm3": 658118000000.0,
+        "proton_cm3": 658118000000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 658117571561.04
+      },
+      "n20": {
+        "nmax": 20,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          342270000000.0,
+          25519.0,
+          75817.4,
+          1781.09,
+          5340.12,
+          8403.24,
+          10953.0,
+          11086.4,
+          12491.7,
+          14775.6,
+          17681.3,
+          21101.1,
+          24989.8,
+          29326.3,
+          34099.9,
+          39304.6,
+          44936.8,
+          50994.1,
+          57475.0,
+          64378.4,
+          71703.7,
+          79450.2,
+          87617.5
+        ],
+        "n2_cm3": 101336.4,
+        "n3_cm3": 15524.449999999999,
+        "temperature_k": 9000.0,
+        "density_cm3": 1000000000000.0,
+        "electron_cm3": 657729000000.0,
+        "proton_cm3": 657729000000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 657729210773.75
+      }
+    },
+    "strong_field": {
+      "n10_to_n20": {
+        "n2_cm3": 0.00879315370720124,
+        "n3_cm3": 0.011646262862921475
+      },
+      "n15_to_n20": {
+        "n2_cm3": 0.001449775629962069,
+        "n3_cm3": 0.002158963959389304
+      },
+      "n15": {
+        "nmax": 15,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          117613000000.0,
+          43681.0,
+          130139.0,
+          3124.18,
+          9368.43,
+          14978.9,
+          19424.5,
+          19727.3,
+          22330.2,
+          26504.7,
+          31768.7,
+          37940.9,
+          44948.5,
+          52757.5,
+          61350.6,
+          70717.9,
+          80853.1,
+          91752.6
+        ],
+        "n2_cm3": 173820.0,
+        "n3_cm3": 27471.51,
+        "temperature_k": 9000.0,
+        "density_cm3": 1000000000000.0,
+        "electron_cm3": 882386000000.0,
+        "proton_cm3": 882386000000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 882386238631.99
+      },
+      "n20": {
+        "nmax": 20,
+        "depth_cm": 5e-05,
+        "bound_cm3": [
+          117778000000.0,
+          43745.0,
+          130327.0,
+          3130.9,
+          9388.42,
+          15011.5,
+          19494.8,
+          19810.1,
+          22398.8,
+          26549.9,
+          31796.6,
+          37957.5,
+          44957.4,
+          52761.0,
+          61350.3,
+          70714.7,
+          80847.9,
+          91745.8,
+          103406.0,
+          115826.0,
+          129005.0,
+          142942.0,
+          157637.0
+        ],
+        "n2_cm3": 174072.0,
+        "n3_cm3": 27530.82,
+        "temperature_k": 9000.0,
+        "density_cm3": 1000000000000.0,
+        "electron_cm3": 882221000000.0,
+        "proton_cm3": 882221000000.0,
+        "charge_source": "saved e- and H+ species densities",
+        "proton_cm3_from_nucleus_conservation": 882220589196.38
+      }
+    }
+  },
+  "tail_controls": {
+    "dilute_n15_to_n40": {
+      "n2_cm3": 0.0234397396206405,
+      "n3_cm3": 0.02512916387580777
+    },
+    "dilute_n20_to_n40": {
+      "n2_cm3": 0.009445318354714516,
+      "n3_cm3": 0.010242498333471017
+    },
+    "baseline_n15_to_n30": {
+      "n2_cm3": 0.002133066677354689,
+      "n3_cm3": 0.0033825940287119938
+    }
+  },
+  "continuum_controls": {
+    "baseline": {
+      "n2_cm3": 0.0004884315098783176,
+      "n3_cm3": 0.0004585751583658926
+    },
+    "cold": {
+      "n2_cm3": 0.00048686992241864235,
+      "n3_cm3": 0.000461927061933487
+    },
+    "dilute_gas": {
+      "n2_cm3": 0.00038954034995097864,
+      "n3_cm3": 0.00039936486073099964
+    }
+  },
+  "executions": [
+    {
+      "directory": "baseline_nmax10_fine",
+      "receipt_sha256": "5c5eb4b14512cc625c4bcf4755c48b2b71154ce8082e7119cb164b42bfbfc635",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "baseline_nmax15_fine",
+      "receipt_sha256": "44207a874be8b99e3eae40cec01722fde9200ebdb75646588d09337c428bf1a8",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "baseline_nmax20_fine",
+      "receipt_sha256": "75509ee7fbac120b644b0da9e009e1d6cb9de67fbdb7a7555af9ea462cbd6216",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "baseline_nmax30",
+      "receipt_sha256": "4c5d989286844bfad67c3be33a867383256ddc786828c931849f023d8d0fd95f",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "cold_nmax10",
+      "receipt_sha256": "0b6d4a5c092e43c240ac2ab1bb9f2514d1ec50348b6afba376e888c6b64a96f1",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "cold_nmax15",
+      "receipt_sha256": "569aaa796b3eaad8043efd6aa8f83d128e26a438e3485f39106eae6ca2da3c18",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "cold_nmax15_fine",
+      "receipt_sha256": "a2b966c77cca58f554ff36f4597f69e56f208344894728d1851f569d5fa7a867",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "cold_nmax20",
+      "receipt_sha256": "933bfe14a9a4ba51b94f025ff5668a8adb1d2200ef890a60fe0f060e9a391f4b",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "dense_gas_nmax10",
+      "receipt_sha256": "57e618a01dba9c2d391b29c761ecbfe7c7ea1400d3872d45efe79f29472a0e2b",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "dense_gas_nmax15",
+      "receipt_sha256": "482ba9efc993538e0b3662a10ea06c06670a5a5abf8b20a9d0a0d5e111263a30",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "dense_gas_nmax20",
+      "receipt_sha256": "de1d46b6955aaa8732b0586c6bc11c8b375d6da4fab18c5606b88b10d91657f4",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "dilute_gas_nmax10",
+      "receipt_sha256": "57535abab8f22e1a3044923085909cfaa6677bc3a0b67e6144fadca2cdde3b83",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "dilute_gas_nmax15",
+      "receipt_sha256": "2ab7f84165249faeaae163d3c00fedfb19074f1fe91c18edd995d1796f4badec",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "dilute_gas_nmax15_fine",
+      "receipt_sha256": "3a8b1f6fe46be6561fd1c47eeb84a03f14cbc1601df684cfb09aeda4424c936f",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "dilute_gas_nmax20",
+      "receipt_sha256": "e16ecd3ac948be4e3a796d4a8b2df4b42be6549b1d2e99acee63e9ecc55baebe",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "dilute_gas_nmax30",
+      "receipt_sha256": "747e01009d87f323c4f13b4329f15e6916ed73a8adcee46a4ba1d33af0b766b8",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "dilute_gas_nmax40",
+      "receipt_sha256": "673f32740fc7d91e4488539afbb37749f3d51f68bfdf3d86aa330ca2372ffcb7",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "hot_nmax10",
+      "receipt_sha256": "2835ab94bb5e0947c6a90378b0275fa66d568da07a59c77bb0fec69ad9c4e009",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "hot_nmax15",
+      "receipt_sha256": "169324c1912fecc9ccc877da5aa6d6ecb1fb6c89b75e39333c289aa824eb097a",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "hot_nmax20",
+      "receipt_sha256": "9020dc945a7c40a5327474ee268b5370da4ca4ac55ad8fec0ded92b4dc055603",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "nmax04",
+      "receipt_sha256": "de72729c2d9b65ee8f6e254b9db4939cd886c5038a795328d58e82e54b451e41",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "nmax05",
+      "receipt_sha256": "79f95dd0821848ad2660e1ce1b4a56c441ddbff26bcd02ef1fd3793b6dc04504",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "nmax06",
+      "receipt_sha256": "7a11a6bc2832453a1be4d21fb6cdb7315b0d14d84a8f331300fe608b3ae24a27",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "nmax08",
+      "receipt_sha256": "675be461f86a28d90d39b17add86e2709dbcf24248f30ad71560b8875daf8120",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "nmax10",
+      "receipt_sha256": "eff75129604bd425aa12449d8707993891d9c4b60ad3fb06c954c58e99f19009",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "nmax15",
+      "receipt_sha256": "8aecb76d43ed5c3884485ba51e0f4b773357878fc291e3d6e20b55a050e4cb30",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "nmax20",
+      "receipt_sha256": "1cef057a85c16f7b450a80b85182d4160135d6862b4f4783e0769aa12324a02f",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "operator_nmax05",
+      "receipt_sha256": "aad0eedb9e779f3d5ab8a51b2e71ed8c9ce9cfbbb4a3f598c607068632532c1b",
+      "executable_sha256": "ff5e25045a03ca8745d35ab58950bca978c220f802861a1b1ee7685cee949f3a",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "operator_nmax10",
+      "receipt_sha256": "3d479282e30e99a754f456ae93630ee5aea7456d898db283f339e81fa5247dc9",
+      "executable_sha256": "ff5e25045a03ca8745d35ab58950bca978c220f802861a1b1ee7685cee949f3a",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "strong_field_nmax10",
+      "receipt_sha256": "d5bd87fca43108df383126281f03c3540e9d6461977f980e7951ebbe97334448",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "strong_field_nmax15",
+      "receipt_sha256": "55412dfcfca7592b292e508963aa748c8257011b55f4c70b96daf299b0b069e7",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "strong_field_nmax20",
+      "receipt_sha256": "d1bcb0b4e0b90e4fa8cbfcf8d0502f525a4093de8609bd2faabb253a4789e2fb",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "weak_field_nmax10",
+      "receipt_sha256": "5997a9a59ea67f2ed7b999161c97c830ffe7ad0666e239e73e767694ac0342c7",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "weak_field_nmax15",
+      "receipt_sha256": "7cbf92ab2cbf2d6bf98295fbf81efd809128baff6a774e0ae940fe0f00acce05",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    },
+    {
+      "directory": "weak_field_nmax20",
+      "receipt_sha256": "b81c46c64d97e6851fb3597628d8939ab2fc6028e0cb25d2ae3051cc282e44b9",
+      "executable_sha256": "8adc9f0d0e9f120126e8f0c6f46bf420a3f012f2597e9baaa929a1905677f873",
+      "exit_code": 0,
+      "final_iterations": 3
+    }
+  ],
+  "process_diagnosis": "shell_budget.json",
+  "criteria": {
+    "population_relative_change": 0.05,
+    "reference_refinement_relative_change": 0.01,
+    "failure_policy": "Retain n10 dilute failure; candidate15 was selected only after that failure and follow-up. No criterion is loosened."
+  },
+  "summary": {
+    "executions": 35,
+    "all_artifact_hashes_match": true,
+    "candidate10_max_change": 0.06956618640598178,
+    "candidate15_max_change": 0.014735734803172695,
+    "candidate15_max_tail_change": 0.02512916387580777,
+    "max_reference_refinement_change": 0.0004884315098783176
+  },
+  "cautions": "Every run prints the generic first-iteration intensity caution; all finish three iterations, and only final populations are used. No PROBLEM/DISASTER output was found."
+}

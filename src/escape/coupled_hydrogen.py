@@ -16,7 +16,9 @@ import numpy as np
 
 from exojax.opacity.lpf.lpf import vvoigt
 
-from .hydrogen_atom import make_hydrogen_atom, atom_rate_coefficients, solve_atom_populations
+from .hydrogen_atom import (
+    DEFAULT_PRINCIPAL_N, atom_rate_coefficients, make_hydrogen_atom, solve_atom_populations,
+)
 from .hydrogen_continuum import continuum_coefficients, planck_intensity_hz
 from .hydrogen_nlte import _bound_ratios
 from .hydrogen_rates import (
@@ -129,7 +131,7 @@ class CoupledHydrogenModel:
     a purely collisionally ionized, unilluminated branch is not initialized.
     """
 
-    def __init__(self, edges_cm, *, nmax=3, quadrature_order=4, spherical=True,
+    def __init__(self, edges_cm, *, nmax=DEFAULT_PRINCIPAL_N, quadrature_order=4, spherical=True,
                  include_free_free=True, include_hminus=False,
                  minimum_energy_ev=1e-4, maximum_energy_ev=100.,
                  bound_free_model="hydrogenic", include_orbital_mixing=True):

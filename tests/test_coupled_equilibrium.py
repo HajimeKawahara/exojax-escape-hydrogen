@@ -15,7 +15,8 @@ jax.config.update("jax_enable_x64", True)
 
 @pytest.fixture(scope="module")
 def model():
-    return CoupledHydrogenModel(np.linspace(1e10, 1.0001e10, 3), quadrature_order=4)
+    # Preserve the small-atom numerical benchmark independently of the default.
+    return CoupledHydrogenModel(np.linspace(1e10, 1.0001e10, 3), nmax=3, quadrature_order=4)
 
 
 def test_self_consistent_radiation_populations(model, record_property):
@@ -34,8 +35,9 @@ def test_self_consistent_radiation_populations(model, record_property):
     record_property("profile_integral_error", float(jnp.max(jnp.abs(solution.radiation.profile_integrals - 1))))
 
 
-def test_thin_column_recovers_prescribed_field_population_limit():
-    model = CoupledHydrogenModel(np.array([1e10, 1e10 + 1]), quadrature_order=4)
+@pytest.mark.parametrize("nmax", [3, 15])
+def test_thin_column_recovers_prescribed_field_population_limit(nmax):
+    model = CoupledHydrogenModel(np.array([1e10, 1e10 + 1]), nmax=nmax, quadrature_order=4)
     outer = model.boundary_blackbody(10000., .05)
     inner = jnp.zeros_like(outer)
     density, temperature = jnp.array([1e9]), jnp.array([9000.])
@@ -87,7 +89,7 @@ def test_joint_equilibrium_derivative(model, record_property):
 def test_frequency_refinement(record_property):
     populations = []
     for order in (4, 8):
-        model = CoupledHydrogenModel(np.linspace(1e10, 1.0001e10, 3), quadrature_order=order)
+        model = CoupledHydrogenModel(np.linspace(1e10, 1.0001e10, 3), nmax=3, quadrature_order=order)
         outer = model.boundary_blackbody(10000., .05)
         solution = model.solve_equilibrium(1e10, 9000., jnp.zeros_like(outer), outer,
                                            iterations=20, continuation_steps=2)

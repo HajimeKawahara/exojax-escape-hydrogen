@@ -1,0 +1,26 @@
+{
+  "tag": "evidence/atom-convergence-20261121",
+  "commit": "331f0711a13260cc9a20ddf46b5b82c991d7bb43",
+  "path": "mceg/evidence/atom_convergence_20261121/raw.tar.gz",
+  "sha256": "150e955ee0c9ffa30598d9815a5ef07dc96e7fe85dcb920826affba0b484fbc6",
+  "bytes": 1312647,
+  "source_revision": "246e340658008a8f355c345333571d75dd1e66e9",
+  "contents": "Fresh reference comparisons, discarded candidate and workflow attempts, final frozen verification and causal diagnosis. Scientific source is retained in Git and numerical workflow input snapshots.",
+  "restore_audit": {
+    "hashed_files": 778,
+    "all_hashes_match": true,
+    "matched_cloudy_comparison_recomputed": "passed",
+    "numerical_workflow_inputs_and_artifacts": "match"
+  },
+  "restoration": [
+    "git show evidence/atom-convergence-20261121:mceg/evidence/atom_convergence_20261121/raw.tar.gz > /tmp/atom-convergence-raw.tar.gz",
+    "mkdir -p results/atom-evidence",
+    "tar -xzf /tmp/atom-convergence-raw.tar.gz -C results/atom-evidence"
+  ],
+  "notes": [
+    "The archive uses standard tar hardlinks for identical file contents; all recorded paths remain present.",
+    "All35 fresh Cloudy runs and14 final escape comparisons are retained, including the rejected nmax10 dilute condition and original failed4-to5 observations.",
+    "verification-01 is retained as a failed workflow attempt due to metadata/input drift despite its passing tests. verification-02 is the frozen successful support execution.",
+    "MCEG contracts reference compact review artifacts directly; full raw receipt verification requires this explicit archive restoration."
+  ]
+}

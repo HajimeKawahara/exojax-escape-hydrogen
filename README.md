@@ -16,6 +16,11 @@ equations, and limitations are in [PR #1](https://github.com/HajimeKawahara/exoj
 
 The [MCEG status overview](mceg/README.md#current-status) separates supported
 numerical checks, measured contradictions and unverified physical accuracy.
+The finite hydrogen atom now defaults to `nmax=15` and supports explicit shells
+through `nmax=20`. The [convergence investigation](doc/atom_convergence.pdf)
+explains the original truncation failure and the scoped Cloudy comparisons.
+Smaller atoms remain explicit numerical experiments; convergence must be checked
+again for new atmospheric conditions.
 The [Parker-wind equations](doc/parker_wind.pdf) cover prescribed-temperature
 nonisothermal winds and linear tides, with code bindings and scoped evidence.
 

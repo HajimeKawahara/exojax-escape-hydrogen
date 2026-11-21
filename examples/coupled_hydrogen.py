@@ -19,13 +19,15 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from escape.coupled_hydrogen import CoupledHydrogenModel
+from escape.hydrogen_atom import DEFAULT_PRINCIPAL_N, MAX_PRINCIPAL_N
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=Path("results/coupled_hydrogen"))
     parser.add_argument("--cells", type=int, default=4)
-    parser.add_argument("--nmax", type=int, choices=(3, 4, 5), default=5)
+    parser.add_argument("--nmax", type=int, choices=range(3, MAX_PRINCIPAL_N + 1),
+                        default=DEFAULT_PRINCIPAL_N)
     parser.add_argument("--order", type=int, default=4)
     parser.add_argument("--width-cm", type=float, default=1e7)
     args = parser.parse_args()

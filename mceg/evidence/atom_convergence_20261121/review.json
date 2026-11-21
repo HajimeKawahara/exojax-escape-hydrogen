@@ -1,0 +1,180 @@
+{
+  "kind": "reviewed_finite_atom_convergence",
+  "date": "2026-11-21",
+  "scientific_source_revision": "246e340658008a8f355c345333571d75dd1e66e9",
+  "scientific_sources": {
+    "tools/cloudy_reference.py": "16a65adf87d609b807dfefafe4d33ef88eceed7e3583f9c4ee56593d6fa4e1dc",
+    "src/escape/__init__.py": "68bfd52442b9d98b7c167846961560a5a2f2e9d8d2a74a297a218c8d0efbf631",
+    "src/escape/coupled_hydrogen.py": "bba13310d54a6eeecd3bfac0eccdb14b1272d15b642c355ccee6f6c8e8adf111",
+    "src/escape/hydrogen_atom.py": "1da46f965072933e12a7f37e603b8450a59d53596a95a22375571fec0020c3db",
+    "src/escape/hydrogen_bound_free.py": "90170626731551946dfeac40f47b87afd369fb9d8f10d378c2f2e5d23de5f5fc",
+    "src/escape/hydrogen_continuum.py": "61a5669f3a08e6af967d2f1042fa387489224389bddcefd13da576b1cd31e770",
+    "src/escape/hydrogen_forward.py": "586ee08f484a01d9a0b150c8cce4cf7a32e62105a29a677434d9d353b3f41ebc",
+    "src/escape/hydrogen_mixing.py": "78bf474551b07a6641c471f4403fae44d0de6c07311858e4ecfe0928c99c3b8f",
+    "src/escape/hydrogen_nlte.py": "697375972fffdc077f9ee2cb131d74a31c1af6e9d8f98fa5e64127fd4b874943",
+    "src/escape/hydrogen_populations.py": "c4b913236c6e5384903920d0378fe285563bb46170528f0fe7d2b02e76733289",
+    "src/escape/hydrogen_rates.py": "a1e1237725284198f8617a828f292d0d92e42ee6824f95c2efcfd68b535b5535",
+    "src/escape/nlte_forward.py": "32197712b8167e19760b265df3480ca1c8b67b008e2a6765a914ebbf9078416c",
+    "src/escape/nonisothermal.py": "35ab60f683ca96ceda895b186406f481aad3563c6c27e7b8af1a8c4715e1c529",
+    "src/escape/parker.py": "0d6b340dd3c47895117b6aa0fbf156ca9eb3f04588170ea99ef7858766004a1e",
+    "src/escape/radiation.py": "1c56019cb4821f3df7020b0403e1308a83c5d24328de07640d473cb0274df2f3",
+    "src/escape/reactive_flow.py": "af160d5ae62c5ebd7b77a4158ecf07768a7638bcdaf659d6caf9fe1b535883df"
+  },
+  "execution_scope": "The comparison and diagnosis were executed while the Git checkout was dirty at719ba25; all selected scientific bytes match246e340. The final numerical workflow was executed at246e340 with no changed inputs. Documents and registration were added afterward.",
+  "scientific_findings": [
+    "The original nmax4-to5 n3 change remains0.077350027506. Fresh Cloudy independently changes by about7.58percent. This is a real small-atom truncation effect.",
+    "Added high shells supply net recombination and cascade flow to low levels. A fixed-electron-density Schur complement and independent charge root distinguish added-source, operator-feedback and charge-feedback contributions.",
+    "Explicit statistical shells are supported through nmax20. Defaults select15; n10 was rejected because the independent dilute-gas10-to20 change is6.9566percent.",
+    "Across all seven unique prior conditions, escape n15-to20 changes n2/n3 by at most 1.4713350273%; baseline n3 changes by 0.2334883297%.",
+    "All 14 matched finite-atom Cloudy comparisons meet the unchanged 5% criterion; maximum difference 2.0314851479%.",
+    "Two larger reference controls compare escape n15 with Cloudy n30 at baseline and n40 in dilute gas; maximum discrepancy 2.0656837485%. Reference continuum refinement changes populations by less than 0.049%.",
+    "These are sampled finite-atom checks. Collapsed orbital populations, VS80 high-shell rates, an infinite Rydberg ladder and an entire escaping atmosphere are not validated by this agreement."
+  ],
+  "numerical_verification": {
+    "workflow_exit_code": 0,
+    "workflow_status": "passed",
+    "changed_inputs": [],
+    "gates": [
+      {
+        "id": "atomic_balance",
+        "status": "passed",
+        "counts": {
+          "passed": 60,
+          "failed": 0,
+          "error": 0,
+          "skipped": 0
+        },
+        "metric_checks": []
+      },
+      {
+        "id": "enlarged_atom_numerics",
+        "status": "passed",
+        "counts": {
+          "passed": 2,
+          "failed": 0,
+          "error": 0,
+          "skipped": 0
+        },
+        "metric_checks": [
+          {
+            "criterion": {
+              "name": "n2_quadrature_change_nmax20",
+              "minimum": 0.0,
+              "maximum": 0.001
+            },
+            "values": [
+              {
+                "case": "tests.test_atom_convergence::test_enlarged_atom_quadrature_refinement",
+                "value": "4.440892098500626e-16"
+              }
+            ],
+            "status": "passed"
+          },
+          {
+            "criterion": {
+              "name": "n3_quadrature_change_nmax20",
+              "minimum": 0.0,
+              "maximum": 0.001
+            },
+            "values": [
+              {
+                "case": "tests.test_atom_convergence::test_enlarged_atom_quadrature_refinement",
+                "value": "3.4416913763379853e-15"
+              }
+            ],
+            "status": "passed"
+          },
+          {
+            "criterion": {
+              "name": "population_gradient_normalized_error_nmax20",
+              "minimum": 0.0,
+              "maximum": 2e-05
+            },
+            "values": [
+              {
+                "case": "tests.test_atom_convergence::test_enlarged_atom_implicit_derivatives",
+                "value": "6.876812452816239e-10"
+              }
+            ],
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "id": "enlarged_atom_convergence",
+        "status": "passed",
+        "counts": {
+          "passed": 1,
+          "failed": 0,
+          "error": 0,
+          "skipped": 0
+        },
+        "metric_checks": [
+          {
+            "criterion": {
+              "name": "n2_relative_change_15_to_20",
+              "minimum": 0.0,
+              "maximum": 0.05
+            },
+            "values": [
+              {
+                "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+                "value": "0.0016035288509919088"
+              }
+            ],
+            "status": "passed"
+          },
+          {
+            "criterion": {
+              "name": "n3_relative_change_15_to_20",
+              "minimum": 0.0,
+              "maximum": 0.05
+            },
+            "values": [
+              {
+                "case": "tests.test_atom_convergence::test_enlarged_atom_shell_sensitivity",
+                "value": "0.002334883296698953"
+              }
+            ],
+            "status": "passed"
+          }
+        ]
+      }
+    ],
+    "distinct_workflow_tests": 63,
+    "coupled_regression": {
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_coupled_equilibrium.py::test_thin_column_recovers_prescribed_field_population_limit",
+        "tests/test_coupled_equilibrium.py::test_joint_equilibrium_derivative",
+        "-q",
+        "-o",
+        "junit_family=xunit1",
+        "--junitxml=results/atom-convergence/coupled-regression.xml"
+      ],
+      "exit_code": 0,
+      "passed": 3,
+      "source_revision": "246e340658008a8f355c345333571d75dd1e66e9",
+      "scope": "Thin-column nmax3 and15 and the retained nmax3 joint-equilibrium derivative; no large-atom coupled flow or thermal accuracy claim."
+    }
+  },
+  "formulation_review": [
+    "Finite Laguerre radial polynomials are summed exactly with Fraction before floating normalization; static construction adds no differentiated parameters.",
+    "The n>=6 VS80 ionization formula matches independently compiled Cloudy C23. Inverse three-body rates use the same finite-atom Saha factors.",
+    "The Coulomb recurrences divide out their common normalization and one energy factor per step. Logarithmic recombination avoids high-l squared-dipole underflow.472independent printed-table anchors include rounding in both logarithms.",
+    "An independent high-energy probe at n20 and relative energy3.1607e9 gives finite positive cross sections; forward/reverse log-slopes differ by3.02e-14 and finite differences by8.53e-10."
+  ],
+  "history_policy": "Original Claims, Evidence, Assessments, Equation/Binding pins and Decision basis are preserved. A new contract records the larger atom; the original FollowUp is bridged to this finite-scope resolution without converting the original contradicted Claim to supported.",
+  "intermediate_attempt": "verification-01 retained63passing tests but its overall receipt failed because a case manifest, diagnostic tool and unrelated coupled test were added/changed during that run. It is not the support evidence. Frozen verification-02 captured exit0 with no input drift; both attempts remain in the raw archive.",
+  "dependencies": "Runtime escape does not import or depend on MCEG or Cloudy. SciPy is used only by independent tests and the diagnosis tool.",
+  "comparison_summary": {
+    "matched_cases": 14,
+    "matched_max_relative_error": 0.020314851478818063,
+    "internal_max_relative_change": 0.014713350272889114,
+    "external_tail_max_relative_error": 0.02065683748497238,
+    "all_sources_current": true,
+    "status": "passed"
+  }
+}

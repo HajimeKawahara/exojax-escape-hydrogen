@@ -6,9 +6,11 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 import pytest
+from scipy.integrate import quad
+from scipy.special import eval_genlaguerre, gammaln
 
 from escape.hydrogen_atom import (
-    HYDROGEN_BOHR_RADIUS_CM, atom_bound_free_rates, atom_collision_rates,
+    HYDROGEN_BOHR_RADIUS_CM, MAX_PRINCIPAL_N, atom_bound_free_rates, atom_collision_rates,
     atom_rate_coefficients, atom_saha_factors, hydrogenic_einstein_a,
     hydrogenic_radial_dipole, make_hydrogen_atom, solve_atom_populations,
 )
@@ -46,7 +48,9 @@ def test_radial_integral_and_published_transition_anchors():
     assert hydrogenic_einstein_a(4, 2, 2, 0) == 0
 
 
-@pytest.mark.parametrize("nmax,levels,lines", [(3, 6, 5), (4, 7, 11), (5, 8, 18)])
+@pytest.mark.parametrize("nmax,levels,lines", [
+    (3, 6, 5), (4, 7, 11), (5, 8, 18), (10, 13, 68), (20, 23, 243),
+])
 def test_truncation_keeps_low_data_and_adds_explicit_cascade_edges(nmax, levels, lines):
     atom = make_hydrogen_atom(nmax)
     assert atom.statistical_weights.shape == (levels,)
@@ -58,14 +62,41 @@ def test_truncation_keeps_low_data_and_adds_explicit_cascade_edges(nmax, levels,
         # The collapsed H-beta shell A is independently tabulated near 8.419e6.
         beta = (atom.line_upper == 6) & (atom.principal_n[atom.line_lower] == 2)
         assert float(jnp.sum(atom.einstein_a_s[beta])) == pytest.approx(8.419e6, rel=2e-4)
-    if nmax == 5:
+    if nmax >= 5:
         assert atom.statistical_weights[7] == 50
         assert np.any((atom.line_upper == 7) & (atom.line_lower == 6))
 
 
+@pytest.mark.parametrize("upper,lower", [
+    ((6, 1), (1, 0)), ((10, 8), (9, 7)),
+    ((20, 0), (19, 1)), ((20, 10), (12, 9)),
+])
+def test_high_shell_dipoles_match_independent_radial_quadrature(upper, lower):
+    """Integrate normalized orbital functions, without the rational expansion."""
+    inverse_scale = 1 / upper[0] + 1 / lower[0]
+
+    def orbital_polynomial(n, ell, radius):
+        normalization = 2 / n**2 * np.exp(
+            (gammaln(n - ell) - gammaln(n + ell + 1)) / 2,
+        )
+        return (normalization * (2 * radius / n)**ell
+                * eval_genlaguerre(n - ell - 1, 2 * ell + 1, 2 * radius / n))
+
+    def integrand(coordinate):
+        radius = coordinate / inverse_scale
+        return (orbital_polynomial(*upper, radius) * orbital_polynomial(*lower, radius)
+                * np.exp(-coordinate) * radius**3 / inverse_scale)
+
+    expected, error = quad(integrand, 0., 250., epsabs=1e-10, epsrel=2e-11, limit=150)
+    assert error < abs(expected) * 2e-10
+    actual = hydrogenic_radial_dipole(*upper, *lower) / HYDROGEN_BOHR_RADIUS_CM
+    assert actual == pytest.approx(expected, rel=2e-10)
+
+
+@pytest.mark.parametrize("nmax", [5, 10, 20])
 @pytest.mark.parametrize("temperature", [6000., 10000., 14000.])
-def test_extended_collisions_preserve_all_pairwise_equilibria(temperature):
-    atom = make_hydrogen_atom(5)
+def test_extended_collisions_preserve_all_pairwise_equilibria(temperature, nmax):
+    atom = make_hydrogen_atom(nmax)
     bb, ion, three = atom_collision_rates(atom, temperature)
     old_bb, old_ion, _ = collision_rates(temperature)
     np.testing.assert_array_equal(bb[:6, :6], old_bb)
@@ -77,6 +108,33 @@ def test_extended_collisions_preserve_all_pairwise_equilibria(temperature):
     flux = boltzmann[:, None] * bb
     np.testing.assert_allclose(flux, flux.T, rtol=2e-13, atol=1e-30)
     np.testing.assert_allclose(three / ion, atom_saha_factors(atom, temperature), rtol=2e-13)
+
+
+def test_extra_shells_preserve_previous_low_level_rate_data():
+    smaller, larger = make_hydrogen_atom(5), make_hydrogen_atom(20)
+    for temperature in (6000., 9000., 14000.):
+        old_bb, old_ion, old_three = atom_collision_rates(smaller, temperature)
+        new_bb, new_ion, new_three = atom_collision_rates(larger, temperature)
+        np.testing.assert_array_equal(new_bb[:8, :8], old_bb)
+        np.testing.assert_array_equal(new_ion[:8], old_ion)
+        np.testing.assert_array_equal(new_three[:8], old_three)
+
+
+@pytest.mark.parametrize("n,temperature,expected", [
+    (6, 6000., 3.0976659751338506e-6),
+    (10, 9000., 2.5098090298669288e-5),
+    (20, 14000., 1.495874742673897e-4),
+])
+def test_high_shell_ionization_matches_cloudy_vs80_source(n, temperature, expected):
+    """Anchors evaluated by compiling C23.01 hydro_vs_ioniz unchanged.
+
+    Input binding energy is 13.5984345/n**2 eV, with this model's exact kB/eV
+    conversion. No highest-level topoff multiplier is applied. Formula: VS80
+    Eq. 8; source: https://data.nublado.org/cloudy_releases/c23/c23.01.tar.gz
+    (source/hydro_vs_rates.cpp, with its license retained in this package).
+    """
+    ionization = atom_collision_rates(make_hydrogen_atom(20), temperature)[1]
+    assert float(ionization[n + 2]) == pytest.approx(expected, rel=2e-14)
 
 
 def test_shared_grid_reproduces_old_atom_rates_without_edge_bias():
@@ -151,6 +209,8 @@ def test_atom_truncation_sensitivity(record_property):
 
 def test_invalid_atomic_choices_and_temperature_are_not_extrapolated():
     with pytest.raises(ValueError, match="nmax"):
-        make_hydrogen_atom(6)
+        make_hydrogen_atom(MAX_PRINCIPAL_N + 1)
+    with pytest.raises(ValueError, match="nmax"):
+        make_hydrogen_atom(True)
     for temperature in (5000., 14001.):
         assert np.isnan(atom_collision_rates(make_hydrogen_atom(5), temperature)[0]).all()

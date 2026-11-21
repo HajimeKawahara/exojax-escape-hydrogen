@@ -1,0 +1,198 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,microtype,pgfplots}
+\usepackage[hidelinks]{hyperref}
+\pgfplotsset{compat=1.18}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\title{Hydrogen shell convergence:\\why the atom needs more excited states}
+\author{\texttt{exojax-escape}: model definition and verification}
+\date{Definition revision 1; 21 November 2026}
+\begin{document}
+\maketitle
+
+\section{The failure and the physical change}
+The previous atom stopped at principal quantum number $N=5$. At the declared
+baseline, raising the cutoff from $N=4$ to 5 changed the population of the
+$n=3$ shell by $7.735\%$, above the unchanged $5\%$ criterion. Cloudy independently
+shows a similar change. This is evidence that the atom is too short: adding a
+new shell opens additional recombination, ionization and cascade paths.
+
+\[
+\boxed{\text{electrons + protons}}
+\ \rightleftarrows\ \boxed{\text{higher shells}}
+\ \rightleftarrows\ \boxed{n=3,\ n=2}
+\]
+
+The revised model includes every statistical shell through $N\le20$, and uses
+$N=15$ as the default. The original six populations remain resolved as
+$1s,2s,2p,3s,3p,3d$. A collapsed shell represents all its orbital states by one
+population, with fraction $(2\ell+1)/n^2$ in state $\ell$. It retains the summed
+physical transition rates; it does not fit a correction factor to $n_2$ or
+$n_3$ or add a recombination top-off above the cutoff.
+
+\section{What had to be extended}
+Three pieces matter. First, every added shell needs transitions to all lower
+retained states. We integrate the finite hydrogenic radial polynomials in
+exact rational arithmetic, then convert the final normalized dipole to
+float64. This changes how the same nonrelativistic integral is evaluated,
+preventing cancellation between very large alternating terms. Construction
+happens before the JAX gas-state calculation and introduces no fitted rates.
+
+Second, each shell needs photoionization and its inverse radiative
+recombination. The Coulomb-wave cross sections use the Brocklehurst recurrence
+already adopted for the smaller atom. We remove a common normalization and
+powers of photon energy before the recurrence, and combine radial products
+in logarithmic form. Otherwise squaring a very small high-$\ell$ dipole can
+underflow before its compensating factors are applied. The physical cross
+section and its inverse Milne relation remain the same.
+
+Third, the added $n\ge6$ shells need electron-impact ionization and three-body
+recombination. We use the VS80 ionization prescription as implemented in
+Cloudy and construct the inverse with the same energy and Saha factor. The
+existing $n\le5$ ionization data and the shell bound--bound collision
+prescription remain unchanged. Statistical orbital populations and the
+collision fits are physical approximations, even when the numerical
+implementation passes its checks.
+
+\section{Why the populations change}
+Electrons captured into a high shell can reach the lower states through a
+cascade. The effect is not an isolated additive source: the new shell also
+changes excitation/ionization losses, and the electron density changes when
+charge and nucleus conservation are solved again. A retained fixed-electron-
+density matrix-elimination calculation separates these terms exactly for
+that diagnostic convention. The result supports missing high-shell pathways
+as the cause, with both source and charge feedback present. Those components
+are a diagnostic decomposition, not independent physical atmospheres.
+
+For the original $4\to5$ change, this diagnostic gives $+2840.7$ cm$^{-3}$
+from the added-shell recombination source, $-880.8$ cm$^{-3}$ from the changed
+effective rate operator and $-509.4$ cm$^{-3}$ from restored charge feedback.
+Their sum, $+1450.5$ cm$^{-3}$, reproduces the $7.735\%$ change. The much larger
+opposing terms show why adding a constant cascade correction would miss
+part of the response.
+
+The full local model continues to solve statistical equilibrium with
+$n_e=n_p$ and $n_p+\sum_i n_i=n_{\rm H}$. The JAX implicit derivative includes
+the electron-density dependence of the rates. Both forward and reverse derivatives with respect to gas temperature and
+hydrogen density are checked against finite differences, so the
+extended atom retains the differentiation needed by later NUTS inference.
+
+\section{What convergence means here}
+For shell $s=2$ or 3 we retain the explicit criterion
+\[
+ \Delta_s(N,N_{\rm ref})=
+ \left|\frac{n_s(N_{\rm ref})}{n_s(N)}-1\right|\le0.05.
+\]
+The new test compares $N=15$ with 20. It also retains the sequence
+$5,10,15,20$, continuum-grid refinement and independent Cloudy comparisons.
+The old $4\to5$ result stays contradicted: success of a new, larger atom does
+not change the answer for the old model.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=.48\textwidth,height=5.7cm,xlabel={Maximum shell $N$},
+ ylabel={$n_3$ ($10^4$ cm$^{-3}$)},xmin=3,xmax=31,ymin=1.75,ymax=2.36,
+ xtick={5,10,15,20,30},legend style={font=\scriptsize,at={(.97,.06)},anchor=south east},
+ tick label style={font=\small},label style={font=\small},grid=major]
+\addplot+[blue,mark=*] coordinates {(4,1.875228681) (5,2.020277671) (10,2.272697295) (15,2.294308309) (20,2.299665251)};
+\addlegendentry{escape rate equations}
+\addplot+[orange!85!black,mark=square*,dashed] coordinates {(4,1.867505) (5,2.009105) (6,2.116755) (8,2.227924) (10,2.262646) (15,2.283159) (20,2.287971) (30,2.290882)};
+\addlegendentry{Cloudy}
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}
+\begin{axis}[width=.48\textwidth,height=5.7cm,ylabel={$15\to20$ change (\%)},
+ xmin=.4,xmax=7.6,ymin=0,ymax=5.6,xtick={1,2,3,4,5,6,7},
+ xticklabels={base,cold,hot,dilute,dense,weak,strong},
+ x tick label style={rotate=45,anchor=east,font=\scriptsize},
+ ytick={0,1,2,3,4,5},yticklabel style={font=\small},label style={font=\small},
+ legend style={font=\scriptsize,at={(.5,.77)},anchor=north,legend columns=2}]
+\addplot+[ybar,bar width=4pt,bar shift=-2pt,blue,fill=blue!40] coordinates {(1,0.1603528851) (2,0.3445587249) (3,0.01509796018) (4,1.384386393) (5,0.002369293216) (6,0.1363045245) (7,0.1705216931)};
+\addlegendentry{$n_2$}
+\addplot+[ybar,bar width=4pt,bar shift=2pt,orange!85!black,fill=orange!40] coordinates {(1,0.2334883297) (2,0.4171766244) (3,0.05741754658) (4,1.471335027) (5,0.06929931228) (6,0.2107801222) (7,0.2413845907)};
+\addlegendentry{$n_3$}
+\addplot[red,dashed,forget plot] coordinates {(.4,5)(7.6,5)};
+\node[red,anchor=south east,font=\scriptsize] at (axis cs:7.5,5) {unchanged criterion};
+\end{axis}
+\end{tikzpicture}
+\caption{Left: baseline shell sequence. The escape-rate points are independently
+solved in the retained matrix-budget diagnosis; the final JAX comparison agrees
+at $N=15,20$. Right: actual escape $15\to20$ changes at all seven registered
+conditions. These factorized points do not define a continuous accuracy domain.}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Comparison & Largest measured difference & Criterion \\
+\midrule
+Original $4\to5$, baseline $n_3$ & $7.735\%$ & $5\%$: failed \\
+New $15\to20$, baseline $n_3$ & $0.2335\%$ & $5\%$: passed \\
+New $15\to20$, both populations, seven cases & $1.4713\%$ & $5\%$: passed \\
+Matched Cloudy $N=15,20$, fourteen cases & $2.0315\%$ & $5\%$: passed \\
+Escape $N=15$ versus selected Cloudy $N=30,40$ & $2.0657\%$ & separate control \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The baseline uses $T=9000$ K, $n_{\rm H}=10^{12}$ cm$^{-3}$,
+$T_{\rm rad}=10000$ K and dilution $W=0.025$. The other conditions change
+one quantity: $T=6000$ or $12000$ K, $n_{\rm H}=10^{10}$ or $10^{14}$ cm$^{-3}$,
+or $W=0.01$ or $0.05$. The physical criterion remains $5\%$ for both $n_2$ and
+$n_3$ in the enlarged-atom comparison. Three Cloudy continuum refinements change
+these populations by less than $0.049\%$.
+
+
+The proposed $N=10$ choice was rejected after the dilute-gas Cloudy control
+showed a larger-than-$5\%$ change against $N=20$. The default therefore uses
+$N=15$, checked against $N=20$ at the declared cases, with selected larger
+Cloudy tails as an additional control. The default is a scoped modeling
+choice, not a theorem that fifteen shells suffice everywhere.
+
+\section{MCEG and the remaining limits}
+The new contract \path{mceg/contracts/escape.atom_convergence.yaml} records
+Equations, source Bindings, the exact tested Subject and Contexts, retained
+Evidence and the adoption Decision. It preserves the older contradicted
+Assessment and records the new finite comparison separately. Numerical
+success, finite-reference agreement and atmospheric adequacy remain distinct.
+
+Only the registered samples are tested; no continuous parameter domain or
+infinite-atom limit is established. The high shells still use statistical
+orbital populations. The local radiation field is prescribed. Neither this
+comparison nor its implicit derivatives validate the full planetary wind,
+moving-medium line transfer, an observed H-alpha spectrum or a NUTS posterior.
+The runtime package remains independent of MCEG.
+
+\begin{thebibliography}{9}
+\bibitem{prozesky} A. Prozesky and D. P. Smits (2018), hydrogenic radiative
+coefficients, Appendix A.1, \href{https://arxiv.org/html/1805.02440v1}{arXiv:1805.02440}.
+The rational summation used here is a provider implementation choice.
+\bibitem{brocklehurst} M. Brocklehurst (1971), \emph{MNRAS} 153, 471,
+\href{https://doi.org/10.1093/mnras/153.4.471}{doi:10.1093/mnras/153.4.471},
+Eqs.~3.13 and 3.17--3.24; evaluated through the inspected Cloudy recurrence.
+\bibitem{vs80} L. Vriens and A. H. M. Smeets (1980), \emph{Physical Review A}
+22, 940, \href{https://doi.org/10.1103/PhysRevA.22.940}{doi:10.1103/PhysRevA.22.940}.
+Ionization Eq.~8 was inspected in Cloudy's \texttt{hydro\_vs\_ioniz}
+implementation; no direct full-text inspection of the paper is claimed.
+\bibitem{cloudy} Cloudy C23.01 source and data,
+\href{https://data.nublado.org/cloudy_releases/c23/c23.01.tar.gz}{official release}:
+\texttt{hydro\_bauman.cpp}, \texttt{hydro\_vs\_rates.cpp}, and
+\texttt{data/hydro\_pcs.dat}. The retained license notice and execution
+provenance identify the adapted routines and the reference calculations.
+\end{thebibliography}
+
+\clearpage
+\appendix
+\section{Recorded equations and units}
+\small
+These definitions are generated from the MCEG contract; their source-code
+bindings and assessment pins remain in that contract.
+\input{atom_convergence_equations.tex}
+\end{document}

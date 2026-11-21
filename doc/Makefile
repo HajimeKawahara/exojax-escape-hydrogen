@@ -1,8 +1,15 @@
-.PHONY: pdf parker-pdf parker-equations nlte-pdf nlte-equations coupled-pdf coupled-equations cloudy-pdf cloudy-equations clean
+.PHONY: pdf parker-pdf parker-equations nlte-pdf nlte-equations coupled-pdf coupled-equations cloudy-pdf cloudy-equations atom-pdf atom-equations clean
 
 pdf:
 	latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error -outdir=build model.tex
 	cp build/model.pdf model.pdf
+
+atom-pdf:
+	latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error -outdir=build atom_convergence.tex
+	cp build/atom_convergence.pdf atom_convergence.pdf
+
+atom-equations:
+	python -m mceg equations ../mceg/contracts/escape.atom_convergence.yaml --output atom_convergence_equations.tex
 
 parker-pdf:
 	latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error -outdir=build parker_wind.tex

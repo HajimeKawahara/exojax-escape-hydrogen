@@ -18,9 +18,10 @@ inconclusive. Historical judgments retain their original records.
 | Isothermal/nonisothermal Parker wind, with or without linear tides | Formulation and sampled numerical checks are `supported` | Prescribed temperature and constant mean molecular weight; no energy equation or planetary accuracy claim. See the [wind contract](contracts/escape.parker_wind.yaml). |
 | Six-state local hydrogen NLTE and H-alpha transfer | Historical formulation/numerical reviews are `supported` | Their exact source and test scopes are retained; atmospheric accuracy and posterior convergence are `unknown`. See the [local NLTE contract](contracts/escape.hydrogen_nlte.yaml). |
 | Coupled radiation, populations, temperature and finite flow | Scoped numerical reviews are `supported` | Finite boundary problems; transonic selection, moving-line transport and planetary accuracy remain unverified. |
-| Repaired finite atom versus Cloudy | `supported` in the eight declared cases | Maximum n2/n3 difference **1.100%**, below **5%**; reference refinement changes them by less than **0.049%**, below **1%**. |
+| Earlier nmax=4/5 finite atom versus Cloudy | `supported` in the eight declared cases | Maximum n2/n3 difference **1.100%**, below **5%**; reference refinement changes them by less than **0.049%**, below **1%**. |
 | Original finite-atom agreement with Cloudy | New reviewed Assessments are `contradicted` | Original n3 errors **32.65%** and **30.22%** exceed **5%**. Original `unknown` records remain as history. |
-| Original and repaired atom-size convergence | New reviewed Assessments are `contradicted` | nmax=4 to 5 changes n3 by **11.46%** in the original atom and **7.735%** in the repaired atom, exceeding **5%**. Larger-atom convergence remains open. |
+| Original and repaired atom-size convergence | New reviewed Assessments are `contradicted` | nmax=4 to 5 changes n3 by **11.46%** in the original atom and **7.735%** in the repaired atom, exceeding **5%**. These original finite-atom claims remain false; the enlarged model has separate criteria below. |
+| Enlarged hydrogen atom (default nmax=15, supported through 20) | New convergence and reference reviews are `supported` | Baseline n3 changes **0.2335%** from 15 to 20; maximum n2/n3 change across seven conditions is **1.4713%**. The fourteen matched Cloudy comparisons differ by at most **2.0315%**, below the unchanged **5%** criterion. |
 | Complete spectrum families and NIST/Rydberg center choices | Six inventory entries remain without dedicated contracts | Existing population or wind checks do not validate their complete geometry, transfer, broadening or observational applicability. |
 
 The [Cloudy investigation contract](contracts/escape.cloudy_investigation.yaml)
@@ -29,12 +30,17 @@ and repaired comparisons. The [coupled contract](contracts/escape.coupled_hydrog
 retains the earlier formulation and execution reviews. The new contradiction
 reviews use the measured criteria, not a reinterpretation of all failed tests.
 
-For current truncation, a new baseline-scoped Evidence record corrects the old
-reference to the eight-case Context. It cites the same saved measurement and
-artifacts; no execution is invented and the old Evidence is unchanged.
-The finite-comparison adoption Decision has a new revision that explicitly
-acknowledges the remaining truncation failure. Acceptance of that comparison
-does not establish infinite-atom convergence.
+The [enlarged-atom contract](contracts/escape.atom_convergence.yaml) records why
+high-shell recombination and cascades change the low populations. It adds explicit
+shells through n=20, chooses nmax=15 as the default and retains the original
+4-to-5 contradiction. The nmax=10 candidate failed the dilute Cloudy convergence
+check (6.96%); it is not silently omitted. Independent n=30/40 reference tails
+and continuum refinement provide separate controls. These finite, sampled tests
+do not establish infinite-atom or atmospheric accuracy.
+
+The original baseline scope correction and finite-comparison Decision remain
+unchanged. A new bridge Evidence and FollowUp resolution connect that historical
+investigation to the enlarged-model result, without declaring its old Claim true.
 
 Two diagnostic hypotheses still have `unknown` support Assessments even though
 their prose records contrary indications: their cited numerical experiments
@@ -47,13 +53,15 @@ Eight entries now link to contracts; six spectrum/line-center entries remain
 uncontracted. All 14 model-boundary reviews remain pending human review.
 `mceg coverage .` therefore still exits **1**; this is an explicit registration
 and review gap, not evidence that the models are physically false.
-The [repository review receipt](evidence/repository_review_20261121/receipt.json)
-records the checked scopes, expected failures and preserved historical records.
+The [earlier repository review](evidence/repository_review_20261121/receipt.json)
+retains its original scope. Current enlarged-atom evidence is in the
+[new review](evidence/atom_convergence_20261121/review.json).
 
 ## Equations and code correspondence
 
 | Definition | Human-readable model | MCEG record |
 | --- | --- | --- |
+| Enlarged hydrogen atom and shell-convergence investigation | [Atom convergence PDF](../doc/atom_convergence.pdf) | [New contract](contracts/escape.atom_convergence.yaml) |
 | Parker wind, prescribed nonisothermal temperature and linear tides | [Parker wind PDF](../doc/parker_wind.pdf) | [Equations and Bindings](contracts/escape.parker_wind.yaml) |
 | Local six-state NLTE and H-alpha branch weights | [Local NLTE PDF](../doc/hydrogen_nlte.pdf) | [Historical local contract](contracts/escape.hydrogen_nlte.yaml) |
 | Radiation, thermal balance and finite reactive flow | [Coupled-model PDF](../doc/coupled_model.pdf) | [Coupled contract](contracts/escape.coupled_hydrogen.yaml) |
@@ -90,8 +98,8 @@ From this provider checkout:
 python -m mceg check
 python -m mceg coverage .
 python -m mceg check mceg/contracts/escape.parker_wind.yaml --assessment numerical_review --root .
-python -m mceg check mceg/contracts/escape.cloudy_investigation.yaml --assessment repaired_reference_agreement_review --root .
-python -m mceg check mceg/contracts/escape.cloudy_investigation.yaml --assessment current_truncation_contradicted_review --root .
+python -m mceg check mceg/contracts/escape.atom_convergence.yaml --assessment convergence_review --root .
+python -m mceg check mceg/contracts/escape.atom_convergence.yaml --assessment reference_review --root .
 python -m mceg explain mceg/contracts/escape.cloudy_investigation.yaml --claim current_atom_truncation --investigation
 python -m mceg equations mceg/contracts/escape.parker_wind.yaml --output doc/parker_wind_equations.tex --check
 ```
@@ -104,9 +112,10 @@ choosing one as the implicit current state. `UNKNOWN` alone may exit zero.
 For the wind, incomplete external source traces and static inspection of JAX
 decorators remain `UNKNOWN`; these are separate from the recorded test outcome.
 
-The current source can be checked against the wind reviews and the investigation's
-`current_numerical_review`. The older local/coupled reviews belong to their
-recorded Subjects. To inspect the original coupled source, use its historical
+The current source can be checked against the wind and enlarged-atom reviews.
+The earlier investigation's `current_numerical_review` and reference/truncation
+reviews now belong to historical source at `719ba25`, before the shell extension.
+The older local/coupled reviews likewise belong to their recorded Subjects. To inspect the original coupled source, use its historical
 checkout instead of refreshing old pins:
 
 ```bash
@@ -127,6 +136,22 @@ records readiness of the finite-atom comparison at that time; it is not a new
 approval of every current follow-up or physical model.
 
 ## Evidence and repeatable verification
+
+The new numerical gates retain the original failed `atom_truncation_accuracy`
+gate and add separate enlarged-atom gates. Run the new verification with:
+
+```bash
+python tools/verify_coupled.py --gate enlarged_atom_convergence \
+  --pythonpath /path/to/exojax/src --record results/atom-check-001
+python tools/diagnose_atom_convergence.py --output results/atom-budget-001.json
+```
+
+The second command reconstructs the fixed-density Schur-complement attribution
+and then solves charge conservation independently. The [new case manifest](investigations/atom_convergence_cases.json)
+reuses the seven original unique conditions at nmax=15 and 20; its original 5%
+criterion is unchanged. The [archive record](evidence/atom_convergence_20261121/archive.json)
+identifies full raw executions stored in the separate evidence tag, including
+failed intermediate attempts. Only compact records are kept in this branch.
 
 The [wind execution](evidence/parker_wind_20261121/receipt.json) records the new
 Parker/nonisothermal/tidal test run. The original
